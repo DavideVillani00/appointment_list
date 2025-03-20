@@ -1,11 +1,16 @@
+import AppointmentList from "./components/AppointmentList.jsx";
+import DialogNew from "./components/DialogNew.jsx";
+import Header from "./components/Header.jsx";
+import TopMain from "./components/TopMain.jsx";
+
 function App() {
   return (
     <>
-      <p className="bg-fuchsia-300">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus rem
-        sunt neque nobis doloribus ducimus odio nulla maxime quod qui distinctio
-        quisquam veritatis illo numquam, at inventore, rerum vero perferendis?
-      </p>
+      <Header />
+      <main>
+        <TopMain />
+        <AppointmentList></AppointmentList>
+      </main>
     </>
   );
 }
