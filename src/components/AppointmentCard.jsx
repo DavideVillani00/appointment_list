@@ -1,6 +1,6 @@
 export default function AppointmentCard() {
   return (
-    <li className="bg-amber-200 rounded-md p-2 my-5 flex flex-col gap-2 ">
+    <li className="bg-bgCardLight dark:bg-bgCardDark rounded-md p-2 my-5 flex flex-col gap-2 ">
       <div className="border-b-[1px] p-3">
         <p>2000-12-1 10:22</p>
         <p>

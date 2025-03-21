@@ -1,1 +1,20 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-textLight: #000;
+  --color-primaryBgLight: #ffffff;
+  --color-secondaryBgLight: #83dada;
+  --color-bgInputLight: #e3fdfd;
+  --color-bgCardLight: #b4f2f2;
+
+  --color-textDark: #fff;
+  --color-primaryBgDark: #0a192c;
+  --color-secondaryBgDark: #596980;
+  --color-bgInputDark: #182940;
+  --color-bgCardDark: #3d4f67;
+}
+
+body {
+  @apply bg-primaryBgLight text-textLight dark:bg-primaryBgDark dark:text-textDark;
+}
