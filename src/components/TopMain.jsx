@@ -1,14 +1,23 @@
 import Input from "./Input.jsx";
 import iconFilterLight from "../assets/icon-filter-light-25.png";
-import iconSearchDark from "../assets/icon-search-light-25.png";
+import iconFilterDark from "../assets/icon-filter-dark-25.png";
+import iconSearchLight from "../assets/icon-search-light-25.png";
+import iconSearchDark from "../assets/icon-search-dark-25.png";
+import { useContext } from "react";
+import { Context } from "../ContextProvider.jsx";
 
 export default function TopMain() {
+  const { theme } = useContext(Context);
   return (
     <>
       <div className="mt-3 p-3 flex flex-col gap-2 md:flex-row">
         <Input type="button" value="Add +" className="md:flex-2/3 " />
         <div className="md:flex-1/3 relative">
-          <img src={iconSearchDark} alt="" className="absolute top-4 left-3" />
+          <img
+            src={theme === "dark" ? iconSearchDark : iconSearchLight}
+            alt=""
+            className="absolute top-4 left-3"
+          />
           <Input
             type="text"
             placeholder="Search"
@@ -24,7 +33,7 @@ export default function TopMain() {
         </div>
         <div className="self-center relative ">
           <img
-            src={iconFilterLight}
+            src={theme === "dark" ? iconFilterDark : iconFilterLight}
             className="mr-2 absolute top-2 left-4"
           ></img>
           <select className="bg-bgCardLight hover:shadow-[0_0_5px_black] dark:bg-bgCardDark p-2 pl-12 dark:hover:shadow-[0_0_5px_white] rounded-2xl">
