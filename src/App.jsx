@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import AppointmentList from "./components/AppointmentList.jsx";
 import DialogNew from "./components/DialogNew.jsx";
 import Header from "./components/Header.jsx";
@@ -8,7 +7,7 @@ import ContextProvider from "./ContextProvider.jsx";
 function App() {
   return (
     <ContextProvider>
-      {/* <DialogNew /> */}
+      <DialogNew />
       <Header />
       <main>
         <TopMain />

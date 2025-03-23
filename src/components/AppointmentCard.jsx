@@ -4,27 +4,32 @@ import iconUncompletedLight from "../assets/icon-uncompleted-light-25.png";
 import iconUncompletedDark from "../assets/icon-uncompleted-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
-export default function AppointmentCard() {
+export default function AppointmentCard({ name, date, time, check }) {
   const { theme } = useContext(Context);
   return (
     <li className="bg-bgCardLight dark:bg-bgCardDark rounded-md p-4 my-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end">
-      <div className="border-bgInputLight dark:border-bgInputDark border-b-[2px] p-3 md:border-0 md:border-l-[2px]  md:flex-5/6 ">
+      <div className="border-bgInputLight dark:border-bgInputDark border-b-[2px] p-3 md:border-0 md:border-l-[2px]   ">
         <p className="text-lg font-bold mb-3 text-textLight/50 dark:text-textDark/50">
-          2000-12-1 10:22
+          {date} {time}
         </p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores,
-          fuga!
-        </p>
+        <p>{name}</p>
       </div>
 
-      <div className=" flex justify-evenly md:flex-col md:justify-between  md:flex-1/6">
+      <div className=" flex justify-evenly md:flex-col md:justify-between  ">
         <div className="flex gap-2 justify-end items-center">
           <img
-            src={theme === "dark" ? iconUncompletedDark : iconUncompletedLight}
+            src={
+              check
+                ? iconComplete
+                : theme === "dark"
+                ? iconUncompletedDark
+                : iconUncompletedLight
+            }
             className="w-[27px]"
           />
-          <span className=" font-bold">UNCOMPLETED</span>
+          <span className=" font-bold">
+            {check ? "COMPLETED" : "UNCOMPLETED"}
+          </span>
         </div>
         <span className="md:my-5 w-[2px] h-auto md:w-auto md:h-[2px] bg-bgInputLight dark:bg-bgInputDark "></span>
         <div className="flex gap-2 justify-end items-center">

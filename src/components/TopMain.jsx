@@ -7,11 +7,22 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 
 export default function TopMain() {
-  const { theme } = useContext(Context);
+  const { theme, dialog } = useContext(Context);
+
+  function handleOpenDialog() {
+    dialog.current.showModal();
+    document.documentElement.classList.add("overflow-hidden");
+  }
+
   return (
     <>
-      <div className="mt-3 p-3 flex flex-col gap-2 md:flex-row">
-        <Input type="button" value="Add +" className="md:flex-2/3 " />
+      <div className="mt-3 p-3 flex flex-col gap-2 md:flex-row ">
+        <Input
+          type="button"
+          value="Add +"
+          className="md:flex-2/3"
+          onClick={handleOpenDialog}
+        />
         <div className="md:flex-1/3 relative">
           <img
             src={theme === "dark" ? iconSearchDark : iconSearchLight}
