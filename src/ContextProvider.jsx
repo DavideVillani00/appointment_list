@@ -8,6 +8,8 @@ export const Context = createContext({
   handleAddAppointment: () => {},
   handleCheckboxAppointment: () => {},
   handleDeleteAppointment: () => {},
+  appointmentCompleted: [],
+  appointmentUncompleted: [],
 });
 
 export default function ContextProvider({ children }) {
@@ -46,7 +48,7 @@ export default function ContextProvider({ children }) {
     }
   }
 
-  function handleAddAppointment(name, date, time) {
+  function handleAddAppointment(name, date, time, timestamp) {
     setProjectState((preState) => {
       return {
         uniqueid: ++preState.uniqueid,
@@ -58,6 +60,7 @@ export default function ContextProvider({ children }) {
             date,
             time,
             check: false,
+            timestamp,
           },
         ],
       };
@@ -82,6 +85,36 @@ export default function ContextProvider({ children }) {
     });
   }
 
+  const appointmentCompleted = projectState.items.filter((app) => {
+    return app.check;
+  });
+  const appointmentUncompleted = projectState.items.filter((app) => {
+    return !app.check;
+  });
+
+  // !! const filter provvisorio per debug, da sostituire con state
+  const filter = "all";
+  function sorter() {
+    const sortAppCompl = appointmentCompleted.sort((a, b) => {
+      return a.timestamp - b.timestamp;
+    });
+    const sortAppUncompl = appointmentUncompleted.sort((a, b) => {
+      return a.timestamp - b.timestamp;
+    });
+
+    switch (filter) {
+      case "completed":
+        return sortAppCompl;
+
+      case "uncompleted":
+        return sortAppUncompl;
+
+      default:
+        return [...sortAppUncompl, ...sortAppCompl];
+    }
+  }
+  console.log(sorter());
+
   const contValue = {
     theme,
     handleTheme,
@@ -90,6 +123,8 @@ export default function ContextProvider({ children }) {
     handleAddAppointment,
     handleCheckboxAppointment,
     handleDeleteAppointment,
+    appointmentCompleted,
+    appointmentUncompleted,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

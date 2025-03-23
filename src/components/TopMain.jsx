@@ -7,7 +7,8 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 
 export default function TopMain() {
-  const { theme, dialog } = useContext(Context);
+  const { theme, dialog, appointmentCompleted, appointmentUncompleted } =
+    useContext(Context);
 
   function handleOpenDialog() {
     dialog.current.showModal();
@@ -38,9 +39,12 @@ export default function TopMain() {
       </div>
       <div className="mt-1 p-3 flex flex-col gap-4 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-textLight/70 dark:text-textDark/70 ">
-          <p>Total: 10;</p>
-          <p>Completed: 0;</p>
-          <p>Uncompleted: 10;</p>
+          <p>
+            Total: {appointmentCompleted.length + appointmentUncompleted.length}
+            ;
+          </p>
+          <p>Completed: {appointmentCompleted.length};</p>
+          <p>Uncompleted: {appointmentUncompleted.length};</p>
         </div>
         <div className="self-center relative ">
           <img

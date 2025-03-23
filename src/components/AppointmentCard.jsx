@@ -12,17 +12,6 @@ export default function AppointmentCard({ id, name, date, time, check }) {
     handleDeleteAppointment,
   } = useContext(Context);
 
-  const appointmentCompleted = projectState.items.map((app) => {
-    if (app.check) {
-      return app;
-    }
-  });
-  const appointmentUncompleted = projectState.items.map((app) => {
-    if (!app.check) {
-      return app;
-    }
-  });
-
   return (
     <li className="bg-bgCardLight dark:bg-bgCardDark rounded-md p-4 my-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end">
       <div className="border-bgInputLight dark:border-bgInputDark border-b-[2px] p-3 md:border-0 md:border-l-[2px]   ">

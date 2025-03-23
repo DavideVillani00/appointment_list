@@ -39,7 +39,7 @@ export default function DialogNew() {
     if (!name || !date || !time || impostedDate < actualDate) {
       return;
     }
-    handleAddAppointment(name, date, time);
+    handleAddAppointment(name, date, time, impostedDate);
     handleCloseModal();
   }
 
