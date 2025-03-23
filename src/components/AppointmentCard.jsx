@@ -4,8 +4,25 @@ import iconUncompletedLight from "../assets/icon-uncompleted-light-25.png";
 import iconUncompletedDark from "../assets/icon-uncompleted-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
-export default function AppointmentCard({ name, date, time, check }) {
-  const { theme } = useContext(Context);
+export default function AppointmentCard({ id, name, date, time, check }) {
+  const {
+    theme,
+    projectState,
+    handleCheckboxAppointment,
+    handleDeleteAppointment,
+  } = useContext(Context);
+
+  const appointmentCompleted = projectState.items.map((app) => {
+    if (app.check) {
+      return app;
+    }
+  });
+  const appointmentUncompleted = projectState.items.map((app) => {
+    if (!app.check) {
+      return app;
+    }
+  });
+
   return (
     <li className="bg-bgCardLight dark:bg-bgCardDark rounded-md p-4 my-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end">
       <div className="border-bgInputLight dark:border-bgInputDark border-b-[2px] p-3 md:border-0 md:border-l-[2px]   ">
@@ -16,7 +33,10 @@ export default function AppointmentCard({ name, date, time, check }) {
       </div>
 
       <div className=" flex justify-evenly md:flex-col md:justify-between  ">
-        <div className="flex gap-2 justify-end items-center">
+        <div
+          className="flex gap-2 justify-end items-center"
+          onClick={() => handleCheckboxAppointment(id)}
+        >
           <img
             src={
               check
@@ -32,7 +52,10 @@ export default function AppointmentCard({ name, date, time, check }) {
           </span>
         </div>
         <span className="md:my-5 w-[2px] h-auto md:w-auto md:h-[2px] bg-bgInputLight dark:bg-bgInputDark "></span>
-        <div className="flex gap-2 justify-end items-center">
+        <div
+          className="flex gap-2 justify-end items-center"
+          onClick={() => handleDeleteAppointment(id)}
+        >
           <img src={iconDelete} className="w-[27px]" />
           <span className="text-[#D40000] font-bold">DELETE</span>
         </div>

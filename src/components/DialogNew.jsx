@@ -24,20 +24,23 @@ export default function DialogNew() {
     const name = inputName.current.value.trim();
     const date = inputDate.current.value;
     const time = inputTime.current.value;
+    const actualDate = new Date().getTime();
+    const impostedDate = new Date([date, time].join(" ")).getTime();
 
     if (!name) {
       inputName.current.classList.add("border-2", "border-red-700");
     }
-    if (!date) {
+    if (!date || impostedDate < actualDate) {
       inputDate.current.classList.add("border-2", "border-red-700");
     }
-    if (!time) {
+    if (!time || impostedDate < actualDate) {
       inputTime.current.classList.add("border-2", "border-red-700");
     }
-    if (name && date && time) {
-      handleAddAppointment(name, date, time);
-      handleCloseModal();
+    if (!name || !date || !time || impostedDate < actualDate) {
+      return;
     }
+    handleAddAppointment(name, date, time);
+    handleCloseModal();
   }
 
   function handleDeleteErr(el) {

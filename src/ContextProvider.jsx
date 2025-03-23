@@ -6,6 +6,8 @@ export const Context = createContext({
   dialog: () => {},
   projectState: [],
   handleAddAppointment: () => {},
+  handleCheckboxAppointment: () => {},
+  handleDeleteAppointment: () => {},
 });
 
 export default function ContextProvider({ children }) {
@@ -28,6 +30,10 @@ export default function ContextProvider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("project", JSON.stringify(projectState));
+  }, [projectState]);
+
   function handleTheme() {
     if (theme === "light") {
       setTheme("dark");
@@ -41,14 +47,13 @@ export default function ContextProvider({ children }) {
   }
 
   function handleAddAppointment(name, date, time) {
-    let id = projectState.uniqueid;
     setProjectState((preState) => {
       return {
-        uniqueid: id++,
+        uniqueid: ++preState.uniqueid,
         items: [
           ...preState.items,
           {
-            id,
+            id: preState.uniqueid,
             name,
             date,
             time,
@@ -57,12 +62,25 @@ export default function ContextProvider({ children }) {
         ],
       };
     });
-    localStorage.setItem("project", JSON.stringify(projectState));
   }
 
-  function handleDeleteAppointment() {}
+  function handleCheckboxAppointment(id) {
+    const updatedItems = projectState.items.map((app) => {
+      return app.id == id ? { ...app, check: !app.check } : app;
+    });
+    setProjectState((preState) => {
+      return { ...preState, items: updatedItems };
+    });
+  }
 
-  function handleCheckboxAppointment() {}
+  function handleDeleteAppointment(id) {
+    const updatedItems = projectState.items.filter((app) => {
+      return app.id != id;
+    });
+    setProjectState((preState) => {
+      return { ...preState, items: updatedItems };
+    });
+  }
 
   const contValue = {
     theme,
@@ -70,6 +88,8 @@ export default function ContextProvider({ children }) {
     dialog,
     projectState,
     handleAddAppointment,
+    handleCheckboxAppointment,
+    handleDeleteAppointment,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }
