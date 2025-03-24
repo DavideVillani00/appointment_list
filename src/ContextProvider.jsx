@@ -10,6 +10,8 @@ export const Context = createContext({
   handleDeleteAppointment: () => {},
   appointmentCompleted: [],
   appointmentUncompleted: [],
+  handleChangeFilter: () => {},
+  sorter: () => {},
 });
 
 export default function ContextProvider({ children }) {
@@ -20,6 +22,7 @@ export default function ContextProvider({ children }) {
     localStorage.getItem("project")
       ? JSON.parse(localStorage.getItem("project"))
       : {
+          filterState: "all",
           uniqueid: 0,
           items: [],
         }
@@ -51,6 +54,7 @@ export default function ContextProvider({ children }) {
   function handleAddAppointment(name, date, time, timestamp) {
     setProjectState((preState) => {
       return {
+        ...preState,
         uniqueid: ++preState.uniqueid,
         items: [
           ...preState.items,
@@ -85,6 +89,12 @@ export default function ContextProvider({ children }) {
     });
   }
 
+  function handleChangeFilter(filterState) {
+    setProjectState((preState) => {
+      return { ...preState, filterState };
+    });
+  }
+
   const appointmentCompleted = projectState.items.filter((app) => {
     return app.check;
   });
@@ -93,7 +103,6 @@ export default function ContextProvider({ children }) {
   });
 
   // !! const filter provvisorio per debug, da sostituire con state
-  const filter = "all";
   function sorter() {
     const sortAppCompl = appointmentCompleted.sort((a, b) => {
       return a.timestamp - b.timestamp;
@@ -102,7 +111,7 @@ export default function ContextProvider({ children }) {
       return a.timestamp - b.timestamp;
     });
 
-    switch (filter) {
+    switch (projectState.filterState) {
       case "completed":
         return sortAppCompl;
 
@@ -113,7 +122,6 @@ export default function ContextProvider({ children }) {
         return [...sortAppUncompl, ...sortAppCompl];
     }
   }
-  console.log(sorter());
 
   const contValue = {
     theme,
@@ -125,6 +133,8 @@ export default function ContextProvider({ children }) {
     handleDeleteAppointment,
     appointmentCompleted,
     appointmentUncompleted,
+    handleChangeFilter,
+    sorter,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

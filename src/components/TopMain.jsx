@@ -7,13 +7,22 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 
 export default function TopMain() {
-  const { theme, dialog, appointmentCompleted, appointmentUncompleted } =
-    useContext(Context);
+  const {
+    theme,
+    dialog,
+    appointmentCompleted,
+    appointmentUncompleted,
+    handleChangeFilter,
+    projectState,
+  } = useContext(Context);
 
   function handleOpenDialog() {
     dialog.current.showModal();
     document.documentElement.classList.add("overflow-hidden");
   }
+  let filterDefault = projectState.filterState.split("");
+  filterDefault[0] = filterDefault[0].toUpperCase();
+  filterDefault = filterDefault.join("");
 
   return (
     <>
@@ -51,7 +60,11 @@ export default function TopMain() {
             src={theme === "dark" ? iconFilterDark : iconFilterLight}
             className="mr-2 absolute top-2 left-4"
           ></img>
-          <select className="bg-bgCardLight hover:shadow-[0_0_5px_black] dark:bg-bgCardDark p-2 pl-12 dark:hover:shadow-[0_0_5px_white] rounded-2xl">
+          <select
+            className="bg-bgCardLight hover:shadow-[0_0_5px_black] dark:bg-bgCardDark p-2 pl-12 dark:hover:shadow-[0_0_5px_white] rounded-2xl"
+            onChange={(e) => handleChangeFilter(e.target.value.toLowerCase())}
+            defaultValue={filterDefault}
+          >
             <option>All</option>
             <option>Completed</option>
             <option>Uncompleted</option>
