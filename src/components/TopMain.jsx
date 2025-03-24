@@ -14,6 +14,8 @@ export default function TopMain() {
     appointmentUncompleted,
     handleChangeFilter,
     projectState,
+    search,
+    handleChangeSearch,
   } = useContext(Context);
 
   function handleOpenDialog() {
@@ -43,6 +45,8 @@ export default function TopMain() {
             type="text"
             placeholder="Search"
             className="w-full px-5 pl-13"
+            value={search}
+            onChange={handleChangeSearch}
           />
         </div>
       </div>

@@ -12,6 +12,8 @@ export const Context = createContext({
   appointmentUncompleted: [],
   handleChangeFilter: () => {},
   sorter: () => {},
+  search: () => {},
+  handleChangeSearch: () => {},
 });
 
 export default function ContextProvider({ children }) {
@@ -28,6 +30,7 @@ export default function ContextProvider({ children }) {
         }
   );
   const dialog = useRef();
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (theme === "dark") {
@@ -122,6 +125,9 @@ export default function ContextProvider({ children }) {
         return [...sortAppUncompl, ...sortAppCompl];
     }
   }
+  function handleChangeSearch(e) {
+    setSearch(e.target.value);
+  }
 
   const contValue = {
     theme,
@@ -135,6 +141,8 @@ export default function ContextProvider({ children }) {
     appointmentUncompleted,
     handleChangeFilter,
     sorter,
+    search,
+    handleChangeSearch,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }
