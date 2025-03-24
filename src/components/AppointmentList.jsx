@@ -1,6 +1,7 @@
 import AppointmentCard from "./AppointmentCard.jsx";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
+
 export default function AppointmentList() {
   const { sorter, search, projectState } = useContext(Context);
   const [sorteredList, setSorteredList] = useState(sorter());
@@ -9,7 +10,9 @@ export default function AppointmentList() {
     if (search.trim() !== "") {
       setSorteredList(
         sorter().filter((app) => {
-          return [app.name, app.date, app.time].join("").includes(search);
+          return (
+            app.name.includes(search.trim()) || app.date.includes(search.trim())
+          );
         })
       );
     } else {

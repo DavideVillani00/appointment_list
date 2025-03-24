@@ -3,14 +3,17 @@ import { createContext, useState, useEffect, useRef } from "react";
 export const Context = createContext({
   theme: "light",
   handleTheme: () => {},
+
   dialog: () => {},
+
   projectState: [],
   handleAddAppointment: () => {},
   handleCheckboxAppointment: () => {},
   handleDeleteAppointment: () => {},
+  handleChangeFilter: () => {},
+
   appointmentCompleted: [],
   appointmentUncompleted: [],
-  handleChangeFilter: () => {},
   sorter: () => {},
   search: () => {},
   handleChangeSearch: () => {},
@@ -105,7 +108,6 @@ export default function ContextProvider({ children }) {
     return !app.check;
   });
 
-  // !! const filter provvisorio per debug, da sostituire con state
   function sorter() {
     const sortAppCompl = appointmentCompleted.sort((a, b) => {
       return a.timestamp - b.timestamp;
@@ -133,13 +135,15 @@ export default function ContextProvider({ children }) {
     theme,
     handleTheme,
     dialog,
+
     projectState,
     handleAddAppointment,
     handleCheckboxAppointment,
     handleDeleteAppointment,
+    handleChangeFilter,
+
     appointmentCompleted,
     appointmentUncompleted,
-    handleChangeFilter,
     sorter,
     search,
     handleChangeSearch,

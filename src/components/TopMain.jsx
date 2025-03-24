@@ -64,15 +64,17 @@ export default function TopMain() {
             src={theme === "dark" ? iconFilterDark : iconFilterLight}
             className="mr-2 absolute top-2 left-4"
           ></img>
-          <select
-            className="bg-bgCardLight hover:shadow-[0_0_5px_black] dark:bg-bgCardDark p-2 pl-12 dark:hover:shadow-[0_0_5px_white] rounded-2xl"
-            onChange={(e) => handleChangeFilter(e.target.value.toLowerCase())}
-            defaultValue={filterDefault}
-          >
-            <option>All</option>
-            <option>Completed</option>
-            <option>Uncompleted</option>
-          </select>
+          <div className=" bg-bgCardLight hover:shadow-[0_0_5px_black] dark:bg-bgCardDark p-2 pl-12  dark:hover:shadow-[0_0_5px_white] rounded-2xl">
+            <select
+              className="bg-bgCardLight  dark:bg-bgCardDark outline-none pr-4"
+              onChange={(e) => handleChangeFilter(e.target.value.toLowerCase())}
+              defaultValue={filterDefault}
+            >
+              <option>All</option>
+              <option>Completed</option>
+              <option>Uncompleted</option>
+            </select>
+          </div>
         </div>
 
         <hr />

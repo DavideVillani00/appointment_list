@@ -18,3 +18,7 @@
 body {
   @apply bg-primaryBgLight text-textLight dark:bg-primaryBgDark dark:text-textDark;
 }
+
+input::-webkit-calendar-picker-indicator {
+  @apply hidden;
+}

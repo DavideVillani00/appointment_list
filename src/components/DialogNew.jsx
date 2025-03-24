@@ -78,7 +78,7 @@ export default function DialogNew() {
             />
             <Input
               type="time"
-              className="md:flex-1/2"
+              className="md:flex-1/2 appearance-none"
               ref={inputTime}
               onClick={handleDeleteErr}
             />
