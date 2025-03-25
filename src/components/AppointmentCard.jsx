@@ -20,7 +20,7 @@ export default function AppointmentCard({ id, name, date, time, check }) {
 
       <div className=" flex justify-evenly md:flex-col md:justify-between flex-1/4 ">
         <div
-          className="flex gap-2 justify-end items-center"
+          className="flex gap-2 justify-end items-center cursor-pointer hover:drop-shadow-[0_0_10px_green] "
           onClick={() => handleCheckboxAppointment(id)}
         >
           <img
@@ -39,7 +39,7 @@ export default function AppointmentCard({ id, name, date, time, check }) {
         </div>
         <span className="md:my-5 w-[2px] h-auto md:w-auto md:h-[2px] bg-bgInputLight dark:bg-bgInputDark  "></span>
         <div
-          className="flex gap-2 justify-end items-center"
+          className="flex gap-2 justify-end items-center cursor-pointer hover:drop-shadow-[0_0_10px_red]"
           onClick={() => handleDeleteAppointment(id)}
         >
           <img src={iconDelete} className="w-[27px]" />

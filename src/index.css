@@ -1,4 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@100&display=swap");
 @import "tailwindcss";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -13,10 +15,12 @@
   --color-secondaryBgDark: #596980;
   --color-bgInputDark: #182940;
   --color-bgCardDark: #3d4f67;
+
+  --font-montserrat: "Montserrat", sans-serif;
 }
 
 body {
-  @apply bg-primaryBgLight text-textLight dark:bg-primaryBgDark dark:text-textDark;
+  @apply bg-primaryBgLight text-textLight dark:bg-primaryBgDark dark:text-textDark font-montserrat font-medium;
 }
 
 input::-webkit-calendar-picker-indicator {
