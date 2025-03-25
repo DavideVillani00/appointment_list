@@ -3,7 +3,7 @@ import iconSun from "../assets/icon-sun-48.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 export default function Header() {
-  const { theme, handleTheme } = useContext(Context);
+  const { theme, handleTheme } = useContext(Context).globalThemeState;
   return (
     <header className="p-4 bg-secondaryBgLight dark:bg-secondaryBgDark h-24 flex justify-between items-center">
       <h1 className="text-3xl font-bold">APPOINTMENT LIST</h1>

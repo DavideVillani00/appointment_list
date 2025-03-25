@@ -5,12 +5,9 @@ import iconUncompletedDark from "../assets/icon-uncompleted-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 export default function AppointmentCard({ id, name, date, time, check }) {
-  const {
-    theme,
-    projectState,
-    handleCheckboxAppointment,
-    handleDeleteAppointment,
-  } = useContext(Context);
+  const { theme } = useContext(Context).globalThemeState;
+  const { handleCheckboxAppointment, handleDeleteAppointment } =
+    useContext(Context).globalProjectState;
 
   return (
     <li className="bg-bgCardLight dark:bg-bgCardDark rounded-md p-4 my-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end">

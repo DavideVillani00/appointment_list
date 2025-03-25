@@ -5,23 +5,18 @@ import iconSearchLight from "../assets/icon-search-light-25.png";
 import iconSearchDark from "../assets/icon-search-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
+import useSorterList from "../hooks/useSorterList.js";
+import useDialogNew from "../hooks/useDialogNew.js";
 
 export default function TopMain() {
-  const {
-    theme,
-    dialog,
-    appointmentCompleted,
-    appointmentUncompleted,
-    handleChangeFilter,
-    projectState,
-    search,
-    handleChangeSearch,
-  } = useContext(Context);
+  const { search, handleChangeSearch } = useContext(Context);
 
-  function handleOpenDialog() {
-    dialog.current.showModal();
-    document.documentElement.classList.add("overflow-hidden");
-  }
+  const { theme } = useContext(Context).globalThemeState;
+  const { appointmentCompleted, appointmentUncompleted } = useSorterList();
+  const { handleChangeFilter, projectState } =
+    useContext(Context).globalProjectState;
+  const { handleOpenDialog } = useDialogNew();
+
   let filterDefault = projectState.filterState.split("");
   filterDefault[0] = filterDefault[0].toUpperCase();
   filterDefault = filterDefault.join("");

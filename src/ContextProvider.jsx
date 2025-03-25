@@ -1,150 +1,34 @@
-import { createContext, useState, useEffect, useRef } from "react";
+import { createContext, useState, useRef } from "react";
+import useProjectState from "./hooks/globalState/useProjectState.js";
+import useThemeState from "./hooks/globalState/useThemeState.js";
 
 export const Context = createContext({
-  theme: "light",
-  handleTheme: () => {},
+  globalProjectState: () => {},
+  globalThemeState: () => {},
 
   dialog: () => {},
 
-  projectState: [],
-  handleAddAppointment: () => {},
-  handleCheckboxAppointment: () => {},
-  handleDeleteAppointment: () => {},
-  handleChangeFilter: () => {},
-
-  appointmentCompleted: [],
-  appointmentUncompleted: [],
-  sorter: () => {},
   search: () => {},
   handleChangeSearch: () => {},
 });
 
 export default function ContextProvider({ children }) {
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
-  const [projectState, setProjectState] = useState(
-    localStorage.getItem("project")
-      ? JSON.parse(localStorage.getItem("project"))
-      : {
-          filterState: "all",
-          uniqueid: 0,
-          items: [],
-        }
-  );
+  const globalProjectState = useProjectState();
+  const globalThemeState = useThemeState();
+
   const dialog = useRef();
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("project", JSON.stringify(projectState));
-  }, [projectState]);
-
-  function handleTheme() {
-    if (theme === "light") {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    }
-  }
-
-  function handleAddAppointment(name, date, time, timestamp) {
-    setProjectState((preState) => {
-      return {
-        ...preState,
-        uniqueid: ++preState.uniqueid,
-        items: [
-          ...preState.items,
-          {
-            id: preState.uniqueid,
-            name,
-            date,
-            time,
-            check: false,
-            timestamp,
-          },
-        ],
-      };
-    });
-  }
-
-  function handleCheckboxAppointment(id) {
-    const updatedItems = projectState.items.map((app) => {
-      return app.id == id ? { ...app, check: !app.check } : app;
-    });
-    setProjectState((preState) => {
-      return { ...preState, items: updatedItems };
-    });
-  }
-
-  function handleDeleteAppointment(id) {
-    const updatedItems = projectState.items.filter((app) => {
-      return app.id != id;
-    });
-    setProjectState((preState) => {
-      return { ...preState, items: updatedItems };
-    });
-  }
-
-  function handleChangeFilter(filterState) {
-    setProjectState((preState) => {
-      return { ...preState, filterState };
-    });
-  }
-
-  const appointmentCompleted = projectState.items.filter((app) => {
-    return app.check;
-  });
-  const appointmentUncompleted = projectState.items.filter((app) => {
-    return !app.check;
-  });
-
-  function sorter() {
-    const sortAppCompl = appointmentCompleted.sort((a, b) => {
-      return a.timestamp - b.timestamp;
-    });
-    const sortAppUncompl = appointmentUncompleted.sort((a, b) => {
-      return a.timestamp - b.timestamp;
-    });
-
-    switch (projectState.filterState) {
-      case "completed":
-        return sortAppCompl;
-
-      case "uncompleted":
-        return sortAppUncompl;
-
-      default:
-        return [...sortAppUncompl, ...sortAppCompl];
-    }
-  }
   function handleChangeSearch(e) {
     setSearch(e.target.value);
   }
 
   const contValue = {
-    theme,
-    handleTheme,
+    globalProjectState,
+    globalThemeState,
+
     dialog,
 
-    projectState,
-    handleAddAppointment,
-    handleCheckboxAppointment,
-    handleDeleteAppointment,
-    handleChangeFilter,
-
-    appointmentCompleted,
-    appointmentUncompleted,
-    sorter,
     search,
     handleChangeSearch,
   };

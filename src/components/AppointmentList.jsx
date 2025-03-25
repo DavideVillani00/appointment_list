@@ -1,9 +1,13 @@
 import AppointmentCard from "./AppointmentCard.jsx";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
+import useSorterList from "../hooks/useSorterList.js";
 
 export default function AppointmentList() {
-  const { sorter, search, projectState } = useContext(Context);
+  const { search } = useContext(Context);
+  const { sorter } = useSorterList();
+  const { projectState } = useContext(Context).globalProjectState;
+
   const [sorteredList, setSorteredList] = useState(sorter());
 
   useEffect(() => {
