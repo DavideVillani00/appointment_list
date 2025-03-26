@@ -6,14 +6,9 @@ import useDialogNew from "../hooks/useDialogNew.js";
 
 export default function DialogNew() {
   const { dialog } = useContext(Context);
-  const inputName = useRef();
-  const inputDate = useRef();
-  const inputTime = useRef();
-  const { handleAddButton, handleCloseModal, handleDeleteErr } = useDialogNew(
-    inputName,
-    inputDate,
-    inputTime
-  );
+
+  const { handleAddButton, handleCloseModal, inputState, handleChangeInput } =
+    useDialogNew();
 
   return (
     <dialog
@@ -25,30 +20,48 @@ export default function DialogNew() {
           <h1 className="text-3xl font-bold">NEW</h1>
           <img
             src={iconClose}
-            className="w-10 hover:drop-shadow-[0_0_5px_red] "
+            className="w-10 hover:drop-shadow-[0_0_5px_red] cursor-pointer"
             onClick={handleCloseModal}
+            alt="X icon for close"
           />
         </div>
         <hr className="my-7" />
         <form className="flex flex-col gap-4 md:p-4">
           <Input
             type="text"
+            name="inputName"
             placeholder="Inserisci un nome"
-            ref={inputName}
-            onClick={handleDeleteErr}
+            value={inputState.inputName.value}
+            onChange={handleChangeInput}
+            className={`border-2
+              ${
+                inputState.inputName.err
+                  ? "border-red-500"
+                  : "border-transparent"
+              }`}
           />
           <div className="flex flex-col gap-4 md:flex-row">
             <Input
+              name="inputDate"
               type="date"
-              className="md:flex-1/2"
-              ref={inputDate}
-              onClick={handleDeleteErr}
+              className={`md:flex-1/2 border-2 ${
+                inputState.inputDate.err
+                  ? "border-red-500"
+                  : "border-transparent"
+              }`}
+              value={inputState.inputDate.value}
+              onChange={handleChangeInput}
             />
             <Input
               type="time"
-              className="md:flex-1/2 appearance-none"
-              ref={inputTime}
-              onClick={handleDeleteErr}
+              name="inputTime"
+              className={`md:flex-1/2 appearance-none border-2 ${
+                inputState.inputTime.err
+                  ? "border-red-500"
+                  : "border-transparent"
+              }`}
+              value={inputState.inputTime.value}
+              onChange={handleChangeInput}
             />
           </div>
           <Input type="button" value="Add +" onClick={handleAddButton} />

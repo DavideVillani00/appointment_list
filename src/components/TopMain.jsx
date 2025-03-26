@@ -33,7 +33,7 @@ export default function TopMain() {
         <div className="md:flex-1/3 relative">
           <img
             src={theme === "dark" ? iconSearchDark : iconSearchLight}
-            alt=""
+            alt="search glass icon"
             className="absolute top-4 left-3"
           />
           <Input
@@ -58,11 +58,12 @@ export default function TopMain() {
           <img
             src={theme === "dark" ? iconFilterDark : iconFilterLight}
             className="mr-2 absolute top-2 left-4"
-          ></img>
+            alt="filter icon"
+          />
           <div className=" bg-bgCardLight hover:shadow-[0_0_5px_black] dark:bg-bgCardDark p-2 pl-12  dark:hover:shadow-[0_0_5px_white] rounded-2xl">
             <select
               className="bg-bgCardLight  dark:bg-bgCardDark outline-none pr-4"
-              onChange={(e) => handleChangeFilter(e.target.value.toLowerCase())}
+              onChange={handleChangeFilter}
               defaultValue={filterDefault}
             >
               <option>All</option>

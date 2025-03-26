@@ -49,7 +49,8 @@ export default function useProjectState() {
     });
   }
 
-  function handleChangeFilter(filterState) {
+  function handleChangeFilter(e) {
+    const filterState = e.target.value.toLowerCase();
     setProjectState((preState) => {
       return { ...preState, filterState };
     });

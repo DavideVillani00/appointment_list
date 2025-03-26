@@ -1,7 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
 
-export default function useDialogNew(inputName, inputDate, inputTime) {
+export default function useDialogNew() {
+  const [inputState, setInputState] = useState({
+    inputName: { value: "", err: false },
+    inputDate: { value: "", err: false },
+    inputTime: { value: "", err: false },
+  });
   const { dialog } = useContext(Context);
   const { handleAddAppointment } = useContext(Context).globalProjectState;
 
@@ -13,31 +18,51 @@ export default function useDialogNew(inputName, inputDate, inputTime) {
   function handleCloseModal() {
     dialog.current.close();
     document.documentElement.classList.remove("overflow-hidden");
-    inputName.current.classList.remove("border-2", "border-red-700");
-    inputDate.current.classList.remove("border-2", "border-red-700");
-    inputTime.current.classList.remove("border-2", "border-red-700");
-    inputName.current.value = "";
-    inputDate.current.value = "";
-    inputTime.current.value = "";
+    setInputState({
+      inputName: { value: "", err: false },
+      inputDate: { value: "", err: false },
+      inputTime: { value: "", err: false },
+    });
+  }
+
+  function handleChangeInput(e) {
+    const { name, value } = e.target;
+    setInputState((preState) => {
+      return {
+        ...preState,
+        [name]: { value, err: false },
+      };
+    });
+  }
+
+  function HandleChangeErr(name) {
+    setInputState((preState) => {
+      return {
+        ...preState,
+        [name]: { ...preState[name], err: true },
+      };
+    });
   }
 
   function handleAddButton() {
-    const name = inputName.current.value.trim();
-    const date = inputDate.current.value;
-    const time = inputTime.current.value;
+    const name = inputState.inputName.value.trim();
+    const date = inputState.inputDate.value;
+    const time = inputState.inputTime.value;
     const actualDate = new Date().getTime();
-    const impostedDate = new Date([date, time].join(" ")).getTime();
+    const impostedDate = new Date(`${date}T${time}`).getTime();
 
-    if (!name) {
-      inputName.current.classList.add("border-2", "border-red-700");
-    }
-    if (!date || impostedDate < actualDate) {
-      inputDate.current.classList.add("border-2", "border-red-700");
-    }
-    if (!time || impostedDate < actualDate) {
-      inputTime.current.classList.add("border-2", "border-red-700");
-    }
+    console.log(date, time, actualDate, impostedDate);
+
     if (!name || !date || !time || impostedDate < actualDate) {
+      if (!name) {
+        HandleChangeErr("inputName");
+      }
+      if (!date || impostedDate < actualDate) {
+        HandleChangeErr("inputDate");
+      }
+      if (!time || impostedDate < actualDate) {
+        HandleChangeErr("inputTime");
+      }
       return;
     }
     handleAddAppointment(name, date, time, impostedDate);
@@ -45,7 +70,7 @@ export default function useDialogNew(inputName, inputDate, inputTime) {
   }
 
   function handleDeleteErr(el) {
-    el.target.classList.remove("border-2", "border-red-700");
+    el.target.classList.remove("border-red-700");
   }
 
   return {
@@ -53,5 +78,7 @@ export default function useDialogNew(inputName, inputDate, inputTime) {
     handleCloseModal,
     handleAddButton,
     handleDeleteErr,
+    handleChangeInput,
+    inputState,
   };
 }

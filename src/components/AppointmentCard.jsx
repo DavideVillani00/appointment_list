@@ -31,18 +31,19 @@ export default function AppointmentCard({ id, name, date, time, check }) {
                 ? iconUncompletedDark
                 : iconUncompletedLight
             }
+            alt="checkbox icon"
             className="w-[27px]"
           />
           <span className=" font-bold">
             {check ? "COMPLETED" : "UNCOMPLETED"}
           </span>
         </div>
-        <span className="md:my-5 w-[2px] h-auto md:w-auto md:h-[2px] bg-bgInputLight dark:bg-bgInputDark  "></span>
+        <span className="md:my-4 w-[2px] h-auto md:w-auto md:h-[2px] bg-bgInputLight dark:bg-bgInputDark  "></span>
         <div
           className="flex gap-2 justify-end items-center cursor-pointer hover:drop-shadow-[0_0_10px_red]"
           onClick={() => handleDeleteAppointment(id)}
         >
-          <img src={iconDelete} className="w-[27px]" />
+          <img src={iconDelete} className="w-[27px]" alt="delete icon" />
           <span className="text-[#D40000] font-bold">DELETE</span>
         </div>
       </div>

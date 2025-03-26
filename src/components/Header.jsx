@@ -17,6 +17,7 @@ export default function Header() {
           }, 300);
         }}
         className="hover:drop-shadow-[0_0_5px_black] dark:hover:drop-shadow-[0_0_5px_white] w-[65px] transition-transform duration-300 "
+        alt="switch color icon"
       />
     </header>
   );
