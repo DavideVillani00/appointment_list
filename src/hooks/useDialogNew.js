@@ -47,17 +47,18 @@ export default function useDialogNew() {
   function handleAddButton() {
     const name = inputState.inputName.value.trim();
     const date = inputState.inputDate.value;
+    const year = new Date(date).getFullYear();
     const time = inputState.inputTime.value;
     const actualDate = new Date().getTime();
     const impostedDate = new Date(`${date}T${time}`).getTime();
 
-    console.log(date, time, actualDate, impostedDate);
+    console.log(date, time, actualDate, impostedDate, year);
 
-    if (!name || !date || !time || impostedDate < actualDate) {
+    if (!name || !date || !time || impostedDate < actualDate || year > 2200) {
       if (!name) {
         HandleChangeErr("inputName");
       }
-      if (!date || impostedDate < actualDate) {
+      if (!date || impostedDate < actualDate || year > 2200) {
         HandleChangeErr("inputDate");
       }
       if (!time || impostedDate < actualDate) {

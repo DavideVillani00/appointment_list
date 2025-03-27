@@ -6,15 +6,17 @@ export default function useThemeState() {
   );
 
   function handleTheme() {
-    if (theme === "light") {
-      setTheme("dark");
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    }
+    setTimeout(() => {
+      if (theme === "light") {
+        setTheme("dark");
+        localStorage.setItem("theme", "dark");
+        document.documentElement.classList.add("dark");
+      } else {
+        setTheme("light");
+        localStorage.setItem("theme", "light");
+        document.documentElement.classList.remove("dark");
+      }
+    }, 300);
   }
 
   return { theme, handleTheme };

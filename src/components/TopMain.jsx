@@ -1,8 +1,8 @@
 import Input from "./Input.jsx";
-import iconFilterLight from "../assets/icon-filter-light-25.png";
-import iconFilterDark from "../assets/icon-filter-dark-25.png";
-import iconSearchLight from "../assets/icon-search-light-25.png";
-import iconSearchDark from "../assets/icon-search-dark-25.png";
+import iconFilterLight from "../assets/icons/beautyIcons/icon-filter-light-25.png";
+import iconFilterDark from "../assets/icons/beautyIcons/icon-filter-dark-25.png";
+import iconSearchLight from "../assets/icons/beautyIcons/icon-search-light-25.png";
+import iconSearchDark from "../assets/icons/beautyIcons/icon-search-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 import useSorterList from "../hooks/useSorterList.js";
@@ -23,27 +23,25 @@ export default function TopMain() {
 
   return (
     <>
-      <div className="mt-3 p-3 flex flex-col gap-2 md:flex-row ">
+      <div className="mt-3 p-3 flex flex-col gap-4 md:flex-row ">
         <Input
           type="button"
           value="Add +"
-          className="md:flex-2/3"
+          classContainer="md:flex-2/3"
+          classInput="pr-13 text-xl font-bold "
           onClick={handleOpenDialog}
         />
-        <div className="md:flex-1/3 relative">
-          <img
-            src={theme === "dark" ? iconSearchDark : iconSearchLight}
-            alt="search glass icon"
-            className="absolute top-4 left-3"
-          />
-          <Input
-            type="text"
-            placeholder="Search"
-            className="w-full px-5 pl-13"
-            value={search}
-            onChange={handleChangeSearch}
-          />
-        </div>
+        <Input
+          classContainer="md:flex-1/3"
+          img={theme === "dark" ? iconSearchDark : iconSearchLight}
+          alt="search glass icon"
+          classImg="top-4 left-3"
+          classInput="px-5 pl-13"
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={handleChangeSearch}
+        />
       </div>
       <div className="mt-1 p-3 flex flex-col gap-4 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-textLight/70 dark:text-textDark/70 ">
@@ -54,7 +52,7 @@ export default function TopMain() {
           <p>Completed: {appointmentCompleted.length};</p>
           <p>Uncompleted: {appointmentUncompleted.length};</p>
         </div>
-        <div className="self-center relative ">
+        <div className="self-center relative shadow-md dark:shadow-secondaryBgDark shadow-secondaryBgLight rounded-2xl">
           <img
             src={theme === "dark" ? iconFilterDark : iconFilterLight}
             className="mr-2 absolute top-2 left-4"
