@@ -14,7 +14,10 @@ export default function useSorterList() {
     sorteredList = search.trim()
       ? sorter().filter(
           (app) =>
-            app.name.includes(search.trim()) || app.date.includes(search.trim())
+            app.name
+              .toLocaleLowerCase()
+              .includes(search.trim().toLocaleLowerCase()) ||
+            app.date.includes(search.trim())
         )
       : sorter();
 

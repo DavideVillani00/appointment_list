@@ -86,7 +86,7 @@ export default function DialogNew() {
           <Input
             type="button"
             value="Add +"
-            classInput="pr-13 text-xl font-bold"
+            classInput="pr-13 text-xl font-bold inset-shadow-[0px_0px_15px] inset-shadow-green-600 text-green-600/90"
             onClick={handleAddButton}
           />
         </form>

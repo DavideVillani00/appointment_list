@@ -28,7 +28,7 @@ export default function TopMain() {
           type="button"
           value="Add +"
           classContainer="md:flex-2/3"
-          classInput="pr-13 text-xl font-bold "
+          classInput="text-xl font-bold inset-shadow-[0px_0px_15px] inset-shadow-green-600 text-green-600/90"
           onClick={handleOpenDialog}
         />
         <Input
@@ -36,21 +36,20 @@ export default function TopMain() {
           img={theme === "dark" ? iconSearchDark : iconSearchLight}
           alt="search glass icon"
           classImg="top-4 left-3"
-          classInput="px-5 pl-13"
+          classInput="px-5"
           type="text"
           placeholder="Search"
           value={search}
           onChange={handleChangeSearch}
         />
       </div>
-      <div className="mt-1 p-3 flex flex-col gap-4 md:flex-row md:justify-center items-center">
+      <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-textLight/70 dark:text-textDark/70 ">
           <p>
             Total: {appointmentCompleted.length + appointmentUncompleted.length}
-            ;
           </p>
-          <p>Completed: {appointmentCompleted.length};</p>
-          <p>Uncompleted: {appointmentUncompleted.length};</p>
+          <p>Completed: {appointmentCompleted.length}</p>
+          <p>Uncompleted: {appointmentUncompleted.length}</p>
         </div>
         <div className="self-center relative shadow-md dark:shadow-secondaryBgDark shadow-secondaryBgLight rounded-2xl">
           <img
