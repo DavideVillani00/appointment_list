@@ -10,6 +10,7 @@ export default function useProjectState() {
           items: [],
         }
   );
+  const [selectedId, setSelectedId] = useState(null);
 
   function handleAddAppointment(name, date, time, timestamp) {
     setProjectState((preState) => {
@@ -40,12 +41,15 @@ export default function useProjectState() {
     });
   }
 
-  function handleDeleteAppointment(id) {
+  function handleDeleteAppointment() {
     const updatedItems = projectState.items.filter((app) => {
-      return app.id != id;
+      return app.id != selectedId;
     });
     setProjectState((preState) => {
-      return { ...preState, items: updatedItems };
+      return {
+        ...preState,
+        items: updatedItems,
+      };
     });
   }
 
@@ -62,5 +66,6 @@ export default function useProjectState() {
     handleCheckboxAppointment,
     handleDeleteAppointment,
     handleChangeFilter,
+    setSelectedId,
   };
 }

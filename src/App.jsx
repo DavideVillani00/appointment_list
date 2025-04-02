@@ -1,15 +1,12 @@
 import AppointmentList from "./components/AppointmentList.jsx";
-import DialogDelete from "./components/DialogDelete.jsx";
 import DialogNew from "./components/DialogNew.jsx";
 import Header from "./components/Header.jsx";
 import TopMain from "./components/TopMain.jsx";
-import useAsideEffect from "./hooks/useAsideEffect.js";
 
 function App() {
-  useAsideEffect();
   return (
     <>
-      {/* <DialogDelete /> */}
+      <div id="modal"></div>
       <DialogNew />
       <Header />
       <main>

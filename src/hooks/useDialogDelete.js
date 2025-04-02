@@ -1,11 +1,17 @@
-import { useRef } from "react";
-export default function useDialogDelete() {
-  const dialogDelete = useRef();
+import { useContext } from "react";
 
-  function handleOpenDialogDelete() {
+import { Context } from "../ContextProvider.jsx";
+export default function useDialogDelete() {
+  const { setSelectedId } = useContext(Context).globalProjectState;
+  const { dialogDelete } = useContext(Context);
+
+  function handleOpenDialogDelete(id) {
+    console.log("dialog", dialogDelete.current);
     document.documentElement.classList.add("overflow-hidden");
     dialogDelete.current.showModal();
+    setSelectedId(id);
   }
+
   function handleCloseDialogDelete() {
     document.documentElement.classList.remove("overflow-hidden");
     dialogDelete.current.close();

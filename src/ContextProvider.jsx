@@ -7,6 +7,7 @@ export const Context = createContext({
   globalThemeState: () => {},
 
   dialog: () => {},
+  dialogDelete: () => {},
 
   search: () => {},
   handleChangeSearch: () => {},
@@ -17,6 +18,7 @@ export default function ContextProvider({ children }) {
   const globalThemeState = useThemeState();
 
   const dialog = useRef();
+  const dialogDelete = useRef();
   const [search, setSearch] = useState("");
 
   function handleChangeSearch(e) {
@@ -28,6 +30,7 @@ export default function ContextProvider({ children }) {
     globalThemeState,
 
     dialog,
+    dialogDelete,
 
     search,
     handleChangeSearch,
