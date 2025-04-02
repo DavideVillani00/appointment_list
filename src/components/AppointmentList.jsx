@@ -14,15 +14,15 @@ export default function AppointmentList() {
   return (
     <>
       <DialogDelete />
-      <ul className=" bg-bgInputLight dark:bg-bgInputDark m-2 p-5 rounded-md  inset-shadow-[-3px_-3px_10px] dark:inset-shadow-secondaryBgDark/20 inset-shadow-secondaryBgLight/40">
+      <ul className=" bg-bgInputLight dark:bg-bgInputDark m-2 p-5 rounded-md  inset-shadow-[-3px_-3px_10px] dark:inset-shadow-secondaryBgDark/20 inset-shadow-secondaryBgLight/40 flex flex-col items-center">
         {isLoading ? (
           <img
             src={theme === "light" ? iconLoadingLight : iconLoadingDark}
             alt="loading ring"
-            className="animate-spin justify-self-center "
+            className="animate-spin w-[50px]"
           />
         ) : sorteredList.length === 0 ? (
-          <p className="justify-self-center">There isn't appointment</p>
+          <p className="">There isn't appointment</p>
         ) : (
           sorteredList.map((app) => {
             return <AppointmentCard key={app.id} {...app} />;
