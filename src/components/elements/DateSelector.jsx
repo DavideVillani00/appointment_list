@@ -1,9 +1,15 @@
 import { useRef, useState } from "react";
-const formatDate = "YYYY-MM-DD";
-export default function DateSelector({ children }) {
-  const [valueInputDate, setValueInputDate] = useState(formatDate);
+import useDialogNew from "../../hooks/useDialogNew.js";
 
-  //   ! da sistemare la logica per farlo inserire nei punti dell'applicazione
+export default function DateSelector({
+  children,
+  onChangeInput,
+  className = "",
+  value,
+  type,
+  ...props
+}) {
+  const { FORMATTED_INPUT } = useDialogNew();
   const inputDate = useRef();
   function handleOpenCalendar() {
     inputDate.current.showPicker();
@@ -11,23 +17,30 @@ export default function DateSelector({ children }) {
 
   return (
     <div
-      className={`relative p-4 rounded-lg shadow-md dark:shadow-secondaryBgDark/50 shadow-secondaryBgLight/50 bg-bgInputLight hover:shadow-[0_0_5px_black] dark:bg-bgInputDark dark:placeholder:text-textDark/75 dark:hover:shadow-[0_0_5px_white] flex gap-4 items-center ${
-        valueInputDate === formatDate
-          ? "text-textLight/60 dark:text-textDark/60"
-          : ""
-      }`}
+      className={`w-full text-lg  relative p-[18px] rounded-lg shadow-md dark:shadow-secondaryBgDark/50 shadow-secondaryBgLight/50 bg-bgInputLight dark:bg-bgInputDark  flex gap-4 items-center 
+         ${
+           value === FORMATTED_INPUT[type]
+             ? "text-textLight/60 dark:text-textDark/60"
+             : ""
+         }
+
+        
+      `}
       onClick={handleOpenCalendar}
     >
       {children}
-      <span>{valueInputDate}</span>
+      <span>{value}</span>
       <input
-        className="opacity-0 bg-amber-500 absolute top-0 left-0 w-full h-full hover:cursor-pointer"
-        type="date"
-        onChange={(e) => {
-          setValueInputDate(e.target.value ? e.target.value : formatDate);
-        }}
+        type={type}
+        className="opacity-0 absolute top-0 left-0 w-full h-full hover:cursor-pointer "
+        onChange={onChangeInput}
+        {...props}
         ref={inputDate}
       />
+
+      <div
+        className={`absolute top-0 left-0 w-full h-full rounded-lg hover:shadow-[0_0_5px_black] dark:hover:shadow-[0_0_5px_white] ${className}`}
+      ></div>
     </div>
   );
 }

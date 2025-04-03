@@ -25,10 +25,10 @@ export default function DialogNew() {
     <dialog
       onClose={handleCloseModal}
       ref={dialog}
-      className=" text-textLight dark:text-textDark backdrop:backdrop-blur-xs bg-bgCardLight dark:bg-bgCardDark w-5/6 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-shadow-[-3px_-3px_10px] dark:inset-shadow-secondaryBgDark inset-shadow-secondaryBgLight"
+      className=" text-textLight dark:text-textDark backdrop:backdrop-blur-xs bg-bgCardLight dark:bg-bgCardDark w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-shadow-[-3px_-3px_10px] dark:inset-shadow-secondaryBgDark inset-shadow-secondaryBgLight"
     >
-      <div className="flex justify-between items-center px-4">
-        <h1 className="text-3xl font-bold">NEW</h1>
+      <div className="flex justify-between items-center ">
+        <h1 className="text-3xl font-bold">New appointment</h1>
         <img
           src={iconClose}
           className="w-10 hover:drop-shadow-[0_0_5px_red] cursor-pointer"
@@ -37,7 +37,7 @@ export default function DialogNew() {
         />
       </div>
       <hr className="mt-5 mb-7" />
-      <form className="flex flex-col gap-4 md:p-4">
+      <form className="flex flex-col gap-4 md:p-4 ">
         <Input
           img={theme === "dark" ? writeIconDark : writeIconLight}
           alt="hand with pencil icon"
@@ -53,40 +53,42 @@ export default function DialogNew() {
                   : "border-transparent"
               }`}
         />
-        <div className="flex flex-col gap-4 md:flex-row">
-          <Input
-            img={theme === "dark" ? calendarIconDark : calendarIconLight}
-            alt="calendar icon"
+        <div className="flex flex-col gap-4 md:flex-row ">
+          <DateSelector
+            onChangeInput={handleChangeInput}
             name="inputDate"
             type="date"
-            classInput={` border-2 ${
+            value={inputState.inputDate.value}
+            className={` border-2 ${
               inputState.inputDate.err ? "border-red-500" : "border-transparent"
             }`}
-            classImg="top-5"
-            classContainer="md:flex-1/2"
-            value={inputState.inputDate.value}
-            onChange={handleChangeInput}
-          />
-          <Input
-            img={theme === "dark" ? clockIconDark : clockIconLight}
-            alt="clock icon"
-            type="time"
+          >
+            <img
+              src={theme === "dark" ? calendarIconDark : calendarIconLight}
+              alt="calendar Icon"
+            />
+          </DateSelector>
+          <DateSelector
+            onChangeInput={handleChangeInput}
             name="inputTime"
-            classContainer="md:flex-1/2"
-            classImg="top-5"
-            classInput={` appearance-none border-2 ${
+            type="time"
+            className={`border-2 ${
               inputState.inputTime.err ? "border-red-500" : "border-transparent"
             }`}
             value={inputState.inputTime.value}
-            onChange={handleChangeInput}
-          />
+          >
+            <img
+              src={theme === "dark" ? clockIconDark : clockIconLight}
+              alt="calendar Icon"
+            />
+          </DateSelector>
         </div>
-
-        {/* //  ! da sistemare la logica per farlo inserire nei punti dell'applicazione */}
-        <DateSelector>
-          <img src={calendarIconLight} alt="calendar Icon" />
-        </DateSelector>
-        {/* //   ! da sistemare la logica per farlo inserire nei punti dell'applicazione */}
+        <ul className="text-center text-red-400 font-bold">
+          {inputState.inputName.err && <li>Insert a valid appointment</li>}
+          {(inputState.inputDate.err || inputState.inputTime.err) && (
+            <li>Enter a date for a future appointment</li>
+          )}
+        </ul>
 
         <Input
           type="button"

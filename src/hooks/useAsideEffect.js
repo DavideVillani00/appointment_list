@@ -13,7 +13,6 @@ export default function useAsideEffect() {
 
   useEffect(() => {
     localStorage.setItem("project", JSON.stringify(projectState));
-    console.log("add");
   }, [projectState]);
 
   return;

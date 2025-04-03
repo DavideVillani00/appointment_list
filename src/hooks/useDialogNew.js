@@ -1,11 +1,16 @@
 import { useContext, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
 
+const FORMATTED_INPUT = {
+  date: "yyyy-mm-dd",
+  time: "--:--",
+};
+
 export default function useDialogNew() {
   const [inputState, setInputState] = useState({
     inputName: { value: "", err: false },
-    inputDate: { value: "", err: false },
-    inputTime: { value: "", err: false },
+    inputDate: { value: FORMATTED_INPUT.date, err: false },
+    inputTime: { value: FORMATTED_INPUT.time, err: false },
   });
   const { dialog } = useContext(Context);
   const { handleAddAppointment } = useContext(Context).globalProjectState;
@@ -20,13 +25,15 @@ export default function useDialogNew() {
     document.documentElement.classList.remove("overflow-hidden");
     setInputState({
       inputName: { value: "", err: false },
-      inputDate: { value: "", err: false },
-      inputTime: { value: "", err: false },
+      inputDate: { value: FORMATTED_INPUT.date, err: false },
+      inputTime: { value: FORMATTED_INPUT.time, err: false },
     });
   }
 
   function handleChangeInput(e) {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    value = value ? value : FORMATTED_INPUT[e.target.type];
+    console.log(name);
     setInputState((preState) => {
       return {
         ...preState,
@@ -36,6 +43,7 @@ export default function useDialogNew() {
   }
 
   function HandleChangeErr(name) {
+    console.log(name);
     setInputState((preState) => {
       return {
         ...preState,
@@ -46,9 +54,16 @@ export default function useDialogNew() {
 
   function handleAddButton() {
     const name = inputState.inputName.value.trim();
-    const date = inputState.inputDate.value;
+    const date =
+      inputState.inputDate.value === FORMATTED_INPUT.date
+        ? null
+        : inputState.inputDate.value;
     const year = new Date(date).getFullYear();
-    const time = inputState.inputTime.value;
+    const time =
+      inputState.inputTime.value === FORMATTED_INPUT.time
+        ? null
+        : inputState.inputTime.value;
+
     const actualDate = new Date().getTime();
     const impostedDate = new Date(`${date}T${time}`).getTime();
 
@@ -59,6 +74,7 @@ export default function useDialogNew() {
         HandleChangeErr("inputName");
       }
       if (!date || impostedDate < actualDate || year > 2200) {
+        console.log("err");
         HandleChangeErr("inputDate");
       }
       if (!time || impostedDate < actualDate) {
@@ -81,5 +97,6 @@ export default function useDialogNew() {
     handleDeleteErr,
     handleChangeInput,
     inputState,
+    FORMATTED_INPUT,
   };
 }
