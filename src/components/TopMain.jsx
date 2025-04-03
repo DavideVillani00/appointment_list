@@ -1,4 +1,4 @@
-import Input from "./Input.jsx";
+import Input from "./elements/Input.jsx";
 import iconFilterLight from "../assets/icons/beautyIcons/icon-filter-light-25.png";
 import iconFilterDark from "../assets/icons/beautyIcons/icon-filter-dark-25.png";
 import iconSearchLight from "../assets/icons/beautyIcons/icon-search-light-25.png";

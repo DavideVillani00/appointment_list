@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { createPortal } from "react-dom";
-import Input from "./Input.jsx";
+import Input from "./elements/Input.jsx";
 import { Context } from "../ContextProvider.jsx";
 import useDialogDelete from "../hooks/useDialogDelete.js";
 import iconDelete from "../assets/icons/icon-delete-25.png";

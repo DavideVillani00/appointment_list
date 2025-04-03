@@ -1,5 +1,7 @@
-import Input from "./Input.jsx";
+import Input from "./elements/Input.jsx";
 import iconClose from "../assets/icons/icon-close-25.png";
+import DateSelector from "./elements/DateSelector.jsx";
+
 import writeIconLight from "../assets/icons/beautyIcons/icon-write-light-25.png";
 import writeIconDark from "../assets/icons/beautyIcons/icon-write-dark-25.png";
 import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-25.png";
@@ -79,6 +81,13 @@ export default function DialogNew() {
             onChange={handleChangeInput}
           />
         </div>
+
+        {/* //  ! da sistemare la logica per farlo inserire nei punti dell'applicazione */}
+        <DateSelector>
+          <img src={calendarIconLight} alt="calendar Icon" />
+        </DateSelector>
+        {/* //   ! da sistemare la logica per farlo inserire nei punti dell'applicazione */}
+
         <Input
           type="button"
           value="Add +"
