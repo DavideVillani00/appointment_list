@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import Input from "./elements/Input.jsx";
 import { Context } from "../ContextProvider.jsx";
 import useDialogDelete from "../hooks/useDialogDelete.js";
-import iconDelete from "../assets/icons/icon-delete-25.png";
+import iconDelete from "../assets/icons/toggleIcons/icon-delete-25.png";
 
 export default function DialogDelete() {
   const { handleDeleteAppointment } = useContext(Context).globalProjectState;

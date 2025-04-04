@@ -1,7 +1,7 @@
-import iconDelete from "../assets/icons/icon-delete-25.png";
-import iconComplete from "../assets/icons/icon-complete-25.png";
-import iconUncompletedLight from "../assets/icons/icon-uncompleted-light-25.png";
-import iconUncompletedDark from "../assets/icons/icon-uncompleted-dark-25.png";
+import iconDelete from "../assets/icons/toggleIcons/icon-delete-25.png";
+import iconComplete from "../assets/icons/toggleIcons/icon-complete-25.png";
+import iconUncompletedLight from "../assets/icons/toggleIcons/icon-uncompleted-light-25.png";
+import iconUncompletedDark from "../assets/icons/toggleIcons/icon-uncompleted-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 

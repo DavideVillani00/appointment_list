@@ -1,8 +1,9 @@
-import iconMoon from "../assets/icons/icon-moon-48.png";
-import iconSun from "../assets/icons/icon-sun-48.png";
+import iconMoon from "../assets/icons/toggleIcons/icon-moon-48.png";
+import iconSun from "../assets/icons/toggleIcons/icon-sun-48.png";
 import title from "../assets/titleLogo.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
+import HeaderBurger from "./HeaderBurger.jsx";
 export default function Header() {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   return (
@@ -25,6 +26,7 @@ export default function Header() {
           alt="switch color icon"
         />
       </div>
+      <HeaderBurger />
     </header>
   );
 }

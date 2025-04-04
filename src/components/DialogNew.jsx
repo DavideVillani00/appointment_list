@@ -1,5 +1,5 @@
 import Input from "./elements/Input.jsx";
-import iconClose from "../assets/icons/icon-close-25.png";
+import iconClose from "../assets/icons/toggleIcons/icon-close-25.png";
 import DateSelector from "./elements/DateSelector.jsx";
 
 import writeIconLight from "../assets/icons/beautyIcons/icon-write-light-25.png";
@@ -40,12 +40,12 @@ export default function DialogNew() {
       <hr className="mt-5 mb-7" />
       <form className="flex flex-col gap-4 md:p-4 ">
         {admin && (
-          <Select defaultValue={"admin"} img={writeIconLight}>
+          <Select img={writeIconLight}>
             <option>pino</option>
             <option>gino</option>
             <option>lino</option>
             <option>tino</option>
-            <option>admin</option>
+            <option selected>admin</option>
           </Select>
         )}
         <Input
