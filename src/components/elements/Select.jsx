@@ -5,7 +5,12 @@ export default function Select({ children, img = null, alt }) {
         className={`absolute top-0 left-0 w-full h-full rounded-lg shadow-md dark:shadow-secondaryBgDark/50 shadow-secondaryBgLight/50 `}
       ></div>
       {img && <img src={img} alt={alt} />}
-      <select className="w-full outline-none z-10">{children}</select>
+      <select
+        className="w-full outline-none z-10 bg-bgInputLight dark:bg-bgInputDark"
+        defaultValue="admin"
+      >
+        {children}
+      </select>
     </div>
   );
 }

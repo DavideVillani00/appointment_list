@@ -1,27 +1,39 @@
 import iconBurgerMenuLight from "../assets/icons/toggleIcons/icon-menu-burger-light-64.png";
 import iconBurgerMenuDark from "../assets/icons/toggleIcons/icon-menu-burger-dark-64.png";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
 import DialogMenuBurger from "./DialogMenuBurger.jsx";
 
 export default function HeaderBurger() {
-  const dialogMenuBurger = useRef();
-  function handleOpen() {
-    dialogMenuBurger.current.showModal();
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleOpenModal() {
+    setIsOpen(true);
   }
-  function handleClose() {
-    dialogMenuBurger.current.close();
+  function handleCloseModal() {
+    setIsOpen(false);
   }
 
   const { theme } = useContext(Context).globalThemeState;
   return (
     <>
-      <img
-        onClick={handleOpen}
-        src={theme === "dark" ? iconBurgerMenuDark : iconBurgerMenuLight}
-        alt="menu burger icon"
-      />
-      <DialogMenuBurger ref={dialogMenuBurger} onClose={handleClose} />
+      {isOpen && (
+        <div
+          className="absolute  w-full h-full top-0 z-10"
+          onClick={handleCloseModal}
+        ></div>
+      )}
+      <div className="relative">
+        <img
+          onClick={handleOpenModal}
+          src={theme === "dark" ? iconBurgerMenuDark : iconBurgerMenuLight}
+          alt="menu burger icon"
+          className={`${
+            isOpen ? "rotate-90" : "rotate-0"
+          } transition-transform duration-150`}
+        />
+        <DialogMenuBurger isOpen={isOpen} onCloseModal={handleCloseModal} />
+      </div>
     </>
   );
 }

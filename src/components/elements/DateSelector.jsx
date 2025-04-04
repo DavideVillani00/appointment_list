@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import useDialogNew from "../../hooks/useDialogNew.js";
 
+// !!! NON FUNZIONA L'INPUT TIME CON FIREFOX
+
 export default function DateSelector({
   children,
   onChangeInput,

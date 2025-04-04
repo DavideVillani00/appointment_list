@@ -2,6 +2,8 @@ import Input from "./elements/Input.jsx";
 import iconClose from "../assets/icons/toggleIcons/icon-close-25.png";
 import DateSelector from "./elements/DateSelector.jsx";
 
+import userIconLight from "../assets/icons/beautyIcons/icon-user-light-25.png";
+import userIconDark from "../assets/icons/beautyIcons/icon-user-dark-25.png";
 import writeIconLight from "../assets/icons/beautyIcons/icon-write-light-25.png";
 import writeIconDark from "../assets/icons/beautyIcons/icon-write-dark-25.png";
 import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-25.png";
@@ -40,12 +42,12 @@ export default function DialogNew() {
       <hr className="mt-5 mb-7" />
       <form className="flex flex-col gap-4 md:p-4 ">
         {admin && (
-          <Select img={writeIconLight}>
+          <Select img={theme === "dark" ? userIconDark : userIconLight}>
             <option>pino</option>
             <option>gino</option>
             <option>lino</option>
             <option>tino</option>
-            <option selected>admin</option>
+            <option>admin</option>
           </Select>
         )}
         <Input
