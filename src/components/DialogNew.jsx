@@ -12,9 +12,10 @@ import clockIconDark from "../assets/icons/beautyIcons/icon-clock-dark-25.png";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 import useDialogNew from "../hooks/useDialogNew.js";
+import Select from "./elements/Select.jsx";
 
 export default function DialogNew() {
-  const { dialog } = useContext(Context);
+  const { dialog, admin } = useContext(Context);
 
   const { handleAddButton, handleCloseModal, inputState, handleChangeInput } =
     useDialogNew();
@@ -38,6 +39,15 @@ export default function DialogNew() {
       </div>
       <hr className="mt-5 mb-7" />
       <form className="flex flex-col gap-4 md:p-4 ">
+        {admin && (
+          <Select defaultValue={"admin"} img={writeIconLight}>
+            <option>pino</option>
+            <option>gino</option>
+            <option>lino</option>
+            <option>tino</option>
+            <option>admin</option>
+          </Select>
+        )}
         <Input
           img={theme === "dark" ? writeIconDark : writeIconLight}
           alt="hand with pencil icon"
