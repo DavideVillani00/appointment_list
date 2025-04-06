@@ -15,7 +15,9 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 import useDialogNew from "../hooks/useDialogNew.js";
 import Select from "./elements/Select.jsx";
+import Button from "./elements/Button.jsx";
 
+// !! da sistemare
 export default function DialogNew() {
   const { dialog, admin } = useContext(Context);
 
@@ -28,21 +30,28 @@ export default function DialogNew() {
     <dialog
       onClose={handleCloseModal}
       ref={dialog}
-      className=" text-textLight dark:text-textDark backdrop:backdrop-blur-xs bg-bgCardLight dark:bg-bgCardDark w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-shadow-[-3px_-3px_10px] dark:inset-shadow-secondaryBgDark inset-shadow-secondaryBgLight"
+      className="  backdrop:backdrop-blur-xs  w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg  cardModalStyle text-text1"
     >
       <div className="flex justify-between items-center ">
-        <h1 className="text-3xl font-bold">New appointment</h1>
+        <h1 className="text-3xl font-bold text-text1 dark:text-text1Dark">
+          New appointment
+        </h1>
         <img
           src={iconClose}
-          className="w-10 hover:drop-shadow-[0_0_5px_red] cursor-pointer"
+          className="w-10  cursor-pointer "
           onClick={handleCloseModal}
           alt="X icon for close"
         />
       </div>
-      <hr className="mt-5 mb-7" />
+
       <form className="flex flex-col gap-4 md:p-4 ">
+        <span className="bg-divider dark:bg-dividerDark w-full h-0.5 my-5"></span>
         {admin && (
-          <Select img={theme === "dark" ? userIconDark : userIconLight}>
+          <Select
+            img={theme === "dark" ? userIconDark : userIconLight}
+            def="admin"
+            className="rounded-lg text-lg py-[18px]"
+          >
             <option>pino</option>
             <option>gino</option>
             <option>lino</option>
@@ -58,7 +67,7 @@ export default function DialogNew() {
           placeholder="Write an appointment"
           value={inputState.inputName.value}
           onChange={handleChangeInput}
-          classInput={`border-2
+          classInput={`border-2 input
               ${
                 inputState.inputName.err
                   ? "border-red-500"
@@ -71,7 +80,7 @@ export default function DialogNew() {
             name="inputDate"
             type="date"
             value={inputState.inputDate.value}
-            className={` border-2 ${
+            className={` border-2 input ${
               inputState.inputDate.err ? "border-red-500" : "border-transparent"
             }`}
           >
@@ -102,12 +111,12 @@ export default function DialogNew() {
           )}
         </ul>
 
-        <Input
-          type="button"
-          value="Add +"
-          classInput="pr-13 text-xl font-bold inset-shadow-[0px_0px_15px] inset-shadow-green-600 text-green-600/90"
+        <Button
+          className="addBtn w-full p-4 rounded-lg"
           onClick={handleAddButton}
-        />
+        >
+          ADD
+        </Button>
       </form>
     </dialog>
   );

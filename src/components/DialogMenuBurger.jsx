@@ -12,9 +12,10 @@ export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   const { admin } = useContext(Context);
 
+  // !! da sistemare tutto
   return (
     <div
-      className={`flex flex-col justify-center items-center bg-bgInputLight dark:bg-bgInputDark p-5 rounded-md gap-4 w-60 absolute top-16 right-[-88px] @min-[600px]:right-[32px]  z-10 border-2 origin-top @min-[600px]:origin-top-right ${
+      className={`cardModalStyle flex flex-col justify-center items-center p-5 rounded-md gap-4 w-60 absolute top-11 right-[-88px] md:right-[32px] md:rounded-tr-none z-10 origin-top md:origin-top-right ${
         isOpen ? "scale-100" : "scale-0"
       } transition-transform duration-150`}
     >
@@ -25,7 +26,7 @@ export default function DialogMenuBurger({ isOpen }) {
             alt="users icon"
             className="w-12"
           />
-          <span className="w-full h-0.5 bg-black dark:bg-white"></span>
+          <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
         </>
       )}
 
@@ -42,13 +43,13 @@ export default function DialogMenuBurger({ isOpen }) {
           alt="switch color icon"
         />
       </div>
-      <span className="w-full h-0.5 bg-black dark:bg-white"></span>
+      <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
       <img
         src={theme === "dark" ? iconLanguageDark : iconLanguageLight}
         alt="change language icon"
         className="w-12"
       />
-      <span className="w-full h-0.5 bg-black dark:bg-white"></span>
+      <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
       <img src={iconLogout} alt="logout icon" className="w-12" />
     </div>
   );

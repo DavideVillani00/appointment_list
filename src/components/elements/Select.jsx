@@ -1,13 +1,44 @@
-export default function Select({ children, img = null, alt }) {
+import { useState } from "react";
+import iconArrowDown from "../../assets/icons/toggleIcons/icon-edit-dark-25.png";
+
+// !! da sistemare
+export default function Select({
+  children,
+  img = null,
+  alt,
+  def,
+  className,
+  ...props
+}) {
+  const [selectValue, setSelectvalue] = useState(def);
+  const [isFocus, setIsFocus] = useState(false);
+
+  function handleChange(e) {
+    setSelectvalue(e.target.value);
+  }
+
+  function handleFocus() {
+    setIsFocus(true);
+  }
+  function handleBlur() {
+    setIsFocus(false);
+  }
   return (
-    <div className=" w-full text-lg  relative px-3 py-[18px] rounded-lg  bg-bgInputLight dark:bg-bgInputDark  flex gap-3 items- hover:shadow-[0_0_5px_black] dark:hover:shadow-[0_0_5px_white]">
-      <div
-        className={`absolute top-0 left-0 w-full h-full rounded-lg shadow-md dark:shadow-secondaryBgDark/50 shadow-secondaryBgLight/50 `}
-      ></div>
+    <div
+      onClick={handleFocus}
+      onBlur={handleBlur}
+      className={` border-2   relative px-3   flex gap-3 input ${
+        isFocus ? "outline-1" : "outline-0"
+      } outline-focus dark:outline-focusDark ${className}`}
+      {...props}
+    >
       {img && <img src={img} alt={alt} />}
+      <span>{selectValue}</span>
+      <img src={iconArrowDown} alt="arrow down" className="absolute right-5" />
       <select
-        className="w-full outline-none z-10 bg-bgInputLight dark:bg-bgInputDark"
-        defaultValue="admin"
+        className="w-full outline-none z-10 input border-none absolute top-0 left-0 px-3 py-[18px] opacity-0"
+        value={selectValue}
+        onChange={handleChange}
       >
         {children}
       </select>

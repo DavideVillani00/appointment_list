@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 
 import useDialogDelete from "../hooks/useDialogDelete.js";
+import Button from "./elements/Button.jsx";
 export default function AppointmentCard({ id, name, date, time, check }) {
   const { theme } = useContext(Context).globalThemeState;
   const { handleCheckboxAppointment } = useContext(Context).globalProjectState;
@@ -13,45 +14,37 @@ export default function AppointmentCard({ id, name, date, time, check }) {
 
   return (
     <li
-      className={`w-full bg-bgCardLight dark:bg-bgCardDark rounded-md p-4 my-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end shadow-md dark:shadow-secondaryBgDark shadow-secondaryBgLight ${
+      className={`w-full  rounded-md p-4 my-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end  cardModalStyle ${
         check ? "opacity-70" : "opacity-100"
       }`}
     >
-      <div className="border-bgInputLight dark:border-bgInputDark border-b-[2px] p-3 md:border-0 md:border-l-[2px] flex-3/4 ">
-        <p className="text-lg font-bold mb-3 text-textLight/50 dark:text-textDark/50">
+      <div className="border-divider dark:border-dividerDark border-b-[2px] p-3 md:border-0 md:border-l-[2px] flex-3/4 ">
+        <p className="text-lg font-bold mb-3 text-placeholder dark:text-placeholderDark">
           {date} {time}
         </p>
         <p>{name}</p>
       </div>
 
-      <div className=" flex justify-evenly md:flex-col md:justify-between flex-1/4 ">
-        <div
-          className="flex gap-2 justify-end items-center cursor-pointer hover:drop-shadow-[0_0_10px_green] "
+      <div className=" flex justify-evenly md:flex-col md:justify-between flex-1/4 min-w-48">
+        <Button
+          img={check ? iconComplete : iconUncompletedDark}
+          alt="checkbox icon"
+          className="primaryBtn rounded-xl p-3 "
           onClick={() => handleCheckboxAppointment(id)}
         >
-          <img
-            src={
-              check
-                ? iconComplete
-                : theme === "dark"
-                ? iconUncompletedDark
-                : iconUncompletedLight
-            }
-            alt="checkbox icon"
-            className="w-[27px]"
-          />
-          <span className=" font-bold">
-            {check ? "COMPLETED" : "UNCOMPLETED"}
-          </span>
-        </div>
-        <span className="md:my-4 w-[2px] h-auto md:w-auto md:h-[2px] bg-bgInputLight dark:bg-bgInputDark  "></span>
-        <div
-          className="flex gap-2 justify-end items-center cursor-pointer hover:shadow-[0_0_10px_red] p-3 rounded-xl bg-red-300/65 w-fit self-end inset-shadow-[0px_0px_10px] inset-shadow-red-900"
+          {check ? "COMPLETED" : "UNCOMPLETED"}
+        </Button>
+
+        <span className="md:my-4 w-[2px] h-auto md:w-auto md:h-[2px] bg-divider dark:bg-dividerDark "></span>
+
+        <Button
+          img={iconDelete}
+          alt="delete icon"
+          className="deleteBtn rounded-xl p-3"
           onClick={() => handleOpenDialogDelete(id)}
         >
-          <img src={iconDelete} className="w-[27px]" alt="delete icon" />
-          <span className="text-[#D40000] font-bold">DELETE</span>
-        </div>
+          DELETE
+        </Button>
       </div>
     </li>
   );

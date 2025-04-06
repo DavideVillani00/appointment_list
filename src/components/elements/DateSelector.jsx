@@ -19,19 +19,19 @@ export default function DateSelector({
 
   return (
     <div
-      className={`w-full text-lg  relative p-[18px] rounded-lg shadow-md dark:shadow-secondaryBgDark/50 shadow-secondaryBgLight/50 bg-bgInputLight dark:bg-bgInputDark  flex gap-4 items-center 
-         ${
-           value === FORMATTED_INPUT[type]
-             ? "text-textLight/60 dark:text-textDark/60"
-             : ""
-         }
-
-        
-      `}
+      className="input w-full text-lg  relative p-[18px] rounded-lg  flex gap-4 items-center"
       onClick={handleOpenCalendar}
     >
       {children}
-      <span>{value}</span>
+      <span
+        className={`${
+          value == FORMATTED_INPUT[type]
+            ? "text-placeholder dark:text-placeholderDark"
+            : "text-text1 dark:text-text1Dark"
+        }`}
+      >
+        {value}
+      </span>
       <input
         type={type}
         className="opacity-0 absolute top-0 left-0 w-full h-full hover:cursor-pointer "
@@ -39,10 +39,6 @@ export default function DateSelector({
         {...props}
         ref={inputDate}
       />
-
-      <div
-        className={`absolute top-0 left-0 w-full h-full rounded-lg hover:shadow-[0_0_5px_black] dark:hover:shadow-[0_0_5px_white] ${className}`}
-      ></div>
     </div>
   );
 }

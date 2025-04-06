@@ -11,7 +11,7 @@ function App() {
       <div id="modal"></div>
       <DialogNew />
       <Header />
-      <main>
+      <main className="p-2 md:p-4 lg:p-6">
         <TopMain />
         <AppointmentList></AppointmentList>
       </main>

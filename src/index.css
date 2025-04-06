@@ -17,12 +17,90 @@
   --color-bgCardDark: #3d4f67;
 
   --font-montserrat: "Montserrat", sans-serif;
+
+  --color-bg: #f4f7fc;
+  --color-bg2: #e8f8ff;
+  --color-text1: #1f2937;
+  --color-text2: #4b5563;
+  --color-bgDark: #1e293b;
+  --color-bg2Dark: #141f35;
+  --color-text1Dark: #f8fafc;
+  --color-text2Dark: #d1d5db;
+
+  --color-cardsModal: #ffffff;
+  --color-cardsModalBorder: #e5e7eb;
+  --color-cardsModalShadow: rgba(0, 0, 0, 0.05);
+  --color-cardsModalDark: #27354d;
+  --color-cardsModalBorderDark: #334155;
+  --color-cardsModalShadowDark: rgba(0, 0, 0, 0.3);
+
+  --color-btn: #3b82f6;
+  --color-btnText: #ffffff;
+  --color-btnHoverBorder: #2563eb;
+  --color-btnShadow: rgba(59, 130, 246, 0.4);
+  --color-btnDark: #60a5fa;
+  --color-btnHoverBorderDark: #3b82f6;
+  --color-btnShadowDark: rgba(96, 165, 250, 0.4);
+
+  --color-btn2: #10b981;
+  --color-btnHoverBorder2: #059669;
+  --color-btnShadow2: rgba(16, 185, 129, 0.4);
+  --color-btn2Dark: #34d399;
+  --color-btnHoverBorder2Dark: #10b981;
+  --color-btnShadow2Dark: rgba(52, 211, 153, 0.4);
+
+  --color-delete: #ef4444;
+  --color-deleteHoverBorder: #dc2626;
+  --color-deleteShadow: rgba(239, 68, 68, 0.4);
+  --color-deleteDark: #f87171;
+  --color-deleteHoverBorderDark: #ef4444;
+  --color-deleteShadowDark: rgba(248, 113, 113, 0.4);
+
+  --color-input: #f9fafb;
+  --color-border: #d1d5db;
+  --color-focus: #3b82f6;
+  --color-inputText: #111827;
+  --color-placeholder: #6b7280;
+  --color-inputDark: #374151;
+  --color-borderDark: #4b5563;
+  --color-focusDark: #60a5fa;
+  --color-inputTextDark: #f8fafc;
+  --color-placeholderDark: #9ca3af;
+
+  --color-icon: #3b82f6;
+  --color-uncomplete: #9ca3af;
+  --color-complete: #10b981;
+  --color-divider: #e5e7eb;
+  --color-iconDark: #60a5fa;
+  --color-dividerDark: #334155;
 }
 
 body {
-  @apply bg-primaryBgLight text-textLight dark:bg-primaryBgDark dark:text-textDark font-montserrat font-medium transition-colors duration-75 overflow-x-hidden;
+  @apply bg-bg text-text1 dark:bg-bgDark dark:text-text1Dark font-montserrat font-medium overflow-x-hidden;
 }
 
 input::-webkit-calendar-picker-indicator {
   @apply hidden;
+}
+
+.cardModalStyle {
+  @apply shadow-lg bg-cardsModal shadow-cardsModalShadow border-cardsModalBorder dark:bg-cardsModalDark dark:shadow-cardsModalShadowDark dark:border-cardsModalBorderDark;
+}
+
+.bg {
+  @apply shadow-lg bg-bg2 shadow-cardsModalShadow border-cardsModalBorder dark:bg-bg2Dark  dark:shadow-cardsModalShadowDark dark:border-cardsModalBorderDark;
+}
+
+.primaryBtn {
+  @apply shadow-sm bg-btn text-btnText hover:bg-btnHoverBorder border-btnHoverBorder  shadow-btnShadow dark:bg-btnDark  dark:hover:bg-btnHoverBorderDark dark:border-btnHoverBorderDark dark:shadow-btnShadowDark;
+}
+.addBtn {
+  @apply shadow-sm bg-btn2 text-btnText hover:bg-btnHoverBorder2 border-btnHoverBorder2  shadow-btnShadow2 dark:bg-btn2Dark dark:hover:bg-btnHoverBorder2Dark dark:border-btnHoverBorder2Dark  dark:shadow-btnShadow2Dark;
+}
+.deleteBtn {
+  @apply shadow-sm font-extrabold bg-delete text-btnText hover:bg-deleteHoverBorder border-deleteHoverBorder  shadow-deleteShadow  dark:bg-deleteDark  dark:hover:bg-deleteHoverBorderDark dark:border-deleteHoverBorderDark  dark:shadow-deleteShadowDark;
+}
+
+.input {
+  @apply border-2 focus:outline-1 bg-input border-border  focus:outline-solid focus:outline-focus text-inputText placeholder:text-placeholder dark:bg-inputDark dark:border-borderDark dark:focus:outline-focusDark dark:text-inputTextDark dark:placeholder:text-placeholderDark;
 }
