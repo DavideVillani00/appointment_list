@@ -1,11 +1,10 @@
+import iconLoading from "../assets/icons/beautyIcons/icon-loading-48.png";
+
 import AppointmentCard from "./AppointmentCard.jsx";
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 import useSorterList from "../hooks/useSorterList.js";
 import DialogDelete from "./DialogDelete.jsx";
-
-import iconLoadingDark from "../assets/icons/beautyIcons/icon-loading-dark-50.png";
-import iconLoadingLight from "../assets/icons/beautyIcons/icon-loading-light-50.png";
 
 export default function AppointmentList() {
   const { theme } = useContext(Context).globalThemeState;
@@ -17,7 +16,7 @@ export default function AppointmentList() {
       <ul className="  m-2 p-5 rounded-md   flex flex-col items-center bg-bg2 dark:bg-bg2Dark border-none ">
         {isLoading ? (
           <img
-            src={theme === "light" ? iconLoadingLight : iconLoadingDark}
+            src={iconLoading}
             alt="loading ring"
             className="animate-spin w-[50px]"
           />

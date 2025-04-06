@@ -1,8 +1,9 @@
+import iconDelete from "../assets/icons/toggleIcons/icon-delete-27.png";
+
 import { useContext } from "react";
 import { createPortal } from "react-dom";
 import { Context } from "../ContextProvider.jsx";
 import useDialogDelete from "../hooks/useDialogDelete.js";
-import iconDelete from "../assets/icons/toggleIcons/icon-delete-25.png";
 import Button from "./elements/Button.jsx";
 
 export default function DialogDelete() {

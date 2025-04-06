@@ -1,6 +1,7 @@
-import iconBurgerMenuLight from "../assets/icons/toggleIcons/icon-menu-burger-light-64.png";
-import iconBurgerMenuDark from "../assets/icons/toggleIcons/icon-menu-burger-dark-64.png";
-import { useContext, useRef, useState } from "react";
+import iconBurgerMenuLight from "../assets/icons/toggleIcons/icon-menu-light-64.png";
+import iconBurgerMenuDark from "../assets/icons/toggleIcons/icon-menu-dark-64.png";
+
+import { useContext, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
 import DialogMenuBurger from "./DialogMenuBurger.jsx";
 

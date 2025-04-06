@@ -1,6 +1,7 @@
-import { useContext } from "react";
 import titleLight from "../assets/title.png";
 import titleDark from "../assets/titleDark.png";
+
+import { useContext } from "react";
 import HeaderBurger from "./HeaderBurger.jsx";
 import { Context } from "../ContextProvider.jsx";
 export default function Header() {

@@ -1,7 +1,8 @@
-import iconDelete from "../assets/icons/toggleIcons/icon-delete-25.png";
-import iconComplete from "../assets/icons/toggleIcons/icon-complete-25.png";
-import iconUncompletedLight from "../assets/icons/toggleIcons/icon-uncompleted-light-25.png";
-import iconUncompletedDark from "../assets/icons/toggleIcons/icon-uncompleted-dark-25.png";
+import iconDelete from "../assets/icons/toggleIcons/icon-delete-27.png";
+import iconCompleteLight from "../assets/icons/toggleIcons/icon-check-light-27.png";
+import iconCompleteDark from "../assets/icons/toggleIcons/icon-check-dark-27.png";
+import iconUncompleted from "../assets/icons/toggleIcons/icon-uncheck-27.png";
+
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 
@@ -27,7 +28,13 @@ export default function AppointmentCard({ id, name, date, time, check }) {
 
       <div className=" flex justify-evenly md:flex-col md:justify-between flex-1/4 min-w-48">
         <Button
-          img={check ? iconComplete : iconUncompletedDark}
+          img={
+            check
+              ? theme === "dark"
+                ? iconCompleteDark
+                : iconCompleteLight
+              : iconUncompleted
+          }
           alt="checkbox icon"
           className="primaryBtn rounded-xl p-3 "
           onClick={() => handleCheckboxAppointment(id)}

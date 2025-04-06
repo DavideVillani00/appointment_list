@@ -1,15 +1,17 @@
-import Input from "./elements/Input.jsx";
-import iconClose from "../assets/icons/toggleIcons/icon-close-25.png";
-import DateSelector from "./elements/DateSelector.jsx";
+import iconCloseLight from "../assets/icons/toggleIcons/icon-close-light-48.png";
+import iconCloseDark from "../assets/icons/toggleIcons/icon-close-dark-48.png";
+import userIconLight from "../assets/icons/beautyIcons/icon-user-light-27.png";
+import userIconDark from "../assets/icons/beautyIcons/icon-user-dark-27.png";
+import writeIconLight from "../assets/icons/beautyIcons/icon-write-light-27.png";
+import writeIconDark from "../assets/icons/beautyIcons/icon-write-dark-27.png";
+import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-27.png";
+import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.png";
+import clockIconLight from "../assets/icons/beautyIcons/icon-clock-light-27.png";
+import clockIconDark from "../assets/icons/beautyIcons/icon-clock-dark-27.png";
+import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
 
-import userIconLight from "../assets/icons/beautyIcons/icon-user-light-25.png";
-import userIconDark from "../assets/icons/beautyIcons/icon-user-dark-25.png";
-import writeIconLight from "../assets/icons/beautyIcons/icon-write-light-25.png";
-import writeIconDark from "../assets/icons/beautyIcons/icon-write-dark-25.png";
-import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-25.png";
-import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-25.png";
-import clockIconLight from "../assets/icons/beautyIcons/icon-clock-light-25.png";
-import clockIconDark from "../assets/icons/beautyIcons/icon-clock-dark-25.png";
+import Input from "./elements/Input.jsx";
+import DateSelector from "./elements/DateSelector.jsx";
 
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
@@ -37,8 +39,8 @@ export default function DialogNew() {
           New appointment
         </h1>
         <img
-          src={iconClose}
-          className="w-10  cursor-pointer "
+          src={theme === "dark" ? iconCloseDark : iconCloseLight}
+          className="cursor-pointer "
           onClick={handleCloseModal}
           alt="X icon for close"
         />
@@ -114,6 +116,8 @@ export default function DialogNew() {
         <Button
           className="addBtn w-full p-4 rounded-lg"
           onClick={handleAddButton}
+          img={addIcon}
+          alt="add icon"
         >
           ADD
         </Button>

@@ -1,13 +1,16 @@
-import Input from "./elements/Input.jsx";
-import iconFilterLight from "../assets/icons/beautyIcons/icon-filter-light-25.png";
-import iconFilterDark from "../assets/icons/beautyIcons/icon-filter-dark-25.png";
-import iconSearchLight from "../assets/icons/beautyIcons/icon-search-light-25.png";
-import iconSearchDark from "../assets/icons/beautyIcons/icon-search-dark-25.png";
+import iconFilterLight from "../assets/icons/beautyIcons/icon-filter-light-27.png";
+import iconFilterDark from "../assets/icons/beautyIcons/icon-filter-dark-27.png";
+import iconSearchLight from "../assets/icons/beautyIcons/icon-search-light-27.png";
+import iconSearchDark from "../assets/icons/beautyIcons/icon-search-dark-27.png";
+import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
+
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
+import Input from "./elements/Input.jsx";
 import useSorterList from "../hooks/useSorterList.js";
 import useDialogNew from "../hooks/useDialogNew.js";
 import Select from "./elements/Select.jsx";
+import Button from "./elements/Button.jsx";
 
 export default function TopMain() {
   const { search, handleChangeSearch } = useContext(Context);
@@ -24,20 +27,22 @@ export default function TopMain() {
 
   return (
     <>
-      <div className="mt-3 p-3 flex flex-col gap-4 md:flex-row ">
-        <Input
-          type="button"
-          value="Add +"
-          classContainer="md:flex-2/3"
-          classInput="text-xl font-bold addBtn"
+      <div className="mt-3 p-3 flex flex-col gap-4 md:flex-row items-center">
+        <Button
+          className="w-full addBtn p-[18px] rounded-lg md:flex-2/3"
+          img={addIcon}
           onClick={handleOpenDialog}
-        />
+          alt="add icon"
+        >
+          ADD
+        </Button>
+
         <Input
-          classContainer="md:flex-1/3  "
+          classContainer="md:flex-1/3 w-full "
           img={theme === "dark" ? iconSearchDark : iconSearchLight}
           alt="search glass icon"
           classImg="top-4 left-3"
-          classInput="px-5 input"
+          classInput="px-5 input "
           type="text"
           placeholder="Search"
           value={search}
