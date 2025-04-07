@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function useProjectState() {
   const [projectState, setProjectState] = useState(
@@ -11,6 +11,11 @@ export default function useProjectState() {
         }
   );
   const [selectedId, setSelectedId] = useState(null);
+  const [firefox, setFirefox] = useState(null);
+  useEffect(() => {
+    const uaBool = navigator.userAgent.toLowerCase().includes("firefox");
+    setFirefox(uaBool);
+  }, []);
 
   function handleAddAppointment(name, date, time, timestamp) {
     setProjectState((preState) => {
@@ -67,5 +72,6 @@ export default function useProjectState() {
     handleDeleteAppointment,
     handleChangeFilter,
     setSelectedId,
+    firefox,
   };
 }
