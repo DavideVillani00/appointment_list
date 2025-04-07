@@ -19,7 +19,6 @@ import useDialogNew from "../hooks/useDialogNew.js";
 import Select from "./elements/Select.jsx";
 import Button from "./elements/Button.jsx";
 
-// !! da sistemare
 export default function DialogNew() {
   const { dialog, admin } = useContext(Context);
 
@@ -32,7 +31,7 @@ export default function DialogNew() {
     <dialog
       onClose={handleCloseModal}
       ref={dialog}
-      className="  backdrop:backdrop-blur-xs  w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg  cardModalStyle text-text1"
+      className="  backdrop:backdrop-blur-xs  w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg border-4 cardModalStyle text-text1"
     >
       <div className="flex justify-between items-center ">
         <h1 className="text-3xl font-bold text-text1 dark:text-text1Dark">
@@ -69,22 +68,16 @@ export default function DialogNew() {
           placeholder="Write an appointment"
           value={inputState.inputName.value}
           onChange={handleChangeInput}
-          classInput={`border-2 input
-              ${
-                inputState.inputName.err
-                  ? "border-red-500"
-                  : "border-transparent"
-              }`}
+          err={inputState.inputName.err}
         />
+
         <div className="flex flex-col gap-4 md:flex-row ">
           <DateSelector
             onChangeInput={handleChangeInput}
             name="inputDate"
             type="date"
             value={inputState.inputDate.value}
-            className={` border-2 input ${
-              inputState.inputDate.err ? "border-red-500" : "border-transparent"
-            }`}
+            err={inputState.inputDate.err}
           >
             <img
               src={theme === "dark" ? calendarIconDark : calendarIconLight}
@@ -95,10 +88,8 @@ export default function DialogNew() {
             onChangeInput={handleChangeInput}
             name="inputTime"
             type="time"
-            className={`border-2 ${
-              inputState.inputTime.err ? "border-red-500" : "border-transparent"
-            }`}
             value={inputState.inputTime.value}
+            err={inputState.inputTime.err}
           >
             <img
               src={theme === "dark" ? clockIconDark : clockIconLight}
@@ -106,7 +97,7 @@ export default function DialogNew() {
             />
           </DateSelector>
         </div>
-        <ul className="text-center text-red-400 font-bold">
+        <ul className="text-center text-delete dark:text-deleteDark font-bold">
           {inputState.inputName.err && <li>Insert a valid appointment</li>}
           {(inputState.inputDate.err || inputState.inputTime.err) && (
             <li>Enter a date for a future appointment</li>

@@ -6,7 +6,6 @@ export default function useDialogDelete() {
   const { dialogDelete } = useContext(Context);
 
   function handleOpenDialogDelete(id) {
-    console.log("dialog", dialogDelete.current);
     document.documentElement.classList.add("overflow-hidden");
     dialogDelete.current.showModal();
     setSelectedId(id);

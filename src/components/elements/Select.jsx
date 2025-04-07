@@ -3,37 +3,34 @@ import iconArrowDownDark from "../../assets/icons/beautyIcons/icon-arrow-down-da
 
 import { useContext, useState } from "react";
 import { Context } from "../../ContextProvider";
+import useFocusElement from "../../hooks/useFocusElement";
 
-// !! da sistemare
 export default function Select({
   children,
   img = null,
   alt,
   def,
   className,
+  err = null,
   ...props
 }) {
   const [selectValue, setSelectvalue] = useState(def);
-  const [isFocus, setIsFocus] = useState(false);
   const { theme } = useContext(Context).globalThemeState;
+  const { isFocus, handleBlur, handleFocus } = useFocusElement();
 
   function handleChange(e) {
     setSelectvalue(e.target.value);
   }
 
-  function handleFocus() {
-    setIsFocus(true);
-  }
-  function handleBlur() {
-    setIsFocus(false);
-  }
   return (
     <div
       onClick={handleFocus}
       onBlur={handleBlur}
       className={` border-2   relative px-3   flex gap-3 input ${
-        isFocus ? "outline-1" : "outline-0"
-      } outline-focus dark:outline-focusDark items-center  ${className}`}
+        err
+          ? "dark:border-deleteDark border-delete"
+          : "border-border dark:border-borderDark"
+      } ${isFocus ? "outline-1" : "outline-0"}  items-center  ${className}`}
       {...props}
     >
       {img && <img src={img} alt={alt} />}

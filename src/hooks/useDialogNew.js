@@ -4,11 +4,12 @@ import { Context } from "../ContextProvider.jsx";
 const FORMATTED_INPUT = {
   date: "yyyy-mm-dd",
   time: "--:--",
+  text: "",
 };
 
 export default function useDialogNew() {
   const [inputState, setInputState] = useState({
-    inputName: { value: "", err: false },
+    inputName: { value: FORMATTED_INPUT.text, err: false },
     inputDate: { value: FORMATTED_INPUT.date, err: false },
     inputTime: { value: FORMATTED_INPUT.time, err: false },
   });
@@ -24,7 +25,7 @@ export default function useDialogNew() {
     dialog.current.close();
     document.documentElement.classList.remove("overflow-hidden");
     setInputState({
-      inputName: { value: "", err: false },
+      inputName: { value: FORMATTED_INPUT.text, err: false },
       inputDate: { value: FORMATTED_INPUT.date, err: false },
       inputTime: { value: FORMATTED_INPUT.time, err: false },
     });
@@ -33,7 +34,6 @@ export default function useDialogNew() {
   function handleChangeInput(e) {
     let { name, value } = e.target;
     value = value ? value : FORMATTED_INPUT[e.target.type];
-    console.log(name);
     setInputState((preState) => {
       return {
         ...preState,
@@ -43,7 +43,6 @@ export default function useDialogNew() {
   }
 
   function HandleChangeErr(name) {
-    console.log(name);
     setInputState((preState) => {
       return {
         ...preState,
@@ -67,14 +66,11 @@ export default function useDialogNew() {
     const actualDate = new Date().getTime();
     const impostedDate = new Date(`${date}T${time}`).getTime();
 
-    console.log(date, time, actualDate, impostedDate, year);
-
     if (!name || !date || !time || impostedDate < actualDate || year > 2200) {
       if (!name) {
         HandleChangeErr("inputName");
       }
       if (!date || impostedDate < actualDate || year > 2200) {
-        console.log("err");
         HandleChangeErr("inputDate");
       }
       if (!time || impostedDate < actualDate) {
@@ -86,15 +82,10 @@ export default function useDialogNew() {
     handleCloseModal();
   }
 
-  function handleDeleteErr(el) {
-    el.target.classList.remove("border-red-700");
-  }
-
   return {
     handleOpenDialog,
     handleCloseModal,
     handleAddButton,
-    handleDeleteErr,
     handleChangeInput,
     inputState,
     FORMATTED_INPUT,

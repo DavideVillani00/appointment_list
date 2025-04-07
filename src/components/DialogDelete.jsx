@@ -15,10 +15,10 @@ export default function DialogDelete() {
     <dialog
       ref={dialogDelete}
       onClose={handleCloseDialogDelete}
-      className=" p-5 md:p-10 rounded-2xl place-self-center w-10/12 md:w-3xl md:items-center backdrop:backdrop-blur-xs border-2 cardModalStyle"
+      className=" p-5 md:p-10 rounded-2xl place-self-center w-10/12 md:w-3xl md:items-center backdrop:backdrop-blur-xs border-4 cardModalStyle"
     >
       <div className="flex flex-col gap-10 place-self-center">
-        <h1 className="text-2xl text-center font-bold leading-12">
+        <h1 className="text-2xl text-center font-bold leading-12 text-text1 dark:text-text1Dark">
           Are you sure you want to delete the appointment?
         </h1>
         <div className="flex flex-col gap-3 md:flex-row justify-center ">

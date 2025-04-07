@@ -42,7 +42,7 @@ export default function TopMain() {
           img={theme === "dark" ? iconSearchDark : iconSearchLight}
           alt="search glass icon"
           classImg="top-4 left-3"
-          classInput="px-5 input "
+          classInput="px-5 "
           type="text"
           placeholder="Search"
           value={search}

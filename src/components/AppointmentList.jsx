@@ -1,13 +1,10 @@
 import iconLoading from "../assets/icons/beautyIcons/icon-loading-48.png";
 
 import AppointmentCard from "./AppointmentCard.jsx";
-import { useContext } from "react";
-import { Context } from "../ContextProvider.jsx";
 import useSorterList from "../hooks/useSorterList.js";
 import DialogDelete from "./DialogDelete.jsx";
 
 export default function AppointmentList() {
-  const { theme } = useContext(Context).globalThemeState;
   const { isLoading, sorteredList } = useSorterList();
 
   return (

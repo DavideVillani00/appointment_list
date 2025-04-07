@@ -102,5 +102,5 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .input {
-  @apply border-2 focus:outline-1 bg-input border-border  focus:outline-solid focus:outline-focus text-inputText placeholder:text-placeholder dark:bg-inputDark dark:border-borderDark dark:focus:outline-focusDark dark:text-inputTextDark dark:placeholder:text-placeholderDark;
+  @apply border-2 focus:outline-1 bg-input   focus:outline-solid focus:outline-focus text-inputText placeholder:text-placeholder dark:bg-inputDark  dark:focus:outline-focusDark dark:text-inputTextDark dark:placeholder:text-placeholderDark outline-focus dark:outline-focusDark;
 }

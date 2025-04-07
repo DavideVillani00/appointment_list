@@ -1,9 +1,7 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import useDialogNew from "../../hooks/useDialogNew.js";
+import useFocusElement from "../../hooks/useFocusElement.js";
 import { Context } from "../../ContextProvider.jsx";
-
-// !!! NON FUNZIONA L'INPUT TIME CON FIREFOX
-let focus = false;
 
 export default function DateSelector({
   children,
@@ -11,12 +9,13 @@ export default function DateSelector({
   className = "",
   value,
   type,
+  err = null,
   ...props
 }) {
   const { FORMATTED_INPUT } = useDialogNew();
   const inputDate = useRef();
   const { firefox } = useContext(Context).globalProjectState;
-  const [isFocus, setIsFocus] = useState(false);
+  const { isFocus, handleBlur, handleFocus } = useFocusElement();
 
   function handleOpenCalendar() {
     if (!(type === "time" && firefox)) {
@@ -24,14 +23,16 @@ export default function DateSelector({
     }
 
     inputDate.current.focus();
-    setIsFocus(true);
+    handleFocus();
   }
 
   return (
     <div
-      className={`input w-full text-lg  relative p-[18px] rounded-lg  flex gap-4 items-center outline-focus dark:outline-focusDark ${
-        isFocus ? "outline-1" : "outline-0"
-      }`}
+      className={`input w-full text-lg  relative p-[18px] rounded-lg  flex gap-4 items-centers ${
+        err
+          ? "dark:border-deleteDark border-delete"
+          : "border-border dark:border-borderDark"
+      } ${isFocus ? "outline-1" : "outline-0"}`}
       onClick={handleOpenCalendar}
     >
       {children}
@@ -43,7 +44,7 @@ export default function DateSelector({
           onChange={onChangeInput}
           {...props}
           ref={inputDate}
-          onBlur={() => setIsFocus(false)}
+          onBlur={handleBlur}
         />
       ) : (
         <>
@@ -62,7 +63,7 @@ export default function DateSelector({
             onChange={onChangeInput}
             {...props}
             ref={inputDate}
-            onBlur={() => setIsFocus(false)}
+            onBlur={handleBlur}
           />
         </>
       )}
