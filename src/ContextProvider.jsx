@@ -5,7 +5,7 @@ import useThemeState from "./hooks/globalState/useThemeState.js";
 export const Context = createContext({
   globalProjectState: () => {},
   globalThemeState: () => {},
-  admin: () => {},
+  info: () => {},
 
   dialog: () => {},
   dialogDelete: () => {},
@@ -17,7 +17,8 @@ export const Context = createContext({
 export default function ContextProvider({ children }) {
   const globalProjectState = useProjectState();
   const globalThemeState = useThemeState();
-  const [admin, setAdmin] = useState(true);
+  // !for debug
+  const [info, setInfo] = useState({ admin: false, login: true });
 
   const dialog = useRef();
   const dialogDelete = useRef();
@@ -30,7 +31,7 @@ export default function ContextProvider({ children }) {
   const contValue = {
     globalProjectState,
     globalThemeState,
-    admin,
+    info,
 
     dialog,
     dialogDelete,

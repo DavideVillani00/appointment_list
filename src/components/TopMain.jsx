@@ -54,7 +54,9 @@ export default function TopMain() {
           <p>
             Total: {appointmentCompleted.length + appointmentUncompleted.length}
           </p>
+          <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
           <p>Completed: {appointmentCompleted.length}</p>
+          <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
           <p>Uncompleted: {appointmentUncompleted.length}</p>
         </div>
 

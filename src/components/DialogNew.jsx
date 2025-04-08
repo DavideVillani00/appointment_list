@@ -20,7 +20,7 @@ import Select from "./elements/Select.jsx";
 import Button from "./elements/Button.jsx";
 
 export default function DialogNew() {
-  const { dialog, admin } = useContext(Context);
+  const { dialog, info } = useContext(Context);
 
   const { handleAddButton, handleCloseModal, inputState, handleChangeInput } =
     useDialogNew();
@@ -47,7 +47,7 @@ export default function DialogNew() {
 
       <form className="flex flex-col gap-4 md:p-4 ">
         <span className="bg-divider dark:bg-dividerDark w-full h-0.5 my-5"></span>
-        {admin && (
+        {info.admin && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
             def="admin"

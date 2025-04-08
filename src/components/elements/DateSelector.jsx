@@ -45,6 +45,7 @@ export default function DateSelector({
           {...props}
           ref={inputDate}
           onBlur={handleBlur}
+          value={value}
         />
       ) : (
         <>

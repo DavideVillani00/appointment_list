@@ -12,7 +12,7 @@ import { Context } from "../ContextProvider";
 
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
-  const { admin } = useContext(Context);
+  const { info } = useContext(Context);
 
   // !! da sistemare tutto
   return (
@@ -21,7 +21,7 @@ export default function DialogMenuBurger({ isOpen }) {
         isOpen ? "scale-100" : "scale-0"
       } transition-transform duration-150`}
     >
-      {admin && (
+      {info.admin && (
         <>
           <img
             src={theme === "dark" ? iconUsersDark : iconUsersLight}
@@ -45,12 +45,16 @@ export default function DialogMenuBurger({ isOpen }) {
         alt="change language icon"
         className="w-12"
       />
-      <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
-      <img
-        src={theme === "dark" ? iconLogoutDark : iconLogoutLight}
-        alt="logout icon"
-        className="w-12"
-      />
+      {info.login && (
+        <>
+          <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
+          <img
+            src={theme === "dark" ? iconLogoutDark : iconLogoutLight}
+            alt="logout icon"
+            className="w-12"
+          />
+        </>
+      )}
     </div>
   );
 }

@@ -12,6 +12,7 @@ export default function Select({
   def,
   className,
   err = null,
+  placeholder = "",
   ...props
 }) {
   const [selectValue, setSelectvalue] = useState(def);
@@ -26,7 +27,7 @@ export default function Select({
     <div
       onClick={handleFocus}
       onBlur={handleBlur}
-      className={` border-2   relative px-3   flex gap-3 input ${
+      className={` border-2   relative px-4   flex gap-4 input ${
         err
           ? "dark:border-deleteDark border-delete"
           : "border-border dark:border-borderDark"
@@ -34,7 +35,15 @@ export default function Select({
       {...props}
     >
       {img && <img src={img} alt={alt} />}
-      <span>{selectValue}</span>
+      <span
+        className={
+          def === placeholder && def === selectValue
+            ? "text-placeholder dark:text-placeholderDark"
+            : ""
+        }
+      >
+        {selectValue}
+      </span>
       <img
         src={theme === "dark" ? iconArrowDownDark : iconArrowDownLight}
         alt="arrow down"
