@@ -15,7 +15,7 @@ export default function LoginPage() {
         </ul>
         <Button className="addBtn w-full p-4 rounded-lg">LOGIN</Button>
         <span className="text-text2 dark:text-text2Dark text-sm">
-          Not registered?{" "}
+          Not registered?
           <span className="text-icon dark:text-iconDark">Sign up</span>
         </span>
       </main>

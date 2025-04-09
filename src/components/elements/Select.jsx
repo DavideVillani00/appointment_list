@@ -13,6 +13,8 @@ export default function Select({
   className,
   err = null,
   placeholder = "",
+  onHandleChange,
+  name,
   ...props
 }) {
   const [selectValue, setSelectvalue] = useState(def);
@@ -21,6 +23,8 @@ export default function Select({
 
   function handleChange(e) {
     setSelectvalue(e.target.value);
+    const value = selectValue;
+    onHandleChange({ name, value });
   }
 
   return (

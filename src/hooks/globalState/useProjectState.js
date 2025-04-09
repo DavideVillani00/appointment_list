@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 
 export default function useProjectState() {
   const [projectState, setProjectState] = useState(
-    localStorage.getItem("project")
+    /* localStorage.getItem("project")
       ? JSON.parse(localStorage.getItem("project"))
-      : {
-          filterState: "all",
-          uniqueid: 0,
-          items: [],
-        }
+      : */ {
+      filterState: "all",
+      uniqueid: 0,
+      items: [],
+    }
   );
   const [selectedId, setSelectedId] = useState(null);
   const [firefox, setFirefox] = useState(null);

@@ -33,7 +33,7 @@ export default function AppointmentCard({ id, name, date, time, check }) {
         </div>
       )}
       <div className="p-3 md:p-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end ">
-        <div className="border-divider dark:border-dividerDark border-b-[2px] p-3 md:border-0 md:border-l-[2px] flex-3/4 ">
+        <div className=" p-3  flex-3/4 ">
           <p className="text-lg font-bold mb-3 text-placeholder dark:text-placeholderDark">
             {date} {time}
           </p>

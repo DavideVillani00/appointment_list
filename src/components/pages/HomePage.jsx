@@ -8,6 +8,7 @@ export default function HomePage() {
       <div id="modal"></div>
       <DialogNew />
       <Header />
+      <h1 className="text-3xl font-extrabold text-center">HOME PAGE</h1>
       <main>
         <TopMain />
         <AppointmentList></AppointmentList>

@@ -7,6 +7,7 @@ export default function AdminPage() {
     <>
       <div id="modal"></div>
       <Header />
+      <h1 className="text-3xl font-extrabold text-center">SUBSCRIBERS</h1>
       <main>
         <TopAdminPage />
         <UsersList />
