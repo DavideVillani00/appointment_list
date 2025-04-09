@@ -1,10 +1,10 @@
-import iconDelete from "../assets/icons/toggleIcons/icon-delete-27.png";
+import iconDelete from "../../assets/icons/toggleIcons/icon-delete-27.png";
 
 import { useContext } from "react";
 import { createPortal } from "react-dom";
-import { Context } from "../ContextProvider.jsx";
-import useDialogDelete from "../hooks/useDialogDelete.js";
-import Button from "./elements/Button.jsx";
+import { Context } from "../../ContextProvider.jsx";
+import useDialogDelete from "../../hooks/useDialogDelete.js";
+import Button from "../elements/Button.jsx";
 
 export default function DialogDelete() {
   const { handleDeleteAppointment } = useContext(Context).globalProjectState;

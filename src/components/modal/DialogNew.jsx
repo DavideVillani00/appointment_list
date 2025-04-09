@@ -1,23 +1,23 @@
-import iconCloseLight from "../assets/icons/toggleIcons/icon-close-light-48.png";
-import iconCloseDark from "../assets/icons/toggleIcons/icon-close-dark-48.png";
-import userIconLight from "../assets/icons/beautyIcons/icon-user-light-27.png";
-import userIconDark from "../assets/icons/beautyIcons/icon-user-dark-27.png";
-import writeIconLight from "../assets/icons/beautyIcons/icon-write-light-27.png";
-import writeIconDark from "../assets/icons/beautyIcons/icon-write-dark-27.png";
-import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-27.png";
-import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.png";
-import clockIconLight from "../assets/icons/beautyIcons/icon-clock-light-27.png";
-import clockIconDark from "../assets/icons/beautyIcons/icon-clock-dark-27.png";
-import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
+import iconCloseLight from "../../assets/icons/toggleIcons/icon-close-light-48.png";
+import iconCloseDark from "../../assets/icons/toggleIcons/icon-close-dark-48.png";
+import userIconLight from "../../assets/icons/beautyIcons/icon-user-light-27.png";
+import userIconDark from "../../assets/icons/beautyIcons/icon-user-dark-27.png";
+import writeIconLight from "../../assets/icons/beautyIcons/icon-write-light-27.png";
+import writeIconDark from "../../assets/icons/beautyIcons/icon-write-dark-27.png";
+import calendarIconLight from "../../assets/icons/beautyIcons/icon-calendar-light-27.png";
+import calendarIconDark from "../../assets/icons/beautyIcons/icon-calendar-dark-27.png";
+import clockIconLight from "../../assets/icons/beautyIcons/icon-clock-light-27.png";
+import clockIconDark from "../../assets/icons/beautyIcons/icon-clock-dark-27.png";
+import addIcon from "../../assets/icons/beautyIcons/icon-add-27.png";
 
-import Input from "./elements/Input.jsx";
-import DateSelector from "./elements/DateSelector.jsx";
+import Input from "../elements/Input.jsx";
+import DateSelector from "../elements/DateSelector.jsx";
 
 import { useContext } from "react";
-import { Context } from "../ContextProvider.jsx";
-import useDialogNew from "../hooks/useDialogNew.js";
-import Select from "./elements/Select.jsx";
-import Button from "./elements/Button.jsx";
+import { Context } from "../../ContextProvider.jsx";
+import useDialogNew from "../../hooks/useDialogNew.js";
+import Select from "../elements/Select.jsx";
+import Button from "../elements/Button.jsx";
 
 export default function DialogNew() {
   const { dialog, info } = useContext(Context);
@@ -53,6 +53,7 @@ export default function DialogNew() {
             def="admin"
             className="rounded-lg text-lg py-[18px]"
           >
+            {/* creare dinamicità */}
             <option>pino</option>
             <option>gino</option>
             <option>lino</option>

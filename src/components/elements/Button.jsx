@@ -7,7 +7,7 @@ export default function Button({
 }) {
   return (
     <div
-      className={`flex gap-2 justify-center items-center cursor-pointer  w-fit self-end ${className}`}
+      className={`flex gap-2 justify-center items-center cursor-pointer  min-w-1/3  self-end mx-2 md:mx-0 md:my-2 w-full ${className}`}
       {...props}
     >
       {img && <img src={img} alt={alt} />}

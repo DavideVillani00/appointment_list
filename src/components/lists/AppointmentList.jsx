@@ -1,8 +1,8 @@
-import iconLoading from "../assets/icons/beautyIcons/icon-loading-48.png";
+import iconLoading from "../../assets/icons/beautyIcons/icon-loading-48.png";
 
 import AppointmentCard from "./AppointmentCard.jsx";
-import useSorterList from "../hooks/useSorterList.js";
-import DialogDelete from "./DialogDelete.jsx";
+import useSorterList from "../../hooks/useSorterList.js";
+import DialogDelete from "../modal/DialogDelete.jsx";
 
 export default function AppointmentList() {
   const { isLoading, sorteredList } = useSorterList();

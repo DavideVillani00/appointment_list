@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import Input from "./Input.jsx";
-import Select from "./Select.jsx";
+import Input from "../Input.jsx";
+import Select from "../Select.jsx";
 
 export default function Label({ children, value, def, ...props }) {
   const inputFocus = useRef();

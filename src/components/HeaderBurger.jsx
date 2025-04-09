@@ -3,7 +3,7 @@ import iconBurgerMenuDark from "../assets/icons/toggleIcons/icon-menu-dark-64.pn
 
 import { useContext, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
-import DialogMenuBurger from "./DialogMenuBurger.jsx";
+import DialogMenuBurger from "./modal/DialogMenuBurger.jsx";
 
 export default function HeaderBurger() {
   const [isOpen, setIsOpen] = useState(false);

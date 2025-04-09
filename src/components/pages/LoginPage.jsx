@@ -1,6 +1,6 @@
 import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
-import Label from "../elements/Label.jsx";
+import Label from "../elements/composite_elements/Label.jsx";
 
 export default function LoginPage() {
   return (

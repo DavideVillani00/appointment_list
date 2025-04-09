@@ -1,14 +1,14 @@
-import iconUsersLight from "../assets/icons/toggleIcons/icon-users-light-48.png";
-import iconUsersDark from "../assets/icons/toggleIcons/icon-users-dark-48.png";
-import iconMoon from "../assets/icons/toggleIcons/icon-moon-48.png";
-import iconSun from "../assets/icons/toggleIcons/icon-sun-48.png";
-import iconLanguageLight from "../assets/icons/toggleIcons/icon-language-light-48.png";
-import iconLanguageDark from "../assets/icons/toggleIcons/icon-language-dark-48.png";
-import iconLogoutLight from "../assets/icons/toggleIcons/icon-logout-light-48.png";
-import iconLogoutDark from "../assets/icons/toggleIcons/icon-logout-dark-48.png";
+import iconUsersLight from "../../assets/icons/toggleIcons/icon-users-light-48.png";
+import iconUsersDark from "../../assets/icons/toggleIcons/icon-users-dark-48.png";
+import iconMoon from "../../assets/icons/toggleIcons/icon-moon-48.png";
+import iconSun from "../../assets/icons/toggleIcons/icon-sun-48.png";
+import iconLanguageLight from "../../assets/icons/toggleIcons/icon-language-light-48.png";
+import iconLanguageDark from "../../assets/icons/toggleIcons/icon-language-dark-48.png";
+import iconLogoutLight from "../../assets/icons/toggleIcons/icon-logout-light-48.png";
+import iconLogoutDark from "../../assets/icons/toggleIcons/icon-logout-dark-48.png";
 
 import { useContext } from "react";
-import { Context } from "../ContextProvider";
+import { Context } from "../../ContextProvider";
 
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;

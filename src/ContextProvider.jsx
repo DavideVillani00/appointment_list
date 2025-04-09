@@ -18,7 +18,7 @@ export default function ContextProvider({ children }) {
   const globalProjectState = useProjectState();
   const globalThemeState = useThemeState();
   // !for debug
-  const [info, setInfo] = useState({ admin: false, login: true });
+  const [info, setInfo] = useState({ admin: true, login: true });
 
   const dialog = useRef();
   const dialogDelete = useRef();
