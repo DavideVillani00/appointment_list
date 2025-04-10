@@ -4,11 +4,18 @@ import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
 import { Context } from "../../ContextProvider.jsx";
+import ErrorList from "../lists/ErrorList.jsx";
+import DialogAlert from "../modal/DialogAlert.jsx";
+import { Link } from "react-router-dom";
+
 export default function SignupPage() {
-  const { handleSubmit } = useContext(Context).globalSignupState;
+  const { handleSubmit, ERROR_MESSAGES, COMPLETED } =
+    useContext(Context).globalSignupState;
   return (
     <>
+      <DialogAlert className={`${COMPLETED ? "visible" : "invisible"}`} />
       <Header />
+
       <h1 className="text-3xl font-extrabold text-center">SIGNUP</h1>
       <main className="flex flex-col justify-center items-center gap-7 md:gap-5">
         <Label placeholder="Enter your user-name" value="UserName" />
@@ -30,17 +37,15 @@ export default function SignupPage() {
           </Label>
           <Label placeholder="Enter your company" value="Company" />
         </div>
+        <ErrorList iterator={ERROR_MESSAGES} />
 
-        <ul className="text-center text-delete dark:text-deleteDark font-bold">
-          {/* <li>Enter all fields</li> */}
-        </ul>
         <Button className="addBtn w-full p-4 rounded-lg" onClick={handleSubmit}>
           SIGNUP
         </Button>
-        <span className="text-text2 dark:text-text2Dark text-sm">
+        <Link to="/login" className="text-text2 dark:text-text2Dark text-sm">
           Already registered?{" "}
           <span className="text-icon dark:text-iconDark">Log in</span>
-        </span>
+        </Link>
       </main>
     </>
   );

@@ -9,6 +9,7 @@ import iconLogoutDark from "../../assets/icons/toggleIcons/icon-logout-dark-48.p
 
 import { useContext } from "react";
 import { Context } from "../../ContextProvider";
+import { Link } from "react-router-dom";
 
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
@@ -23,11 +24,14 @@ export default function DialogMenuBurger({ isOpen }) {
     >
       {info.admin && (
         <>
-          <img
-            src={theme === "dark" ? iconUsersDark : iconUsersLight}
-            alt="users icon"
-            className="w-12"
-          />
+          <Link to="/admin">
+            {" "}
+            <img
+              src={theme === "dark" ? iconUsersDark : iconUsersLight}
+              alt="users icon"
+              className="w-12"
+            />
+          </Link>
           <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
         </>
       )}
