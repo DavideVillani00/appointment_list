@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../ContextProvider";
 
 let ERROR_MESSAGES = [];
-let COMPLETED = null;
-export default function useSignup() {
+
+export default function useSignup(alertState, setAlertState) {
   const navigate = useNavigate();
+  // const { setAlertState, alertState } = useContext(Context);
   const [inputState, setInputState] = useState({
     UserName: { value: "", err: false },
     Email: { value: "", err: false },
@@ -129,7 +131,6 @@ export default function useSignup() {
     ERROR_MESSAGES = [];
     const userName = inputState.UserName.value.trim();
     const password = inputState.Password.value.trim();
-    console.log(userName, password);
 
     if (!userName) {
       handleChangeErr("UserName");
@@ -149,45 +150,47 @@ export default function useSignup() {
   }
 
   async function handleSignup(user) {
-    const result = await fetch("http://localhost:3000/api/signup", {
+    const response = await fetch("http://localhost:3000/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
-    const data = await result.json();
+    const data = await response.json();
 
-    if (result.ok) {
+    if (response.ok) {
       handleReset();
-      COMPLETED = true;
+      setAlertState(true);
       document.documentElement.classList.add("overflow-hidden");
 
       setTimeout(() => {
-        COMPLETED = null;
+        setAlertState(false);
         document.documentElement.classList.remove("overflow-hidden");
         navigate("/login");
       }, 1000);
+      return;
     } else {
       handleChangeErr(data.err);
       ERROR_MESSAGES.push(data.msg);
+      return;
     }
   }
 
   async function handleLogin(user) {
-    const result = await fetch("http://localhost:3000/api/login", {
+    const response = await fetch("http://localhost:3000/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
-    const data = await result.json();
+    const data = await response.json();
 
-    if (result.ok) {
+    if (response.ok) {
       localStorage.setItem("token", data.token);
       handleReset();
-      COMPLETED = true;
+      setAlertState(true);
       document.documentElement.classList.add("overflow-hidden");
 
       setTimeout(() => {
-        COMPLETED = null;
+        setAlertState(false);
         document.documentElement.classList.remove("overflow-hidden");
         navigate("/");
       }, 1000);
@@ -202,6 +205,5 @@ export default function useSignup() {
     handleSubmitLogin,
     handleChange,
     ERROR_MESSAGES,
-    COMPLETED,
   };
 }

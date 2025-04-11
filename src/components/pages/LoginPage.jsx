@@ -8,11 +8,13 @@ import ErrorList from "../lists/ErrorList.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
 
 export default function LoginPage() {
-  const { ERROR_MESSAGES, handleSubmitLogin, COMPLETED } =
+  const { ERROR_MESSAGES, handleSubmitLogin } =
     useContext(Context).globalSignupState;
+  const { alertState } = useContext(Context);
+  console.log(alertState);
   return (
     <>
-      <DialogAlert className={`${COMPLETED ? "visible" : "invisible"}`}>
+      <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
         LOGGED IN
       </DialogAlert>
       <Header />

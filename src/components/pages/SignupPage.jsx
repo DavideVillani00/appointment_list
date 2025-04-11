@@ -9,11 +9,13 @@ import DialogAlert from "../modal/DialogAlert.jsx";
 import { Link } from "react-router-dom";
 
 export default function SignupPage() {
-  const { handleSubmitSignup, ERROR_MESSAGES, COMPLETED } =
+  const { handleSubmitSignup, ERROR_MESSAGES } =
     useContext(Context).globalSignupState;
+  const { alertState } = useContext(Context);
+  console.log(alertState);
   return (
     <>
-      <DialogAlert className={`${COMPLETED ? "visible" : "invisible"}`}>
+      <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
         REGISTRATION SUCCESSFUL
       </DialogAlert>
       <Header />

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 export default function useProjectState() {
+  const [appointmentState, setAppointmentState] = useState([]);
+
   const [projectState, setProjectState] = useState(
     /* localStorage.getItem("project")
       ? JSON.parse(localStorage.getItem("project"))
@@ -73,5 +75,6 @@ export default function useProjectState() {
     handleChangeFilter,
     setSelectedId,
     firefox,
+    appointmentState,
   };
 }
