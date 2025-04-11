@@ -9,11 +9,13 @@ import DialogAlert from "../modal/DialogAlert.jsx";
 import { Link } from "react-router-dom";
 
 export default function SignupPage() {
-  const { handleSubmit, ERROR_MESSAGES, COMPLETED } =
+  const { handleSubmitSignup, ERROR_MESSAGES, COMPLETED } =
     useContext(Context).globalSignupState;
   return (
     <>
-      <DialogAlert className={`${COMPLETED ? "visible" : "invisible"}`} />
+      <DialogAlert className={`${COMPLETED ? "visible" : "invisible"}`}>
+        REGISTRATION SUCCESSFUL
+      </DialogAlert>
       <Header />
 
       <h1 className="text-3xl font-extrabold text-center">SIGNUP</h1>
@@ -39,7 +41,10 @@ export default function SignupPage() {
         </div>
         <ErrorList iterator={ERROR_MESSAGES} />
 
-        <Button className="addBtn w-full p-4 rounded-lg" onClick={handleSubmit}>
+        <Button
+          className="addBtn w-full p-4 rounded-lg"
+          onClick={handleSubmitSignup}
+        >
           SIGNUP
         </Button>
         <Link to="/login" className="text-text2 dark:text-text2Dark text-sm">

@@ -47,7 +47,7 @@ export default function useSignup() {
       };
     });
   }
-  function handleSubmit() {
+  function handleSubmitSignup() {
     ERROR_MESSAGES = [];
     const { UserName, Email, Password, Name, Surname, Gender, Company } =
       inputState;
@@ -121,10 +121,34 @@ export default function useSignup() {
       gender,
       company,
     };
+    handleSignup(user);
+  }
+
+  function handleSubmitLogin() {
+    let error = false;
+    ERROR_MESSAGES = [];
+    const userName = inputState.UserName.value.trim();
+    const password = inputState.Password.value.trim();
+    console.log(userName, password);
+
+    if (!userName) {
+      handleChangeErr("UserName");
+      error = true;
+    }
+    if (!password) {
+      handleChangeErr("Password");
+      error = true;
+    }
+
+    if (error) {
+      ERROR_MESSAGES.push("Enter all fields");
+      return;
+    }
+    const user = { userName, password };
     handleLogin(user);
   }
 
-  async function handleLogin(user) {
+  async function handleSignup(user) {
     const result = await fetch("http://localhost:3000/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -147,5 +171,37 @@ export default function useSignup() {
       ERROR_MESSAGES.push(data.msg);
     }
   }
-  return { inputState, handleSubmit, handleChange, ERROR_MESSAGES, COMPLETED };
+
+  async function handleLogin(user) {
+    const result = await fetch("http://localhost:3000/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    });
+    const data = await result.json();
+
+    if (result.ok) {
+      localStorage.setItem("token", data.token);
+      handleReset();
+      COMPLETED = true;
+      document.documentElement.classList.add("overflow-hidden");
+
+      setTimeout(() => {
+        COMPLETED = null;
+        document.documentElement.classList.remove("overflow-hidden");
+        navigate("/");
+      }, 1000);
+    } else {
+      handleChangeErr(data.err);
+      ERROR_MESSAGES.push(data.msg);
+    }
+  }
+  return {
+    inputState,
+    handleSubmitSignup,
+    handleSubmitLogin,
+    handleChange,
+    ERROR_MESSAGES,
+    COMPLETED,
+  };
 }
