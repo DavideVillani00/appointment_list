@@ -35,10 +35,28 @@ export default function ContextProvider({ children }) {
 
   const dialog = useRef();
   const dialogDelete = useRef();
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState(""); //!cancellare
 
-  function handleChangeSearch(e) {
-    setSearch(e.target.value);
+  const [filters, setFilters] = useState({
+    searchTitle: null,
+    date: null,
+    userName: null,
+    check: null,
+  });
+
+  // function handleChangeSearch(e, type) {
+  function handleChangeFilters({ name, value }) {
+    if (value === "Completed") value = true;
+    if (value === "Uncompleted") value = false;
+    console.log(value);
+
+    // setSearch(e.target.value);
+    setFilters((preState) => {
+      return {
+        ...preState,
+        [name]: value,
+      };
+    });
   }
 
   const contValue = {
@@ -56,8 +74,9 @@ export default function ContextProvider({ children }) {
     dialog,
     dialogDelete,
 
-    search,
-    handleChangeSearch,
+    // search,
+    filters,
+    handleChangeFilters,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

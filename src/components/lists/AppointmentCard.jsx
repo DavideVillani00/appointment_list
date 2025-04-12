@@ -9,7 +9,14 @@ import { Context } from "../../ContextProvider.jsx";
 
 import useDialogDelete from "../../hooks/useDialogDelete.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
-export default function AppointmentCard({ id, name, date, time, check }) {
+export default function AppointmentCard({
+  id,
+  title,
+  date,
+  time,
+  check,
+  userName,
+}) {
   const { info } = useContext(Context);
   const { theme } = useContext(Context).globalThemeState;
   const { handleCheckboxAppointment } = useContext(Context).globalProjectState;
@@ -29,7 +36,7 @@ export default function AppointmentCard({ id, name, date, time, check }) {
       />
       {info.admin && (
         <div className=" bg-uncomplete/10 px-3 py-3.5 rounded-t-md md:px-5">
-          <span>@username</span>
+          <span>@{userName}</span>
         </div>
       )}
       <div className="p-3 md:p-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end ">
@@ -37,7 +44,7 @@ export default function AppointmentCard({ id, name, date, time, check }) {
           <p className="text-lg font-bold mb-3 text-placeholder dark:text-placeholderDark">
             {date} {time}
           </p>
-          <p>{name}</p>
+          <p>{title}</p>
         </div>
         <ButtonCardSection
           id={id}

@@ -11,24 +11,26 @@ import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 import Input from "./elements/Input.jsx";
-import useSorterList from "../hooks/useSorterList.js";
+// import useSorterList from "../hooks/useSorterList.js";
 import useDialogNew from "../hooks/useDialogNew.js";
 import Select from "./elements/Select.jsx";
 import DateSelector from "./elements/DateSelector.jsx";
 import Button from "./elements/Button.jsx";
+import useSorter from "../hooks/useSorter.js";
 
 export default function TopMain() {
-  const { search, handleChangeSearch, info } = useContext(Context);
+  const { search, handleChangeFilters, info } = useContext(Context);
 
   const { theme } = useContext(Context).globalThemeState;
-  const { appointmentCompleted, appointmentUncompleted } = useSorterList();
-  const { handleChangeFilter, projectState } =
-    useContext(Context).globalProjectState;
+  // const { appointmentCompleted, appointmentUncompleted } = useSorterList();
+  const { appointmentCompleted, appointmentUncompleted } = useSorter();
+  // const { handleChangeFilter, projectState } =
+  //   useContext(Context).globalProjectState;
   const { handleOpenDialog, handleChangeInput, inputState } = useDialogNew();
 
-  let filterDefault = projectState.filterState.split("");
-  filterDefault[0] = filterDefault[0].toUpperCase();
-  filterDefault = filterDefault.join("");
+  // let filterDefault = projectState.filterState.split("");
+  // filterDefault[0] = filterDefault[0].toUpperCase();
+  // filterDefault = filterDefault.join("");
 
   return (
     <>
@@ -51,7 +53,8 @@ export default function TopMain() {
             type="text"
             placeholder="Search"
             value={search}
-            onChange={handleChangeSearch}
+            onHandleChange={handleChangeFilters}
+            name="searchTitle"
           />
           <DateSelector
             onChangeInput={handleChangeInput}
@@ -95,10 +98,12 @@ export default function TopMain() {
 
         <Select
           img={theme === "dark" ? iconFilterDark : iconFilterLight}
-          onChange={handleChangeFilter}
+          // onChange={handleChangeFilter}
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
-          def={filterDefault}
+          def="All"
+          name="check"
+          onHandleChange={handleChangeFilters}
         >
           <option>All</option>
           <option>Completed</option>

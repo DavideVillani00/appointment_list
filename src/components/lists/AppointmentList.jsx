@@ -1,11 +1,16 @@
 import iconLoading from "../../assets/icons/beautyIcons/icon-loading-48.png";
 
 import AppointmentCard from "./AppointmentCard.jsx";
-import useSorterList from "../../hooks/useSorterList.js";
+// import useSorterList from "../../hooks/useSorterList.js";
 import DialogDelete from "../modal/DialogDelete.jsx";
+import useSorter from "../../hooks/useSorter.js";
+import useHomePage from "../../hooks/useHomePage.js";
 
 export default function AppointmentList() {
-  const { isLoading, sorteredList } = useSorterList();
+  // const { isLoading, sorteredList } = useSorterList();
+  const { appointmentSortered } = useSorter();
+  const { isLoading } = useHomePage();
+  console.log(appointmentSortered);
 
   return (
     <>
@@ -17,10 +22,10 @@ export default function AppointmentList() {
             alt="loading ring"
             className="animate-spin w-[50px]"
           />
-        ) : sorteredList.length === 0 ? (
+        ) : appointmentSortered.length === 0 ? (
           <p>There isn't appointment</p>
         ) : (
-          sorteredList.map((app) => {
+          appointmentSortered.map((app) => {
             return <AppointmentCard key={app.id} {...app} />;
           })
         )}

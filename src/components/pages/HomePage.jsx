@@ -5,9 +5,11 @@ import TopMain from "../TopMain.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
+import useHomePage from "../../hooks/useHomePage.js";
 
 export default function HomePage() {
   const { alertState } = useContext(Context);
+  useHomePage();
 
   return (
     <>

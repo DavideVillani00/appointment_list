@@ -8,9 +8,15 @@ export default function Input({
   err = false,
   refInput,
   refFocus,
+  name,
+  onHandleChange,
   ...props
 }) {
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
+  function handleChange(e) {
+    const value = e.target.value;
+    onHandleChange({ name, value });
+  }
 
   return (
     <div
@@ -33,6 +39,7 @@ export default function Input({
       <input
         ref={refInput}
         type="text"
+        onChange={handleChange}
         {...props}
         className={`w-full rounded-lg p-4  text-lg outline-0  ${
           img ? "pl-15" : ""
