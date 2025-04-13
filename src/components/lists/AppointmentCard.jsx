@@ -7,7 +7,7 @@ import writeIconDark from "../../assets/icons/beautyIcons/icon-write-dark-27.png
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 
-import useDialogDelete from "../../hooks/useDialogDelete.js";
+// import useDialogDelete from "../../hooks/useDialogDelete.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
 export default function AppointmentCard({
   id,

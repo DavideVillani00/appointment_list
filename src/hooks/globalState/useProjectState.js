@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../../ContextProvider.jsx";
+import useSorter from "../useSorter";
 export default function useProjectState() {
-  const [appointmentState, setAppointmentState] = useState([]);
+  // const [appointmentState, setAppointmentState] = useState([]);
   const [userState, setUserState] = useState(null);
-  const [usersList, setUsersList] = useState([]);
+  const [usersList, setUsersList] = useState(null);
 
   const [firefox, setFirefox] = useState(null);
   useEffect(() => {
@@ -28,8 +30,8 @@ export default function useProjectState() {
 
   return {
     firefox,
-    appointmentState,
-    setAppointmentState,
+    // appointmentState,
+    // setAppointmentState,
     userState,
     setUserState,
     usersList,

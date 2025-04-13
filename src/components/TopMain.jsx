@@ -21,7 +21,6 @@ import OptionUsersName from "./lists/OptionUsersName.jsx";
 export default function TopMain() {
   const { search, handleChangeFilters, info } = useContext(Context);
   const { usersList, userState } = useContext(Context).globalProjectState;
-  console.log(usersList, "user", userState);
 
   const { theme } = useContext(Context).globalThemeState;
   const { handleOpenDialog, handleChangeInput, inputState } = useDialogNew();
@@ -69,9 +68,7 @@ export default function TopMain() {
         {info.admin && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
-            // ! NON FUNZIONA
-            key={userState.userName}
-            def={userState.userName}
+            def="All"
             className="rounded-lg text-lg py-[18px] w-full"
             onHandleChange={handleChangeFilters}
             name="userName"
@@ -92,7 +89,6 @@ export default function TopMain() {
 
         <Select
           img={theme === "dark" ? iconFilterDark : iconFilterLight}
-          // onChange={handleChangeFilter}
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
           def="All"

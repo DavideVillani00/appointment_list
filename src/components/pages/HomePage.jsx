@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 
 export default function HomePage() {
-  const { alertState } = useContext(Context);
+  const { alertState, filters } = useContext(Context);
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function HomePage() {
       <h1 className="text-3xl font-extrabold text-center">HOME PAGE</h1>
       <main>
         <TopMain />
-        <AppointmentList></AppointmentList>
+        <AppointmentList />
       </main>
     </>
   );

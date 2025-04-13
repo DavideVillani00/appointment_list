@@ -18,7 +18,6 @@ export default function Select({
   ...props
 }) {
   const { userState } = useContext(Context).globalProjectState;
-  console.log(userState, "userState", def, "def");
 
   const [selectValue, setSelectvalue] = useState(def ? def : userState);
   const { theme } = useContext(Context).globalThemeState;
@@ -26,7 +25,6 @@ export default function Select({
 
   function handleChange(e) {
     setSelectvalue(e.target.value);
-    // const value = selectValue;
     onHandleChange(name, e.target.value);
   }
 

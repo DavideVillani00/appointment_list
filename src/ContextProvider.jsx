@@ -28,14 +28,11 @@ export default function ContextProvider({ children }) {
 
   const globalSignupState = useSignup(alertState, setAlertState);
 
-  // const globalValue = useGlobalValue();
-
   // !for debug
   const [info, setInfo] = useState({ admin: true, login: true }); // ! canncel
 
   const dialog = useRef();
   const dialogDelete = useRef();
-  // const [search, setSearch] = useState(""); //!cancellare
 
   const [filters, setFilters] = useState({
     searchTitle: null,
@@ -44,20 +41,19 @@ export default function ContextProvider({ children }) {
     check: null,
   });
 
-  // function handleChangeSearch(e, type) {
   function handleChangeFilters(name, value) {
-    console.log(name, value);
     if (value === "Completed") value = true;
     if (value === "Uncompleted") value = false;
-    console.log(value);
 
-    // setSearch(e.target.value);
     setFilters((preState) => {
+      console.log("name", name, "value", value);
+
       return {
         ...preState,
         [name]: value,
       };
     });
+    console.log("filters", filters);
   }
 
   const contValue = {
@@ -66,7 +62,6 @@ export default function ContextProvider({ children }) {
 
     globalSignupState,
 
-    // globalValue,
     alertState,
     setAlertState,
 
@@ -75,7 +70,6 @@ export default function ContextProvider({ children }) {
     dialog,
     dialogDelete,
 
-    // search,
     filters,
     handleChangeFilters,
   };
