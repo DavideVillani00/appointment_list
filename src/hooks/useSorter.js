@@ -1,45 +1,29 @@
-import { useContext, useState, useEffect } from "react";
-import { Context } from "../ContextProvider.jsx";
-
-// let sorteredList = [];
-let appointmentSortered = [];
-
 export default function useSorter() {
-  const { appointmentState } = useContext(Context).globalProjectState;
+  function sort(list = []) {
+    const appointmentCompleted = list
+      .filter((app) => {
+        return app.check;
+      })
+      .sort((a, b) => {
+        return a.timestamp - b.timestamp;
+      });
 
-  // const [isLoading, setIsLoading] = useState(false);
+    const appointmentUncompleted = list
+      .filter((app) => {
+        return !app.check;
+      })
+      .sort((a, b) => {
+        return a.timestamp - b.timestamp;
+      });
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-
-  //   const time = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 500);
-  //   return () => clearTimeout(time);
-  // }, [appointmentState]);
-
-  const appointmentCompleted = appointmentState
-    .filter((app) => {
-      return app.check;
-    })
-    .sort((a, b) => {
-      return a.timestamp - b.timestamp;
-    });
-
-  const appointmentUncompleted = appointmentState
-    .filter((app) => {
-      return !app.check;
-    })
-    .sort((a, b) => {
-      return a.timestamp - b.timestamp;
-    });
-
-  appointmentSortered = [...appointmentUncompleted, ...appointmentCompleted];
+    return {
+      appointmentSortered: [...appointmentUncompleted, ...appointmentCompleted],
+      appointmentCompleted,
+      appointmentUncompleted,
+    };
+  }
 
   return {
-    appointmentCompleted,
-    appointmentUncompleted,
-
-    appointmentSortered,
+    sort,
   };
 }

@@ -9,7 +9,7 @@ export default function Select({
   children,
   img = null,
   alt,
-  def,
+  def = null,
   className,
   err = null,
   placeholder = "",
@@ -17,14 +17,17 @@ export default function Select({
   name,
   ...props
 }) {
-  const [selectValue, setSelectvalue] = useState(def);
+  const { userState } = useContext(Context).globalProjectState;
+  console.log(userState, "userState", def, "def");
+
+  const [selectValue, setSelectvalue] = useState(def ? def : userState);
   const { theme } = useContext(Context).globalThemeState;
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
 
   function handleChange(e) {
     setSelectvalue(e.target.value);
-    const value = selectValue;
-    onHandleChange({ name, value });
+    // const value = selectValue;
+    onHandleChange(name, e.target.value);
   }
 
   return (

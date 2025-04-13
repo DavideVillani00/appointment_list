@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 import ErrorList from "../lists/ErrorList.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
@@ -11,7 +11,11 @@ export default function LoginPage() {
   const { ERROR_MESSAGES, handleSubmitLogin } =
     useContext(Context).globalSignupState;
   const { alertState } = useContext(Context);
-  console.log(alertState);
+  const { handleReset } = useContext(Context).globalSignupState;
+
+  useEffect(() => {
+    handleReset();
+  }, []);
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>

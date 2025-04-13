@@ -10,6 +10,7 @@ export default function DateSelector({
   value,
   type,
   err = null,
+  onHandleChange,
   ...props
 }) {
   const { FORMATTED_INPUT } = useDialogNew();
@@ -61,7 +62,10 @@ export default function DateSelector({
           <input
             type={type}
             className="opacity-0 absolute top-0 left-0 w-full h-full hover:cursor-pointer  "
-            onChange={onChangeInput}
+            onChange={(e) => {
+              onChangeInput(e);
+              onHandleChange(type, e.target.value);
+            }}
             {...props}
             ref={inputDate}
             onBlur={handleBlur}

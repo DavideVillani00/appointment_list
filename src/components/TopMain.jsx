@@ -8,29 +8,25 @@ import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
 import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-27.png";
 import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.png";
 
-import { useContext } from "react";
+import { use, useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
 import Input from "./elements/Input.jsx";
-// import useSorterList from "../hooks/useSorterList.js";
 import useDialogNew from "../hooks/useDialogNew.js";
 import Select from "./elements/Select.jsx";
 import DateSelector from "./elements/DateSelector.jsx";
 import Button from "./elements/Button.jsx";
 import useSorter from "../hooks/useSorter.js";
+import OptionUsersName from "./lists/OptionUsersName.jsx";
 
 export default function TopMain() {
   const { search, handleChangeFilters, info } = useContext(Context);
+  const { usersList, userState } = useContext(Context).globalProjectState;
+  console.log(usersList, "user", userState);
 
   const { theme } = useContext(Context).globalThemeState;
-  // const { appointmentCompleted, appointmentUncompleted } = useSorterList();
-  const { appointmentCompleted, appointmentUncompleted } = useSorter();
-  // const { handleChangeFilter, projectState } =
-  //   useContext(Context).globalProjectState;
   const { handleOpenDialog, handleChangeInput, inputState } = useDialogNew();
-
-  // let filterDefault = projectState.filterState.split("");
-  // filterDefault[0] = filterDefault[0].toUpperCase();
-  // filterDefault = filterDefault.join("");
+  const { appointmentCompleted, appointmentSortered, appointmentUncompleted } =
+    useSorter().sort();
 
   return (
     <>
@@ -62,6 +58,7 @@ export default function TopMain() {
             type="date"
             value={inputState.inputDate.value}
             err={inputState.inputDate.err}
+            onHandleChange={handleChangeFilters}
           >
             <img
               src={theme === "dark" ? calendarIconDark : calendarIconLight}
@@ -72,24 +69,21 @@ export default function TopMain() {
         {info.admin && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
-            def="admin"
+            // ! NON FUNZIONA
+            key={userState.userName}
+            def={userState.userName}
             className="rounded-lg text-lg py-[18px] w-full"
+            onHandleChange={handleChangeFilters}
+            name="userName"
+            alt="user icon"
           >
-            {" "}
-            {/* creare dinamicità */}
-            <option>pino</option>
-            <option>gino</option>
-            <option>lino</option>
-            <option>tino</option>
-            <option>admin</option>
+            <OptionUsersName users={usersList} />
           </Select>
         )}
       </div>
       <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-text2 dark:text-text2Dark">
-          <p>
-            Total: {appointmentCompleted.length + appointmentUncompleted.length}
-          </p>
+          <p>Total: {appointmentSortered.length}</p>
           <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
           <p>Completed: {appointmentCompleted.length}</p>
           <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>

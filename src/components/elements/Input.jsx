@@ -8,14 +8,14 @@ export default function Input({
   err = false,
   refInput,
   refFocus,
-  name,
+
   onHandleChange,
   ...props
 }) {
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
   function handleChange(e) {
     const value = e.target.value;
-    onHandleChange({ name, value });
+    onHandleChange(e.target.name, value);
   }
 
   return (

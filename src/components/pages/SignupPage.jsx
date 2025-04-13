@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
@@ -9,10 +9,13 @@ import DialogAlert from "../modal/DialogAlert.jsx";
 import { Link } from "react-router-dom";
 
 export default function SignupPage() {
-  const { handleSubmitSignup, ERROR_MESSAGES } =
+  const { handleSubmitSignup, ERROR_MESSAGES, handleReset } =
     useContext(Context).globalSignupState;
   const { alertState } = useContext(Context);
-  console.log(alertState);
+
+  useEffect(() => {
+    handleReset();
+  }, []);
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>

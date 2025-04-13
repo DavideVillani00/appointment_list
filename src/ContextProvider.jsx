@@ -45,7 +45,8 @@ export default function ContextProvider({ children }) {
   });
 
   // function handleChangeSearch(e, type) {
-  function handleChangeFilters({ name, value }) {
+  function handleChangeFilters(name, value) {
+    console.log(name, value);
     if (value === "Completed") value = true;
     if (value === "Uncompleted") value = false;
     console.log(value);

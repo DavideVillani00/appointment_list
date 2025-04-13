@@ -32,6 +32,7 @@ export default function useSignup(alertState, setAlertState) {
 
   function handleChange(e) {
     const { name, value } = e.target ? e.target : e;
+    console.log(name, value);
 
     setInputState((preState) => {
       return {
@@ -205,5 +206,6 @@ export default function useSignup(alertState, setAlertState) {
     handleSubmitLogin,
     handleChange,
     ERROR_MESSAGES,
+    handleReset,
   };
 }

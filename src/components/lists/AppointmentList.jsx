@@ -1,16 +1,51 @@
 import iconLoading from "../../assets/icons/beautyIcons/icon-loading-48.png";
 
 import AppointmentCard from "./AppointmentCard.jsx";
-// import useSorterList from "../../hooks/useSorterList.js";
 import DialogDelete from "../modal/DialogDelete.jsx";
 import useSorter from "../../hooks/useSorter.js";
-import useHomePage from "../../hooks/useHomePage.js";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../ContextProvider.jsx";
 
 export default function AppointmentList() {
-  // const { isLoading, sorteredList } = useSorterList();
-  const { appointmentSortered } = useSorter();
-  const { isLoading } = useHomePage();
-  console.log(appointmentSortered);
+  const { sort } = useSorter();
+  const [appointmentsList, setAppointmentsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { filters } = useContext(Context);
+
+  async function uploadAppointment() {
+    console.log(filters);
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/appointments/search",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(filters),
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        console.error("Error fetching appointments:", data.error);
+        return setAppointmentsList(data.arr);
+      }
+      return setAppointmentsList(sort(data).appointmentSortered);
+    } catch (err) {
+      console.error("Error in fetch:", err);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 200);
+    }
+  }
+
+  useEffect(() => {
+    uploadAppointment();
+  }, []);
+
+  useEffect(() => {
+    uploadAppointment();
+  }, [filters]);
 
   return (
     <>
@@ -22,10 +57,10 @@ export default function AppointmentList() {
             alt="loading ring"
             className="animate-spin w-[50px]"
           />
-        ) : appointmentSortered.length === 0 ? (
+        ) : appointmentsList.length === 0 ? (
           <p>There isn't appointment</p>
         ) : (
-          appointmentSortered.map((app) => {
+          appointmentsList.map((app) => {
             return <AppointmentCard key={app.id} {...app} />;
           })
         )}

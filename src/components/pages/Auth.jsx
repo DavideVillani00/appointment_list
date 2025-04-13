@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Auth({ children }) {
   const { setAlertState } = useContext(Context);
+  const { setUserState } = useContext(Context).globalProjectState;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +31,8 @@ export default function Auth({ children }) {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    console.log(data, "data from auth");
+    if (response.ok) setUserState(data);
   }
 
   return <>{children}</>;
