@@ -8,7 +8,7 @@ import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
 import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-27.png";
 import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.png";
 
-import { use, useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Context } from "../ContextProvider.jsx";
 import Input from "./elements/Input.jsx";
 import useDialogNew from "../hooks/useDialogNew.js";
@@ -19,13 +19,30 @@ import useSorter from "../hooks/useSorter.js";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
 
 export default function TopMain() {
-  const { search, handleChangeFilters, info } = useContext(Context);
+  const { search, handleChangeFilters } = useContext(Context);
   const { usersList, userState } = useContext(Context).globalProjectState;
+  const [appointmentsList, setAppointmentsList] = useState([]);
 
   const { theme } = useContext(Context).globalThemeState;
   const { handleOpenDialog, handleChangeInput, inputState } = useDialogNew();
   const { appointmentCompleted, appointmentSortered, appointmentUncompleted } =
-    useSorter().sort();
+    useSorter().sort(appointmentsList);
+
+  async function getAllProjects() {
+    try {
+      const response = await fetch("http://localhost:3000/api/appointments", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+      if (response.ok) setAppointmentsList(data);
+    } catch (err) {
+      console.error("Error in fetch:", err);
+    }
+  }
+  useEffect(() => {
+    getAllProjects();
+  }, []);
 
   return (
     <>
@@ -33,7 +50,7 @@ export default function TopMain() {
         <Button
           className="w-full addBtn p-[18px] rounded-lg md:flex-3/5"
           img={addIcon}
-          onClick={handleOpenDialog}
+          onClick={() => handleOpenDialog()}
           alt="add icon"
         >
           ADD
@@ -65,7 +82,7 @@ export default function TopMain() {
             />
           </DateSelector>
         </div>
-        {info.admin && (
+        {userState.role === "admin" && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
             def="All"
@@ -74,7 +91,7 @@ export default function TopMain() {
             name="userName"
             alt="user icon"
           >
-            <OptionUsersName users={usersList} />
+            <OptionUsersName users={usersList} allOption={true} />
           </Select>
         )}
       </div>

@@ -5,7 +5,8 @@ import iconLoading from "../../assets/icons/beautyIcons/icon-loading-48.png";
 
 export default function Auth({ children }) {
   const { setAlertState } = useContext(Context);
-  const { setUserState, userState } = useContext(Context).globalProjectState;
+  const { setUserState, userState, usersList } =
+    useContext(Context).globalProjectState;
   const navigate = useNavigate();
   const [pageLoading, setPageLoading] = useState(true);
 
@@ -46,7 +47,7 @@ export default function Auth({ children }) {
       navigate("/login");
     }, 1000);
   }
-  if (pageLoading || !userState) {
+  if (pageLoading || !userState || !usersList) {
     return (
       <div className="w-full h-full absolute top-0 left-0 flex  justify-center items-center">
         <img

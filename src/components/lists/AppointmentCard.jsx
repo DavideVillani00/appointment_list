@@ -9,6 +9,7 @@ import { Context } from "../../ContextProvider.jsx";
 
 // import useDialogDelete from "../../hooks/useDialogDelete.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
+import useDialogNew from "../../hooks/useDialogNew.js";
 export default function AppointmentCard({
   id,
   title,
@@ -18,8 +19,10 @@ export default function AppointmentCard({
   userName,
 }) {
   const { info } = useContext(Context);
+  const { handleOpenDialog, getAppointmentByid } = useDialogNew();
   const { theme } = useContext(Context).globalThemeState;
-  const { handleCheckboxAppointment } = useContext(Context).globalProjectState;
+  const { handleCheckboxAppointment, userState } =
+    useContext(Context).globalProjectState;
 
   return (
     <li
@@ -29,12 +32,13 @@ export default function AppointmentCard({
     >
       <img
         src={theme === "dark" ? writeIconDark : writeIconLight}
+        onClick={() => handleOpenDialog(id)}
         alt="edit icon"
         className={`absolute p-3 md:px-5 top-0 right-0 bg-uncomplete/10 ${
           info.admin ? "" : "rounded-bl-md"
         } rounded-tr-md`}
       />
-      {info.admin && (
+      {userState.role === "admin" && (
         <div className=" bg-uncomplete/10 px-3 py-3.5 rounded-t-md md:px-5">
           <span>@{userName}</span>
         </div>
@@ -57,7 +61,9 @@ export default function AppointmentCard({
           }
           alt="checkbox icon"
           value={check ? "COMPLETED" : "UNCOMPLETED"}
-          onClickBtn={handleCheckboxAppointment}
+          onClickBtn={() => {
+            getAppointmentByid(id, check);
+          }}
           className="min-w-48"
         />
       </div>

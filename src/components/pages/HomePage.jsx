@@ -3,11 +3,12 @@ import DialogNew from "../modal/DialogNew.jsx";
 import Header from "../Header.jsx";
 import TopMain from "../TopMain.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../../ContextProvider.jsx";
+import useDialogNew from "../../hooks/useDialogNew.js";
 
 export default function HomePage() {
-  const { alertState, filters } = useContext(Context);
+  const { alertState } = useContext(Context);
 
   return (
     <>

@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   const { info } = useContext(Context);
-
+  const { userState } = useContext(Context).globalProjectState;
   // !! da sistemare tutto
   return (
     <div
@@ -22,10 +22,9 @@ export default function DialogMenuBurger({ isOpen }) {
         isOpen ? "scale-100" : "scale-0"
       } transition-transform duration-150`}
     >
-      {info.admin && (
+      {userState && userState.role === "admin" && (
         <>
           <Link to="/admin">
-            {" "}
             <img
               src={theme === "dark" ? iconUsersDark : iconUsersLight}
               alt="users icon"
@@ -49,7 +48,7 @@ export default function DialogMenuBurger({ isOpen }) {
         alt="change language icon"
         className="w-12"
       />
-      {info.login && (
+      {userState && (
         <>
           <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
           <img

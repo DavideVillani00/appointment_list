@@ -5,6 +5,7 @@ export default function useProjectState() {
   // const [appointmentState, setAppointmentState] = useState([]);
   const [userState, setUserState] = useState(null);
   const [usersList, setUsersList] = useState(null);
+  // const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   const [firefox, setFirefox] = useState(null);
   useEffect(() => {
@@ -35,5 +36,8 @@ export default function useProjectState() {
     userState,
     setUserState,
     usersList,
+
+    // selectedAppointment,
+    // setSelectedAppointment,
   };
 }

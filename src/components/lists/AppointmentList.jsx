@@ -38,34 +38,6 @@ export default function AppointmentList() {
     }
   }
 
-  // ! da sistemare
-  async function updatedAppointment(
-    id = null,
-    username = null,
-    title = null,
-    date = null,
-    time = null,
-    check = null
-  ) {
-    const edit = { id, username, title, date, time, check };
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/appointments/edit",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(edit),
-        }
-      );
-      const data = await response.json();
-      if (response.ok) {
-        uploadAppointment();
-      }
-    } catch (err) {
-      console.error("Error in fetch:", err);
-    }
-  }
-
   useEffect(() => {
     uploadAppointment();
   }, []);

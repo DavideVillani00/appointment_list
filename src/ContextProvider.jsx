@@ -3,6 +3,11 @@ import useProjectState from "./hooks/globalState/useProjectState.js";
 import useThemeState from "./hooks/globalState/useThemeState.js";
 import useSignup from "./hooks/useSignup.js";
 // import useGlobalValue from "./hooks/globalState/useGlobalValue.js";
+const FORMATTED_INPUT = {
+  date: "yyyy-mm-dd",
+  time: "--:--",
+  text: "",
+};
 
 export const Context = createContext({
   globalProjectState: () => {},
@@ -19,6 +24,11 @@ export const Context = createContext({
 
   search: () => {},
   handleChangeSearch: () => {},
+
+  isEdit: false,
+  setIsEdit: () => {},
+  inputState: {},
+  setInputState: () => {},
 });
 
 export default function ContextProvider({ children }) {
@@ -28,8 +38,26 @@ export default function ContextProvider({ children }) {
 
   const globalSignupState = useSignup(alertState, setAlertState);
 
+  const { userState } = globalProjectState;
   // !for debug
   const [info, setInfo] = useState({ admin: true, login: true }); // ! canncel
+  const [isEdit, setIsEdit] = useState(false);
+  const [inputState, setInputState] = useState({
+    id: null,
+    userName: null,
+    inputName: {
+      value: FORMATTED_INPUT.text,
+      err: false,
+    },
+    inputDate: {
+      value: FORMATTED_INPUT.date,
+      err: false,
+    },
+    inputTime: {
+      value: FORMATTED_INPUT.time,
+      err: false,
+    },
+  });
 
   const dialog = useRef();
   const dialogDelete = useRef();
@@ -41,19 +69,22 @@ export default function ContextProvider({ children }) {
     check: null,
   });
 
-  function handleChangeFilters(name, value) {
+  function handleChangeFilters(name = null, value = null) {
+    if (!name || !value) {
+      return setFilters((preState) => {
+        return { ...preState };
+      });
+    }
+    console.log("prova");
     if (value === "Completed") value = true;
     if (value === "Uncompleted") value = false;
 
     setFilters((preState) => {
-      console.log("name", name, "value", value);
-
       return {
         ...preState,
         [name]: value,
       };
     });
-    console.log("filters", filters);
   }
 
   const contValue = {
@@ -72,6 +103,11 @@ export default function ContextProvider({ children }) {
 
     filters,
     handleChangeFilters,
+
+    inputState,
+    setInputState,
+    isEdit,
+    setIsEdit,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

@@ -18,12 +18,16 @@ import { Context } from "../../ContextProvider.jsx";
 import useDialogNew from "../../hooks/useDialogNew.js";
 import Select from "../elements/Select.jsx";
 import Button from "../elements/Button.jsx";
+import OptionUsersName from "../lists/OptionUsersName.jsx";
 
 export default function DialogNew() {
-  const { dialog, info } = useContext(Context);
+  const { dialog, inputState, isEdit } = useContext(Context);
 
-  const { handleAddButton, handleCloseModal, inputState, handleChangeInput } =
+  const { usersList, userState } = useContext(Context).globalProjectState;
+  const { handleAddButton, handleCloseModal, handleChangeInput } =
     useDialogNew();
+
+  const defSelect = inputState.userName || userState.userName;
 
   const { theme } = useContext(Context).globalThemeState;
 
@@ -35,7 +39,7 @@ export default function DialogNew() {
     >
       <div className="flex justify-between items-center ">
         <h1 className="text-3xl font-bold text-text1 dark:text-text1Dark">
-          New appointment
+          {isEdit ? "Edit appointment" : "New appointment"}
         </h1>
         <img
           src={theme === "dark" ? iconCloseDark : iconCloseLight}
@@ -47,18 +51,19 @@ export default function DialogNew() {
 
       <form className="flex flex-col gap-4 md:p-4 ">
         <span className="bg-divider dark:bg-dividerDark w-full h-0.5 my-5"></span>
-        {info.admin && (
+        {userState.role === "admin" && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
-            def="admin"
+            alt="user icon"
+            def={defSelect}
             className="rounded-lg text-lg py-[18px]"
+            name="userName"
+            onHandleChange={(name, value, type) => {
+              console.log(name, value, type);
+              handleChangeInput(name, value, type);
+            }}
           >
-            {/* creare dinamicità */}
-            <option>pino</option>
-            <option>gino</option>
-            <option>lino</option>
-            <option>tino</option>
-            <option>admin</option>
+            <OptionUsersName users={usersList} />
           </Select>
         )}
         <Input
@@ -74,6 +79,7 @@ export default function DialogNew() {
 
         <div className="flex flex-col gap-4 md:flex-row ">
           <DateSelector
+            // onHandleChange={handleChangeInput}
             onChangeInput={handleChangeInput}
             name="inputDate"
             type="date"
@@ -86,6 +92,7 @@ export default function DialogNew() {
             />
           </DateSelector>
           <DateSelector
+            // onHandleChange={handleChangeInput}
             onChangeInput={handleChangeInput}
             name="inputTime"
             type="time"
@@ -111,7 +118,7 @@ export default function DialogNew() {
           img={addIcon}
           alt="add icon"
         >
-          ADD
+          {isEdit ? "EDIT" : "ADD"}
         </Button>
       </form>
     </dialog>

@@ -1,7 +1,7 @@
 import iconArrowDownLight from "../../assets/icons/beautyIcons/icon-arrow-down-light-27.png";
 import iconArrowDownDark from "../../assets/icons/beautyIcons/icon-arrow-down-dark-27.png";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../../ContextProvider";
 import useFocusElement from "../../hooks/useFocusElement";
 
@@ -23,9 +23,16 @@ export default function Select({
   const { theme } = useContext(Context).globalThemeState;
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
 
+  useEffect(() => {
+    setSelectvalue(def);
+  }, [def]);
+
   function handleChange(e) {
-    setSelectvalue(e.target.value);
-    onHandleChange(name, e.target.value);
+    console.log(e);
+    const type = e.target.type;
+    const value = e.target.value;
+    setSelectvalue(value);
+    onHandleChange(name, value, type); //!!!! onHandleChange({name, value})
   }
 
   return (
