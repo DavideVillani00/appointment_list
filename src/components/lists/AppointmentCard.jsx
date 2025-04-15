@@ -10,6 +10,7 @@ import { Context } from "../../ContextProvider.jsx";
 // import useDialogDelete from "../../hooks/useDialogDelete.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
 import useDialogNew from "../../hooks/useDialogNew.js";
+import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
 export default function AppointmentCard({
   id,
   title,
@@ -19,10 +20,10 @@ export default function AppointmentCard({
   userName,
 }) {
   const { info } = useContext(Context);
+  const { handleCheck } = useHandleToggleButton();
   const { handleOpenDialog, getAppointmentByid } = useDialogNew();
   const { theme } = useContext(Context).globalThemeState;
-  const { handleCheckboxAppointment, userState } =
-    useContext(Context).globalProjectState;
+  const { userState } = useContext(Context).globalProjectState;
 
   return (
     <li
@@ -62,7 +63,7 @@ export default function AppointmentCard({
           alt="checkbox icon"
           value={check ? "COMPLETED" : "UNCOMPLETED"}
           onClickBtn={() => {
-            getAppointmentByid(id, check);
+            handleCheck(id);
           }}
           className="min-w-48"
         />

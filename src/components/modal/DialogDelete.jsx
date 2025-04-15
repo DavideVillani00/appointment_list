@@ -5,9 +5,10 @@ import { createPortal } from "react-dom";
 import { Context } from "../../ContextProvider.jsx";
 import useDialogDelete from "../../hooks/useDialogDelete.js";
 import Button from "../elements/Button.jsx";
+import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
 
 export default function DialogDelete() {
-  const { handleDeleteAppointment } = useContext(Context).globalProjectState;
+  const { handleDelete } = useHandleToggleButton();
   const { dialogDelete, handleCloseDialogDelete } = useDialogDelete();
   const modalRoot = document.getElementById("modal");
   if (!modalRoot) return null;
@@ -33,7 +34,7 @@ export default function DialogDelete() {
             alt="delete icon"
             className="flex-1/3 deleteBtn w-full p-4 rounded-md"
             onClick={() => {
-              handleDeleteAppointment();
+              handleDelete();
               handleCloseDialogDelete();
             }}
           >

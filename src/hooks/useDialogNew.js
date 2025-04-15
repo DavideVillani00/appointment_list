@@ -7,12 +7,11 @@ const FORMATTED_INPUT = {
   text: "",
 };
 
-// !!!c'è un problema con gli stati che si accavallano nel backend
-
 export default function useDialogNew() {
   const { userState } = useContext(Context).globalProjectState;
   const { setInputState, inputState, isEdit, setIsEdit } = useContext(Context);
-  const [oldDate, setOldDate] = useState(null);
+  // const [oldDate, setOldDate] = useState(null);
+  const oldDate = useRef();
   const { dialog } = useContext(Context);
   const { handleChangeFilters } = useContext(Context);
 
@@ -24,11 +23,11 @@ export default function useDialogNew() {
     document.documentElement.classList.add("overflow-hidden");
   }
 
-  async function getAppointmentByid(idRef, check = null) {
+  async function getAppointmentByid(idRef) {
     setIsEdit(true);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/appointments/search?id=${idRef}`,
+        `http://localhost:3000/api/appointments/search/${idRef}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -36,12 +35,6 @@ export default function useDialogNew() {
       );
       const data = await response.json();
       if (response.ok) {
-        if (typeof check === "boolean") {
-          console.log(data);
-          let checkEdit = data.check === true ? false : true;
-          return handlePushAppointment({ id: data.id, check: checkEdit });
-        }
-        console.log("fallito");
         setInputState({
           id: data.id,
           userName: data.userName,
@@ -58,7 +51,8 @@ export default function useDialogNew() {
             err: false,
           },
         });
-        setOldDate(new Date(`${data.date}T${data.time}`).getTime());
+        oldDate.current = new Date(`${data.date}T${data.time}`).getTime();
+        console.log(oldDate);
       }
     } catch (err) {
       console.error("Error in fetch:", err);
@@ -67,7 +61,7 @@ export default function useDialogNew() {
 
   function handleCloseModal() {
     setIsEdit(false);
-    setOldDate(null);
+    oldDate.current = null;
     setInputState({
       id: null,
       userName: userState.userName,
@@ -80,21 +74,19 @@ export default function useDialogNew() {
   }
 
   function handleChangeInput(first, second = null, third = null) {
-    console.log(first, second, third);
     let name;
     let value;
     if (second === null) {
       name = first.target.name;
       value = first.target.value;
+      value = value ? value : FORMATTED_INPUT[first.target.type];
     } else {
       name = first;
       value = second;
+      value = value ? value : FORMATTED_INPUT[first];
     }
-    // let { name, value } = e.target;
-    value = value ? value : FORMATTED_INPUT[first.target.type];
 
     if (third === "select-one") {
-      console.log("ciao");
       setInputState((preState) => {
         return { ...preState, userName: value };
       });
@@ -139,12 +131,13 @@ export default function useDialogNew() {
       console.log("err name");
     }
     if (isEdit) {
-      if (!date || impostedDate < oldDate || year > 2200) {
+      console.log(oldDate);
+      if (!date || impostedDate < oldDate.current || year > 2200) {
         HandleChangeErr("inputDate");
         err = true;
         console.log("err date edit");
       }
-      if (!time || impostedDate < oldDate) {
+      if (!time || impostedDate < oldDate.current) {
         HandleChangeErr("inputTime");
         err = true;
         console.log("err time edit");
@@ -166,7 +159,7 @@ export default function useDialogNew() {
 
     handlePushAppointment({
       id: inputState.id,
-      userName: inputState.userName,
+      userName: inputState.userName || userState.userName,
       date: inputState.inputDate.value,
       time: inputState.inputTime.value,
       title: inputState.inputName.value.trim(),
@@ -181,15 +174,18 @@ export default function useDialogNew() {
       const url = isEdit
         ? "http://localhost:3000/api/appointments/edit"
         : "http://localhost:3000/api/appointments/add";
+      const method = isEdit ? "PUT" : "POST";
       console.log(url);
       const response = await fetch(url, {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(obj),
       });
       const data = await response.json();
-      setIsEdit(false);
-      handleChangeFilters();
+      if (response.ok) {
+        setIsEdit(false);
+        handleChangeFilters();
+      }
     } catch (err) {
       console.error("Error in fetch:", err);
     }

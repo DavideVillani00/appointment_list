@@ -79,7 +79,7 @@ export default function DialogNew() {
 
         <div className="flex flex-col gap-4 md:flex-row ">
           <DateSelector
-            // onHandleChange={handleChangeInput}
+            onHandleChange={handleChangeInput}
             onChangeInput={handleChangeInput}
             name="inputDate"
             type="date"
@@ -92,7 +92,7 @@ export default function DialogNew() {
             />
           </DateSelector>
           <DateSelector
-            // onHandleChange={handleChangeInput}
+            onHandleChange={handleChangeInput}
             onChangeInput={handleChangeInput}
             name="inputTime"
             type="time"

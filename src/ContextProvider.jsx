@@ -29,6 +29,8 @@ export const Context = createContext({
   setIsEdit: () => {},
   inputState: {},
   setInputState: () => {},
+
+  selectedId: null,
 });
 
 export default function ContextProvider({ children }) {
@@ -38,9 +40,12 @@ export default function ContextProvider({ children }) {
 
   const globalSignupState = useSignup(alertState, setAlertState);
 
-  const { userState } = globalProjectState;
+  // const { userState } = globalProjectState;
   // !for debug
   const [info, setInfo] = useState({ admin: true, login: true }); // ! canncel
+
+  const selectId = useRef(null);
+
   const [isEdit, setIsEdit] = useState(false);
   const [inputState, setInputState] = useState({
     id: null,
@@ -70,12 +75,11 @@ export default function ContextProvider({ children }) {
   });
 
   function handleChangeFilters(name = null, value = null) {
-    if (!name || !value) {
+    if (!name && !value) {
       return setFilters((preState) => {
         return { ...preState };
       });
     }
-    console.log("prova");
     if (value === "Completed") value = true;
     if (value === "Uncompleted") value = false;
 
@@ -108,6 +112,8 @@ export default function ContextProvider({ children }) {
     setInputState,
     isEdit,
     setIsEdit,
+
+    selectId,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }
