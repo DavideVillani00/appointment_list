@@ -13,7 +13,6 @@ export default function useHandleToggleButton() {
       );
       const data = await response.json();
       if (response.ok) {
-        console.log("fatto");
         handleChangeFilters();
       }
     } catch (err) {
@@ -22,7 +21,6 @@ export default function useHandleToggleButton() {
   }
 
   async function handleDelete() {
-    console.log(selectId);
     const response = await fetch(
       `http://localhost:3000/api/appointments/delete/${selectId.current}`,
       {
@@ -32,7 +30,6 @@ export default function useHandleToggleButton() {
     );
     const data = await response.json();
     if (response.ok) {
-      console.log("fatto");
       handleChangeFilters();
     }
   }

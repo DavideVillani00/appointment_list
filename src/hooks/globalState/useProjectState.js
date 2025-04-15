@@ -1,12 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 import useSorter from "../useSorter";
+import { useNavigate } from "react-router-dom";
 export default function useProjectState() {
   // const [appointmentState, setAppointmentState] = useState([]);
   const [userState, setUserState] = useState(null);
   const [usersList, setUsersList] = useState(null);
   // const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [pageLoading, setPageLoading] = useState(true);
 
+  const { setAlertState } = useContext(Context);
+  const navigate = useNavigate();
   const [firefox, setFirefox] = useState(null);
   useEffect(() => {
     const uaBool = navigator.userAgent.toLowerCase().includes("firefox");
@@ -29,6 +33,21 @@ export default function useProjectState() {
     }
   }
 
+  function handleLogOut() {
+    setUserState(null);
+    setUsersList(null);
+    localStorage.removeItem("token");
+    setAlertState(true);
+    document.documentElement.classList.add("overflow-hidden");
+
+    setTimeout(() => {
+      setAlertState(false);
+      document.documentElement.classList.remove("overflow-hidden");
+      navigate("/login");
+      setPageLoading(false);
+    }, 1000);
+  }
+
   return {
     firefox,
     // appointmentState,
@@ -36,6 +55,11 @@ export default function useProjectState() {
     userState,
     setUserState,
     usersList,
+    handleLogOut,
+    uploadUsers,
+
+    pageLoading,
+    setPageLoading,
 
     // selectedAppointment,
     // setSelectedAppointment,

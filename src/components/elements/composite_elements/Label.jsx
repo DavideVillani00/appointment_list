@@ -4,7 +4,7 @@ import useSignup from "../../../hooks/useSignup.js";
 import Select from "../Select.jsx";
 import { Context } from "../../../ContextProvider.jsx";
 
-export default function Label({ children, value, def, ...props }) {
+export default function Label({ children, label, def, ...props }) {
   const inputFocus = useRef();
   const divFocus = useRef();
   const { handleChange, inputState } = useContext(Context).globalSignupState;
@@ -15,18 +15,19 @@ export default function Label({ children, value, def, ...props }) {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <label onClick={handleFocus} className="text-lg">
-        {value}
+        {label}
       </label>
       {children ? (
         <Select
-          err={inputState[value].err}
+          // err={inputState[value].err}
           def={def}
           placeholder={def}
           className="p-4 rounded-lg "
-          name={value}
-          onHandleChange={handleChange}
+          // name={value}
+          // onHandleChange={handleChange}
+          {...props}
         >
           {children}
         </Select>
@@ -34,9 +35,9 @@ export default function Label({ children, value, def, ...props }) {
         <Input
           refInput={inputFocus}
           refFocus={divFocus}
-          onChange={handleChange}
-          name={value}
-          err={inputState[value].err}
+          // onChange={handleChange}
+          // name={value}
+          // err={inputState[value].err}
           {...props}
         />
       )}

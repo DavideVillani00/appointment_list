@@ -6,38 +6,31 @@ let ERROR_MESSAGES = [];
 
 export default function useSignup(alertState, setAlertState) {
   const navigate = useNavigate();
+  const inputStateDefault = {
+    userName: { value: "", err: false },
+    email: { value: "", err: false },
+    password: { value: "", err: false },
+    name: { value: "", err: false },
+    surname: { value: "", err: false },
+    gender: { value: null, err: false },
+    company: { value: "", err: false },
+  };
   // const { setAlertState, alertState } = useContext(Context);
-  const [inputState, setInputState] = useState({
-    UserName: { value: "", err: false },
-    Email: { value: "", err: false },
-    Password: { value: "", err: false },
-    Name: { value: "", err: false },
-    Surname: { value: "", err: false },
-    Gender: { value: "", err: false },
-    Company: { value: "", err: false },
-  });
+  const [inputState, setInputState] = useState(inputStateDefault);
 
   function handleReset() {
     ERROR_MESSAGES = [];
-    setInputState({
-      UserName: { value: "", err: false },
-      Email: { value: "", err: false },
-      Password: { value: "", err: false },
-      Name: { value: "", err: false },
-      Surname: { value: "", err: false },
-      Gender: { value: "", err: false },
-      Company: { value: "", err: false },
-    });
+    setInputState(inputStateDefault);
   }
 
+  // !!! da sistemare (guarda gli altri sheet)
   function handleChange(e) {
     const { name, value } = e.target ? e.target : e;
-    console.log(name, value);
 
     setInputState((preState) => {
       return {
         ...preState,
-        [name]: { value, err: false },
+        [name]: { value: value.trim(), err: false },
       };
     });
   }
@@ -52,15 +45,14 @@ export default function useSignup(alertState, setAlertState) {
   }
   function handleSubmitSignup() {
     ERROR_MESSAGES = [];
-    const { UserName, Email, Password, Name, Surname, Gender, Company } =
-      inputState;
-    const userName = UserName.value.trim();
-    const email = Email.value.trim();
-    const password = Password.value.trim();
-    const name = Name.value.trim();
-    const surname = Surname.value.trim();
-    const gender = Gender.value;
-    const company = Company.value.trim();
+
+    const userName = inputState.userName.value;
+    const email = inputState.email.value;
+    const password = inputState.password.value;
+    const name = inputState.name.value;
+    const surname = inputState.surname.value;
+    const gender = inputState.gender.value;
+    const company = inputState.company.value;
 
     const regexMail = /^[\w.-_]+@[\w.-_]+\.[a-zA-Z]{2,}$/;
     const emailValidation = regexMail.test(email);
@@ -74,43 +66,42 @@ export default function useSignup(alertState, setAlertState) {
     let error = false;
 
     if (!userName) {
-      handleChangeErr("UserName");
+      handleChangeErr("userName");
       error = true;
     }
     if (!name) {
-      handleChangeErr("Name");
+      handleChangeErr("name");
       error = true;
     }
     if (!surname) {
-      handleChangeErr("Surname");
+      handleChangeErr("surname");
       error = true;
     }
     if (!gender) {
-      handleChangeErr("Gender");
+      handleChangeErr("gender");
       error = true;
     }
     if (!company) {
-      handleChangeErr("Company");
+      handleChangeErr("company");
       error = true;
     }
     if (error) ERROR_MESSAGES.push("Enter all fields");
 
     if (!emailValidation) {
-      handleChangeErr("Email");
+      handleChangeErr("email");
       error = true;
       ERROR_MESSAGES.push("Incorrect email format");
     }
     if (!passwordValidation) {
-      handleChangeErr("Password");
+      handleChangeErr("password");
       error = true;
       ERROR_MESSAGES.push(
-        "Password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
+        "password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
       );
     }
     if (error) {
       return;
     }
-    console.log("controllo nel db se l'utente e mail esistono");
     const id = Math.random() * 1000;
     const role = "user";
     const user = {
@@ -130,15 +121,15 @@ export default function useSignup(alertState, setAlertState) {
   function handleSubmitLogin() {
     let error = false;
     ERROR_MESSAGES = [];
-    const userName = inputState.UserName.value.trim();
-    const password = inputState.Password.value.trim();
+    const userName = inputState.userName.value.trim();
+    const password = inputState.password.value.trim();
 
     if (!userName) {
-      handleChangeErr("UserName");
+      handleChangeErr("userName");
       error = true;
     }
     if (!password) {
-      handleChangeErr("Password");
+      handleChangeErr("password");
       error = true;
     }
 

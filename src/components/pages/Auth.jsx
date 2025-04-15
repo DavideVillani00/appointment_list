@@ -8,10 +8,13 @@ export default function Auth({ children }) {
   const { setUserState, userState, usersList } =
     useContext(Context).globalProjectState;
   const navigate = useNavigate();
-  const [pageLoading, setPageLoading] = useState(true);
+  // const [pageLoading, setPageLoading] = useState(true);
+  const { pageLoading, setPageLoading } =
+    useContext(Context).globalProjectState;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (token) {
       handleToken(token);
     } else {
@@ -45,6 +48,7 @@ export default function Auth({ children }) {
       setAlertState(false);
       document.documentElement.classList.remove("overflow-hidden");
       navigate("/login");
+      setPageLoading(false);
     }, 1000);
   }
   if (pageLoading || !userState || !usersList) {

@@ -52,7 +52,6 @@ export default function useDialogNew() {
           },
         });
         oldDate.current = new Date(`${data.date}T${data.time}`).getTime();
-        console.log(oldDate);
       }
     } catch (err) {
       console.error("Error in fetch:", err);
@@ -128,30 +127,24 @@ export default function useDialogNew() {
     if (!name) {
       HandleChangeErr("inputName");
       err = true;
-      console.log("err name");
     }
     if (isEdit) {
-      console.log(oldDate);
       if (!date || impostedDate < oldDate.current || year > 2200) {
         HandleChangeErr("inputDate");
         err = true;
-        console.log("err date edit");
       }
       if (!time || impostedDate < oldDate.current) {
         HandleChangeErr("inputTime");
         err = true;
-        console.log("err time edit");
       }
     } else {
       if (!date || impostedDate < actualDate || year > 2200) {
         HandleChangeErr("inputDate");
         err = true;
-        console.log("err date");
       }
       if (!time || impostedDate < actualDate) {
         HandleChangeErr("inputTime");
         err = true;
-        console.log("err time");
       }
     }
 
@@ -168,14 +161,11 @@ export default function useDialogNew() {
   }
 
   async function handlePushAppointment(obj) {
-    console.log(obj);
     try {
-      console.log("obj", isEdit);
       const url = isEdit
         ? "http://localhost:3000/api/appointments/edit"
         : "http://localhost:3000/api/appointments/add";
       const method = isEdit ? "PUT" : "POST";
-      console.log(url);
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },

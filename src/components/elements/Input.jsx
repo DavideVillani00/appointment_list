@@ -8,7 +8,7 @@ export default function Input({
   err = false,
   refInput,
   refFocus,
-
+  type = "text",
   onHandleChange,
   ...props
 }) {
@@ -38,8 +38,8 @@ export default function Input({
       )}
       <input
         ref={refInput}
-        type="text"
         onChange={handleChange}
+        type={type === "password" && !isFocus ? "password" : "text"}
         {...props}
         className={`w-full rounded-lg p-4  text-lg outline-0  ${
           img ? "pl-15" : ""

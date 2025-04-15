@@ -28,7 +28,6 @@ export default function Select({
   }, [def]);
 
   function handleChange(e) {
-    console.log(e);
     const type = e.target.type;
     const value = e.target.value;
     setSelectvalue(value);

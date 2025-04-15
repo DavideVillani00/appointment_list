@@ -14,15 +14,16 @@ import { Link } from "react-router-dom";
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   const { info } = useContext(Context);
-  const { userState } = useContext(Context).globalProjectState;
+  const { userState, handleLogOut } = useContext(Context).globalProjectState;
   // !! da sistemare tutto
+
   return (
     <div
       className={`cardModalStyle flex flex-col justify-center items-center p-5 rounded-md gap-4 w-60 absolute top-11 right-[-88px] md:right-[32px] md:rounded-tr-none z-10 origin-top md:origin-top-right ${
         isOpen ? "scale-100" : "scale-0"
       } transition-transform duration-150`}
     >
-      {userState && userState.role === "admin" && (
+      {userState && userState.role === "Admin" && (
         <>
           <Link to="/admin">
             <img
@@ -52,9 +53,10 @@ export default function DialogMenuBurger({ isOpen }) {
         <>
           <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
           <img
+            onClick={handleLogOut}
             src={theme === "dark" ? iconLogoutDark : iconLogoutLight}
             alt="logout icon"
-            className="w-12"
+            className="w-12 cursor-pointer"
           />
         </>
       )}

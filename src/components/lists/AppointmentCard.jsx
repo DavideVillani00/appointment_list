@@ -36,10 +36,10 @@ export default function AppointmentCard({
         onClick={() => handleOpenDialog(id)}
         alt="edit icon"
         className={`absolute p-3 md:px-5 top-0 right-0 bg-uncomplete/10 ${
-          info.admin ? "" : "rounded-bl-md"
+          userState.role === "Admin" ? "" : "rounded-bl-md"
         } rounded-tr-md`}
       />
-      {userState.role === "admin" && (
+      {userState.role === "Admin" && (
         <div className=" bg-uncomplete/10 px-3 py-3.5 rounded-t-md md:px-5">
           <span>@{userName}</span>
         </div>

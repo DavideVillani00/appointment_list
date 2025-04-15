@@ -25,7 +25,14 @@ export default function RoutesApp() {
       />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="/admin" element={<AdminPage />} />
+      <Route
+        path="/admin"
+        element={
+          <Auth>
+            <AdminPage />
+          </Auth>
+        }
+      />
     </Routes>
   );
 }

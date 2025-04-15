@@ -2,6 +2,7 @@ import { createContext, useState, useRef } from "react";
 import useProjectState from "./hooks/globalState/useProjectState.js";
 import useThemeState from "./hooks/globalState/useThemeState.js";
 import useSignup from "./hooks/useSignup.js";
+import useAdminPage from "./hooks/globalState/useAdminPage.js";
 // import useGlobalValue from "./hooks/globalState/useGlobalValue.js";
 const FORMATTED_INPUT = {
   date: "yyyy-mm-dd",
@@ -13,17 +14,13 @@ export const Context = createContext({
   globalProjectState: () => {},
   globalThemeState: () => {},
   globalSignupState: () => {},
-  info: () => {},
+  globalAdminPage: () => {},
 
-  // globalValue: () => {},
   alertState: false,
   setAlertState: () => {},
 
   dialog: () => {},
   dialogDelete: () => {},
-
-  search: () => {},
-  handleChangeSearch: () => {},
 
   isEdit: false,
   setIsEdit: () => {},
@@ -37,12 +34,8 @@ export default function ContextProvider({ children }) {
   const [alertState, setAlertState] = useState(false);
   const globalProjectState = useProjectState();
   const globalThemeState = useThemeState();
-
   const globalSignupState = useSignup(alertState, setAlertState);
-
-  // const { userState } = globalProjectState;
-  // !for debug
-  const [info, setInfo] = useState({ admin: true, login: true }); // ! canncel
+  const globalAdminPage = useAdminPage();
 
   const selectId = useRef(null);
 
@@ -94,13 +87,11 @@ export default function ContextProvider({ children }) {
   const contValue = {
     globalProjectState,
     globalThemeState,
-
     globalSignupState,
+    globalAdminPage,
 
     alertState,
     setAlertState,
-
-    info,
 
     dialog,
     dialogDelete,

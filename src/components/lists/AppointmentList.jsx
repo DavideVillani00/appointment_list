@@ -25,7 +25,7 @@ export default function AppointmentList() {
       );
       const data = await response.json();
       if (!response.ok) {
-        console.error("Error fetching appointments:", data.error);
+        console.error("Error fetching appointments:", data.msg);
         return setAppointmentsList(data.arr);
       }
       return setAppointmentsList(sort(data).appointmentSortered);

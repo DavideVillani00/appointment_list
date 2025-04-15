@@ -51,7 +51,7 @@ export default function DialogNew() {
 
       <form className="flex flex-col gap-4 md:p-4 ">
         <span className="bg-divider dark:bg-dividerDark w-full h-0.5 my-5"></span>
-        {userState.role === "admin" && (
+        {userState.role === "Admin" && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
             alt="user icon"
@@ -59,7 +59,6 @@ export default function DialogNew() {
             className="rounded-lg text-lg py-[18px]"
             name="userName"
             onHandleChange={(name, value, type) => {
-              console.log(name, value, type);
               handleChangeInput(name, value, type);
             }}
           >

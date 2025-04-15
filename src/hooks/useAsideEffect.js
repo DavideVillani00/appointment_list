@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "../ContextProvider.jsx";
 
 export default function useAsideEffect() {
-  const { projectState } = useContext(Context).globalProjectState;
+  // const { projectState } = useContext(Context).globalProjectState;
   const { theme } = useContext(Context).globalThemeState;
 
   useEffect(() => {
@@ -11,9 +11,9 @@ export default function useAsideEffect() {
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("project", JSON.stringify(projectState));
-  }, [projectState]);
+  // useEffect(() => {
+  //   localStorage.setItem("project", JSON.stringify(projectState));
+  // }, [projectState]);
 
   return;
 }

@@ -82,7 +82,7 @@ export default function TopMain() {
             />
           </DateSelector>
         </div>
-        {userState.role === "admin" && (
+        {userState.role === "Admin" && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
             def="All"

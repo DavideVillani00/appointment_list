@@ -11,7 +11,8 @@ export default function LoginPage() {
   const { ERROR_MESSAGES, handleSubmitLogin } =
     useContext(Context).globalSignupState;
   const { alertState } = useContext(Context);
-  const { handleReset } = useContext(Context).globalSignupState;
+  const { handleReset, handleChange, inputState } =
+    useContext(Context).globalSignupState;
 
   useEffect(() => {
     handleReset();
@@ -24,8 +25,21 @@ export default function LoginPage() {
       <Header />
       <main className="flex flex-col justify-center items-center gap-7">
         <h1 className="text-3xl font-extrabold ">LOGIN</h1>
-        <Label placeholder="Enter your userName" value="UserName" />
-        <Label placeholder="Enter your password" value="Password" />
+        <Label
+          placeholder="Enter your user-name"
+          label="UserName"
+          onChange={handleChange}
+          name="userName"
+          err={inputState.userName.err}
+        />
+        <Label
+          placeholder="Enter your password"
+          label="Password"
+          onChange={handleChange}
+          name="password"
+          type="password"
+          err={inputState.password.err}
+        />
         <ErrorList iterator={ERROR_MESSAGES} />
         <Button
           className="addBtn w-full p-4 rounded-lg "
