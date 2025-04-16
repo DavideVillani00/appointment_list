@@ -6,6 +6,8 @@ import { Context } from "../ContextProvider.jsx";
 import DialogMenuBurger from "./modal/DialogMenuBurger.jsx";
 
 export default function HeaderBurger() {
+  const { theme } = useContext(Context).globalThemeState;
+
   const [isOpen, setIsOpen] = useState(false);
 
   function handleOpenModal() {
@@ -15,7 +17,6 @@ export default function HeaderBurger() {
     setIsOpen(false);
   }
 
-  const { theme } = useContext(Context).globalThemeState;
   return (
     <>
       {isOpen && (
@@ -31,7 +32,7 @@ export default function HeaderBurger() {
           alt="menu burger icon"
           className={`${
             isOpen ? "rotate-90" : "rotate-0"
-          } transition-transform duration-150`}
+          } transition-transform duration-150 cursor-pointer`}
         />
         <DialogMenuBurger isOpen={isOpen} onCloseModal={handleCloseModal} />
       </div>

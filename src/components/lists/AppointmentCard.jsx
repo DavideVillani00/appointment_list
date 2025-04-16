@@ -7,10 +7,10 @@ import writeIconDark from "../../assets/icons/beautyIcons/icon-write-dark-27.png
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 
-// import useDialogDelete from "../../hooks/useDialogDelete.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
-import useDialogNew from "../../hooks/useDialogNew.js";
 import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
+import useModalAppointment from "../../hooks/modal/useModalAppointment.js";
+
 export default function AppointmentCard({
   id,
   title,
@@ -19,9 +19,8 @@ export default function AppointmentCard({
   check,
   userName,
 }) {
-  const { info } = useContext(Context);
-  const { handleCheck } = useHandleToggleButton();
-  const { handleOpenDialog, getAppointmentByid } = useDialogNew();
+  const { handleToggleCheckButton } = useHandleToggleButton();
+  const { handleOpenModalAppointment } = useModalAppointment();
   const { theme } = useContext(Context).globalThemeState;
   const { userState } = useContext(Context).globalProjectState;
 
@@ -33,7 +32,7 @@ export default function AppointmentCard({
     >
       <img
         src={theme === "dark" ? writeIconDark : writeIconLight}
-        onClick={() => handleOpenDialog(id)}
+        onClick={() => handleOpenModalAppointment(id)}
         alt="edit icon"
         className={`absolute p-3 md:px-5 top-0 right-0 bg-uncomplete/10 ${
           userState.role === "Admin" ? "" : "rounded-bl-md"
@@ -53,6 +52,7 @@ export default function AppointmentCard({
         </div>
         <ButtonCardSection
           id={id}
+          page="home"
           img={
             check
               ? theme === "dark"
@@ -63,7 +63,7 @@ export default function AppointmentCard({
           alt="checkbox icon"
           value={check ? "COMPLETED" : "UNCOMPLETED"}
           onClickBtn={() => {
-            handleCheck(id);
+            handleToggleCheckButton(id);
           }}
           className="min-w-48"
         />

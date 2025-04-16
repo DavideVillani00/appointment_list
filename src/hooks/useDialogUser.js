@@ -33,7 +33,7 @@ export default function useDialogUser() {
     setInputAdminState((preState) => {
       return {
         ...preState,
-        [name]: { value: value.trim(), err: false },
+        [name]: { value, err: false },
       };
     });
   }
@@ -56,12 +56,12 @@ export default function useDialogUser() {
   function handleSendRequest() {
     ERROR_MESSAGES_ADMIN = [];
     const role = inputAdminState.role.value;
-    const userName = inputAdminState.userName.value;
-    const email = inputAdminState.email.value;
-    const password = inputAdminState.password.value;
-    const name = inputAdminState.name.value;
-    const surname = inputAdminState.surname.value;
-    const company = inputAdminState.company.value;
+    const userName = inputAdminState.userName.value.trim();
+    const email = inputAdminState.email.value.trim();
+    const password = inputAdminState.password.value.trim();
+    const name = inputAdminState.name.value.trim();
+    const surname = inputAdminState.surname.value.trim();
+    const company = inputAdminState.company.value.trim();
     const gender = inputAdminState.gender.value;
 
     let err = false;
@@ -135,7 +135,7 @@ export default function useDialogUser() {
       );
       const data = await response.json();
       if (!response.ok) {
-        return console.error("Error in fetching users:", data.msg);
+        return console.error("Error in fetching user:", data.msg);
       }
       const {
         id,

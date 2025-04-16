@@ -6,16 +6,19 @@ import iconLanguageLight from "../../assets/icons/toggleIcons/icon-language-ligh
 import iconLanguageDark from "../../assets/icons/toggleIcons/icon-language-dark-48.png";
 import iconLogoutLight from "../../assets/icons/toggleIcons/icon-logout-light-48.png";
 import iconLogoutDark from "../../assets/icons/toggleIcons/icon-logout-dark-48.png";
+import iconHomeLight from "../../assets/icons/toggleIcons/icon-home-light-27.png";
+import iconHomeDark from "../../assets/icons/toggleIcons/icon-home-dark-27.png";
 
 import { useContext } from "react";
 import { Context } from "../../ContextProvider";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
-  const { info } = useContext(Context);
-  const { userState, handleLogOut } = useContext(Context).globalProjectState;
-  // !! da sistemare tutto
+  const { userState, actualPage } = useContext(Context).globalProjectState;
+
+  const { handleLogout } = useAuth();
 
   return (
     <div
@@ -25,9 +28,17 @@ export default function DialogMenuBurger({ isOpen }) {
     >
       {userState && userState.role === "Admin" && (
         <>
-          <Link to="/admin">
+          <Link to={actualPage === "home" ? "/admin" : "/"}>
             <img
-              src={theme === "dark" ? iconUsersDark : iconUsersLight}
+              src={
+                theme === "dark"
+                  ? actualPage === "home"
+                    ? iconUsersDark
+                    : iconHomeDark
+                  : actualPage === "home"
+                  ? iconUsersLight
+                  : iconHomeLight
+              }
               alt="users icon"
               className="w-12"
             />
@@ -41,19 +52,19 @@ export default function DialogMenuBurger({ isOpen }) {
         alt="switch color icon"
         className={`${
           theme === "dark" ? "rotate-0 w-12" : "rotate-180 w-[50px]"
-        } transition-transform duration-200`}
+        } transition-transform duration-200 cursor-pointer`}
       />
       <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
       <img
         src={theme === "dark" ? iconLanguageDark : iconLanguageLight}
         alt="change language icon"
-        className="w-12"
+        className="w-12 cursor-pointer"
       />
       {userState && (
         <>
           <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
           <img
-            onClick={handleLogOut}
+            onClick={handleLogout}
             src={theme === "dark" ? iconLogoutDark : iconLogoutLight}
             alt="logout icon"
             className="w-12 cursor-pointer"

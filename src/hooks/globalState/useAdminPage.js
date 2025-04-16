@@ -14,7 +14,7 @@ export default function useAdminPage() {
     gender: { value: null, err: false },
   };
 
-  const { uploadUsers } = useContext(Context).globalProjectState; //! da sistemare la posizione
+  // const { uploadUsers } = useContext(Context).globalProjectState; //! da sistemare la posizione
 
   const [isEdit, setIsEdit] = useState(false);
   const dialogUser = useRef(null);

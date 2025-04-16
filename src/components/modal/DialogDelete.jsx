@@ -8,8 +8,10 @@ import Button from "../elements/Button.jsx";
 import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
 
 export default function DialogDelete() {
+  const { actualPage } = useContext(Context).globalProjectState;
   const { handleDelete } = useHandleToggleButton();
   const { dialogDelete, handleCloseDialogDelete } = useDialogDelete();
+
   const modalRoot = document.getElementById("modal");
   if (!modalRoot) return null;
   return createPortal(
@@ -20,7 +22,8 @@ export default function DialogDelete() {
     >
       <div className="flex flex-col gap-10 place-self-center">
         <h1 className="text-2xl text-center font-bold leading-12 text-text1 dark:text-text1Dark">
-          Are you sure you want to delete the appointment?
+          Are you sure you want to delete the{" "}
+          {actualPage === "home" ? "appointment" : "user"}?
         </h1>
         <div className="flex flex-col gap-3 md:flex-row justify-center ">
           <Button

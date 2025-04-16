@@ -13,9 +13,10 @@ export default function Input({
   ...props
 }) {
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
+
   function handleChange(e) {
-    const value = e.target.value;
-    onHandleChange(e.target.name, value);
+    const { value, name } = e.target;
+    onHandleChange(name, value);
   }
 
   return (

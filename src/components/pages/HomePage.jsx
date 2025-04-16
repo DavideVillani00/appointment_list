@@ -3,13 +3,13 @@ import DialogNew from "../modal/DialogNew.jsx";
 import Header from "../Header.jsx";
 import TopMain from "../TopMain.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
-import useDialogNew from "../../hooks/useDialogNew.js";
 
 export default function HomePage() {
-  const { alertState } = useContext(Context);
-
+  const { alertState, userState, usersList } =
+    useContext(Context).globalProjectState;
+  console.log(userState, usersList);
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>

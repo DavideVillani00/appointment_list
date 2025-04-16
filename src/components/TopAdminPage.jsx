@@ -6,7 +6,6 @@ import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
 
 import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
-import Input from "./elements/Input.jsx";
 import Select from "./elements/Select.jsx";
 import Button from "./elements/Button.jsx";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
@@ -17,6 +16,7 @@ export default function TopAdminPage() {
   const { usersList } = useContext(Context).globalProjectState;
   const { handleChangeFilterAdmin } = useContext(Context).globalAdminPage;
   const { handleOpenModalUser } = useDialogUser();
+
   return (
     <>
       <div className="mt-3 p-3 flex flex-col gap-4 md:flex-row items-center justify-center">

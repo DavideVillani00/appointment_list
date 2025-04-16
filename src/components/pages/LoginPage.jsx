@@ -2,21 +2,20 @@ import { Link } from "react-router-dom";
 import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 import ErrorList from "../lists/ErrorList.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
+import useLogin from "../../hooks/useLogin.js";
 
 export default function LoginPage() {
-  const { ERROR_MESSAGES, handleSubmitLogin } =
-    useContext(Context).globalSignupState;
-  const { alertState } = useContext(Context);
-  const { handleReset, handleChange, inputState } =
-    useContext(Context).globalSignupState;
+  const { alertState } = useContext(Context).globalProjectState;
+  const { resetInputLoginSignupPage, inputLoginSignupPage, handleChangeInput } =
+    useContext(Context).globalLoginSignupPage;
 
-  useEffect(() => {
-    handleReset();
-  }, []);
+  const { handleSendLoginRequest, ERROR_MESSAGES_LOGIN, handleResetErrorList } =
+    useLogin();
+
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
@@ -28,26 +27,33 @@ export default function LoginPage() {
         <Label
           placeholder="Enter your user-name"
           label="UserName"
-          onChange={handleChange}
+          onChange={handleChangeInput}
           name="userName"
-          err={inputState.userName.err}
+          err={inputLoginSignupPage.userName.err}
         />
         <Label
           placeholder="Enter your password"
           label="Password"
-          onChange={handleChange}
+          onChange={handleChangeInput}
           name="password"
           type="password"
-          err={inputState.password.err}
+          err={inputLoginSignupPage.password.err}
         />
-        <ErrorList iterator={ERROR_MESSAGES} />
+        <ErrorList iterator={ERROR_MESSAGES_LOGIN} />
         <Button
           className="addBtn w-full p-4 rounded-lg "
-          onClick={handleSubmitLogin}
+          onClick={handleSendLoginRequest}
         >
           LOGIN
         </Button>
-        <Link to="/signup" className="text-text2 dark:text-text2Dark text-sm ">
+        <Link
+          to="/signup"
+          className="text-text2 dark:text-text2Dark text-sm "
+          onClick={() => {
+            handleResetErrorList();
+            resetInputLoginSignupPage();
+          }}
+        >
           Not registered?{" "}
           <span className="text-icon dark:text-iconDark ">Sign up</span>
         </Link>

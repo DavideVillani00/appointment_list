@@ -18,10 +18,10 @@ export default function Select({
   ...props
 }) {
   const { userState } = useContext(Context).globalProjectState;
-
-  const [selectValue, setSelectvalue] = useState(def ? def : userState);
   const { theme } = useContext(Context).globalThemeState;
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
+
+  const [selectValue, setSelectvalue] = useState(def ? def : userState);
 
   useEffect(() => {
     setSelectvalue(def);

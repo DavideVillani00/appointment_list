@@ -1,26 +1,28 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
-import { Context } from "../../ContextProvider.jsx";
-import ErrorList from "../lists/ErrorList.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
+import ErrorList from "../lists/ErrorList.jsx";
+import useSignup from "../../hooks/useSignup.js";
+import { Context } from "../../ContextProvider.jsx";
 import { Link } from "react-router-dom";
 
 export default function SignupPage() {
+  const { alertState } = useContext(Context).globalProjectState;
   const {
-    handleSubmitSignup,
-    ERROR_MESSAGES,
-    handleReset,
-    inputState,
-    handleChange,
-  } = useContext(Context).globalSignupState;
-  const { alertState } = useContext(Context);
+    inputLoginSignupPage,
+    resetInputLoginSignupPage,
+    handleChangeInput,
+    handleChangeSelect,
+  } = useContext(Context).globalLoginSignupPage;
+  const {
+    handleSendSignupRequest,
+    ERROR_MESSAGES_SIGNUP,
+    handleResetErrorList,
+  } = useSignup();
 
-  useEffect(() => {
-    handleReset();
-  }, []);
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
@@ -33,39 +35,39 @@ export default function SignupPage() {
         <Label
           placeholder="Enter your user-name"
           label="UserName"
-          onChange={handleChange}
+          onChange={handleChangeInput}
           name="userName"
-          err={inputState.userName.err}
+          err={inputLoginSignupPage.userName.err}
         />
         <Label
           placeholder="Enter your email"
           label="Email"
-          onChange={handleChange}
+          onChange={handleChangeInput}
           name="email"
-          err={inputState.email.err}
+          err={inputLoginSignupPage.email.err}
         />
         <Label
           placeholder="Enter your password"
           label="Password"
-          onChange={handleChange}
+          onChange={handleChangeInput}
           name="password"
           type="password"
-          err={inputState.password.err}
+          err={inputLoginSignupPage.password.err}
         />
         <div className="flex flex-col w-full md:flex-row  gap-5">
           <Label
             placeholder="Enter your name"
             label="Name"
-            onChange={handleChange}
+            onChange={handleChangeInput}
             name="name"
-            err={inputState.name.err}
+            err={inputLoginSignupPage.name.err}
           />
           <Label
             placeholder="Enter your surname"
             label="Surname"
-            onChange={handleChange}
+            onChange={handleChangeInput}
             name="surname"
-            err={inputState.surname.err}
+            err={inputLoginSignupPage.surname.err}
           />
         </div>
         <div className="flex flex-col w-full md:flex-row  gap-5">
@@ -73,9 +75,11 @@ export default function SignupPage() {
             placeholder="Enter your gender"
             label="Gender"
             def="Enter your gender"
-            onChange={handleChange}
+            onHandleChange={(name, value) => {
+              handleChangeSelect(name, value);
+            }}
             name="gender"
-            err={inputState.gender.err}
+            err={inputLoginSignupPage.gender.err}
           >
             <option>Male</option>
             <option>Female</option>
@@ -84,20 +88,27 @@ export default function SignupPage() {
           <Label
             placeholder="Enter your company"
             label="Company"
-            onChange={handleChange}
+            onChange={handleChangeInput}
             name="company"
-            err={inputState.company.err}
+            err={inputLoginSignupPage.company.err}
           />
         </div>
-        <ErrorList iterator={ERROR_MESSAGES} />
+        <ErrorList iterator={ERROR_MESSAGES_SIGNUP} />
 
         <Button
           className="addBtn w-full p-4 rounded-lg"
-          onClick={handleSubmitSignup}
+          onClick={handleSendSignupRequest}
         >
           SIGNUP
         </Button>
-        <Link to="/login" className="text-text2 dark:text-text2Dark text-sm">
+        <Link
+          to="/login"
+          className="text-text2 dark:text-text2Dark text-sm"
+          onClick={() => {
+            handleResetErrorList();
+            resetInputLoginSignupPage();
+          }}
+        >
           Already registered?{" "}
           <span className="text-icon dark:text-iconDark">Log in</span>
         </Link>

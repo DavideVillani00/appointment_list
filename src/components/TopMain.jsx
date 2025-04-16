@@ -11,37 +11,36 @@ import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../ContextProvider.jsx";
 import Input from "./elements/Input.jsx";
-import useDialogNew from "../hooks/useDialogNew.js";
 import Select from "./elements/Select.jsx";
 import DateSelector from "./elements/DateSelector.jsx";
 import Button from "./elements/Button.jsx";
 import useSorter from "../hooks/useSorter.js";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
+import useModalAppointment from "../hooks/modal/useModalAppointment.js";
+
+// !! da sisteare
+//!!
 
 export default function TopMain() {
-  const { search, handleChangeFilters } = useContext(Context);
-  const { usersList, userState } = useContext(Context).globalProjectState;
-  const [appointmentsList, setAppointmentsList] = useState([]);
+  const { usersList, userState, appointmentsList } =
+    useContext(Context).globalProjectState;
 
   const { theme } = useContext(Context).globalThemeState;
-  const { handleOpenDialog, handleChangeInput, inputState } = useDialogNew();
-  const { appointmentCompleted, appointmentSortered, appointmentUncompleted } =
-    useSorter().sort(appointmentsList);
+  const { handleChangeFilterHome, homeFilter } =
+    useContext(Context).globalHomePage;
+  const { handleOpenModalAppointment, getAllAppointment } =
+    useModalAppointment();
 
-  async function getAllProjects() {
-    try {
-      const response = await fetch("http://localhost:3000/api/appointments", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-      if (response.ok) setAppointmentsList(data);
-    } catch (err) {
-      console.error("Error in fetch:", err);
-    }
-  }
+  const appointments =
+    userState.role === "Admin"
+      ? appointmentsList
+      : appointmentsList.filter((app) => app.userName === userState.userName);
+
+  const { appointmentCompleted, appointmentSortered, appointmentUncompleted } =
+    useSorter().sort(appointments);
+
   useEffect(() => {
-    getAllProjects();
+    getAllAppointment();
   }, []);
 
   return (
@@ -50,7 +49,7 @@ export default function TopMain() {
         <Button
           className="w-full addBtn p-[18px] rounded-lg md:flex-3/5"
           img={addIcon}
-          onClick={() => handleOpenDialog()}
+          onClick={() => handleOpenModalAppointment()}
           alt="add icon"
         >
           ADD
@@ -64,17 +63,17 @@ export default function TopMain() {
             classInput="px-5 "
             type="text"
             placeholder="Search"
-            value={search}
-            onHandleChange={handleChangeFilters}
-            name="searchTitle"
+            value={homeFilter.title}
+            onHandleChange={handleChangeFilterHome}
+            name="title"
           />
           <DateSelector
-            onChangeInput={handleChangeInput}
-            name="inputDate"
+            onChangeInput={handleChangeFilterHome}
+            name="date"
             type="date"
-            value={inputState.inputDate.value}
-            err={inputState.inputDate.err}
-            onHandleChange={handleChangeFilters}
+            value={homeFilter.date}
+            // err={inputHomeState.date.err}
+            onHandleChange={handleChangeFilterHome}
           >
             <img
               src={theme === "dark" ? calendarIconDark : calendarIconLight}
@@ -87,7 +86,7 @@ export default function TopMain() {
             img={theme === "dark" ? userIconDark : userIconLight}
             def="All"
             className="rounded-lg text-lg py-[18px] w-full"
-            onHandleChange={handleChangeFilters}
+            onHandleChange={handleChangeFilterHome}
             name="userName"
             alt="user icon"
           >
@@ -110,7 +109,7 @@ export default function TopMain() {
           className="w-60 py-3 rounded-2xl "
           def="All"
           name="check"
-          onHandleChange={handleChangeFilters}
+          onHandleChange={handleChangeFilterHome}
         >
           <option>All</option>
           <option>Completed</option>

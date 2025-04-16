@@ -3,6 +3,7 @@ import { Context } from "../../ContextProvider";
 
 export default function OptionUsersName({ users, allOption = false }) {
   const { userState } = useContext(Context).globalProjectState;
+
   if (!userState || !users) return null;
 
   const all = { userName: "All", id: "All" };

@@ -1,6 +1,7 @@
 import useDialogUser from "../../hooks/useDialogUser.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
 import CardInfo from "../elements/composite_elements/CardInfo.jsx";
+import editIcon from "../../assets/icons/beautyIcons/icon-edit-27.png";
 export default function CardUser({ user }) {
   const { handleOpenModalUser } = useDialogUser();
   const {
@@ -16,7 +17,7 @@ export default function CardUser({ user }) {
   } = user;
 
   return (
-    <li className="flex flex-col md:flex-row-reverse gap-3 cardModalStyle p-4 rounded-md">
+    <li className="flex flex-col md:flex-row-reverse gap-3 cardModalStyle p-4 rounded-md md:max-w-10/14">
       <div className="flex flex-wrap gap-3">
         <CardInfo label="ID:" info={id} />
         <CardInfo label="User-Name:" info={userName} />
@@ -29,6 +30,7 @@ export default function CardUser({ user }) {
         <CardInfo label="Company:" info={company} />
       </div>
       <ButtonCardSection
+        img={editIcon}
         id={id}
         value="EDIT"
         onClickBtn={handleOpenModalUser}

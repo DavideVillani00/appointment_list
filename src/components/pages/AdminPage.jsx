@@ -7,7 +7,9 @@ import DialogUser from "../modal/DialogUser.jsx";
 
 export default function AdminPage() {
   const { userState } = useContext(Context).globalProjectState;
+
   if (userState.role !== "Admin") return null;
+
   return (
     <>
       <div id="modal"></div>

@@ -9,32 +9,37 @@ import calendarIconDark from "../../assets/icons/beautyIcons/icon-calendar-dark-
 import clockIconLight from "../../assets/icons/beautyIcons/icon-clock-light-27.png";
 import clockIconDark from "../../assets/icons/beautyIcons/icon-clock-dark-27.png";
 import addIcon from "../../assets/icons/beautyIcons/icon-add-27.png";
-
-import Input from "../elements/Input.jsx";
-import DateSelector from "../elements/DateSelector.jsx";
+import editIcon from "../../assets/icons/beautyIcons/icon-edit-27.png";
 
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
-import useDialogNew from "../../hooks/useDialogNew.js";
+import Input from "../elements/Input.jsx";
+import DateSelector from "../elements/DateSelector.jsx";
 import Select from "../elements/Select.jsx";
 import Button from "../elements/Button.jsx";
 import OptionUsersName from "../lists/OptionUsersName.jsx";
+import useModalAppointment from "../../hooks/modal/useModalAppointment.js";
+import ErrorList from "../lists/ErrorList.jsx";
 
 export default function DialogNew() {
-  const { dialog, inputState, isEdit } = useContext(Context);
-
+  const { dialogAppointment, isEdit, inputHomeState } =
+    useContext(Context).globalHomePage;
   const { usersList, userState } = useContext(Context).globalProjectState;
-  const { handleAddButton, handleCloseModal, handleChangeInput } =
-    useDialogNew();
-
-  const defSelect = inputState.userName || userState.userName;
-
   const { theme } = useContext(Context).globalThemeState;
+  const {
+    handleCloseModalAppointment,
+    handleChangeInput,
+    handleChangeSelect,
+    handleSendRequest,
+    ERROR_MESSAGES_HOME,
+  } = useModalAppointment();
+
+  const defSelect = inputHomeState.userName.value || userState.userName;
 
   return (
     <dialog
-      onClose={handleCloseModal}
-      ref={dialog}
+      onClose={handleCloseModalAppointment}
+      ref={dialogAppointment}
       className="  backdrop:backdrop-blur-xs  w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg border-4 cardModalStyle text-text1"
     >
       <div className="flex justify-between items-center ">
@@ -44,7 +49,7 @@ export default function DialogNew() {
         <img
           src={theme === "dark" ? iconCloseDark : iconCloseLight}
           className="cursor-pointer "
-          onClick={handleCloseModal}
+          onClick={handleCloseModalAppointment}
           alt="X icon for close"
         />
       </div>
@@ -58,8 +63,8 @@ export default function DialogNew() {
             def={defSelect}
             className="rounded-lg text-lg py-[18px]"
             name="userName"
-            onHandleChange={(name, value, type) => {
-              handleChangeInput(name, value, type);
+            onHandleChange={(name, value) => {
+              handleChangeSelect(name, value);
             }}
           >
             <OptionUsersName users={usersList} />
@@ -69,21 +74,21 @@ export default function DialogNew() {
           img={theme === "dark" ? writeIconDark : writeIconLight}
           alt="hand with pencil icon"
           type="text"
-          name="inputName"
+          name="title"
           placeholder="Write an appointment"
-          value={inputState.inputName.value}
+          value={inputHomeState.title.value}
           onChange={handleChangeInput}
-          err={inputState.inputName.err}
+          err={inputHomeState.title.err}
         />
 
         <div className="flex flex-col gap-4 md:flex-row ">
           <DateSelector
-            onHandleChange={handleChangeInput}
+            // onHandleChange={handleChangeInput}
             onChangeInput={handleChangeInput}
-            name="inputDate"
+            name="date"
             type="date"
-            value={inputState.inputDate.value}
-            err={inputState.inputDate.err}
+            value={inputHomeState.date.value}
+            err={inputHomeState.date.err}
           >
             <img
               src={theme === "dark" ? calendarIconDark : calendarIconLight}
@@ -91,12 +96,12 @@ export default function DialogNew() {
             />
           </DateSelector>
           <DateSelector
-            onHandleChange={handleChangeInput}
+            // onHandleChange={handleChangeInput}
             onChangeInput={handleChangeInput}
-            name="inputTime"
+            name="time"
             type="time"
-            value={inputState.inputTime.value}
-            err={inputState.inputTime.err}
+            value={inputHomeState.time.value}
+            err={inputHomeState.time.err}
           >
             <img
               src={theme === "dark" ? clockIconDark : clockIconLight}
@@ -104,17 +109,12 @@ export default function DialogNew() {
             />
           </DateSelector>
         </div>
-        <ul className="text-center text-delete dark:text-deleteDark font-bold">
-          {inputState.inputName.err && <li>Insert a valid appointment</li>}
-          {(inputState.inputDate.err || inputState.inputTime.err) && (
-            <li>Enter a date for a future appointment</li>
-          )}
-        </ul>
+        <ErrorList iterator={ERROR_MESSAGES_HOME} />
 
         <Button
           className="addBtn w-full p-4 rounded-lg"
-          onClick={handleAddButton}
-          img={addIcon}
+          onClick={handleSendRequest}
+          img={isEdit ? editIcon : addIcon}
           alt="add icon"
         >
           {isEdit ? "EDIT" : "ADD"}

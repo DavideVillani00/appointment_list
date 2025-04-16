@@ -3,9 +3,9 @@ import CardUser from "../lists/CardUser.jsx";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 export default function UsersList() {
-  const { usersList } = useContext(Context).globalProjectState;
   const { isLoadingList, filteredUsersList } =
     useContext(Context).globalAdminPage;
+
   return (
     <>
       <DialogDelete />

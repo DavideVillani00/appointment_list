@@ -1,110 +1,51 @@
-import { createContext, useState, useRef } from "react";
+import { createContext, useRef } from "react";
 import useProjectState from "./hooks/globalState/useProjectState.js";
 import useThemeState from "./hooks/globalState/useThemeState.js";
-import useSignup from "./hooks/useSignup.js";
+
 import useAdminPage from "./hooks/globalState/useAdminPage.js";
-// import useGlobalValue from "./hooks/globalState/useGlobalValue.js";
-const FORMATTED_INPUT = {
-  date: "yyyy-mm-dd",
-  time: "--:--",
-  text: "",
-};
+import useHomePage from "./hooks/globalState/useHomePage.js";
+import useLoginSignupPage from "./hooks/globalState/useLoginSignupPage.js";
 
 export const Context = createContext({
-  globalProjectState: () => {},
+  globalProjectState: () => {}, //! da cancellare
   globalThemeState: () => {},
-  globalSignupState: () => {},
+
   globalAdminPage: () => {},
+  globalHomePage: () => {},
 
-  alertState: false,
-  setAlertState: () => {},
+  // alertState: false,
+  // setAlertState: () => {},
 
-  dialog: () => {},
   dialogDelete: () => {},
-
-  isEdit: false,
-  setIsEdit: () => {},
-  inputState: {},
-  setInputState: () => {},
-
-  selectedId: null,
+  actualPage: null,
 });
 
 export default function ContextProvider({ children }) {
-  const [alertState, setAlertState] = useState(false);
-  const globalProjectState = useProjectState();
+  // const [alertState, setAlertState] = useState(false);
+  const globalProjectState = useProjectState(); //!
   const globalThemeState = useThemeState();
-  const globalSignupState = useSignup(alertState, setAlertState);
+
   const globalAdminPage = useAdminPage();
+  const globalHomePage = useHomePage();
+  const globalLoginSignupPage = useLoginSignupPage();
 
-  const selectId = useRef(null);
-
-  const [isEdit, setIsEdit] = useState(false);
-  const [inputState, setInputState] = useState({
-    id: null,
-    userName: null,
-    inputName: {
-      value: FORMATTED_INPUT.text,
-      err: false,
-    },
-    inputDate: {
-      value: FORMATTED_INPUT.date,
-      err: false,
-    },
-    inputTime: {
-      value: FORMATTED_INPUT.time,
-      err: false,
-    },
-  });
-
-  const dialog = useRef();
   const dialogDelete = useRef();
-
-  const [filters, setFilters] = useState({
-    searchTitle: null,
-    date: null,
-    userName: null,
-    check: null,
-  });
-
-  function handleChangeFilters(name = null, value = null) {
-    if (!name && !value) {
-      return setFilters((preState) => {
-        return { ...preState };
-      });
-    }
-    if (value === "Completed") value = true;
-    if (value === "Uncompleted") value = false;
-
-    setFilters((preState) => {
-      return {
-        ...preState,
-        [name]: value,
-      };
-    });
-  }
+  // const [actualPage, setActualPage] = useState(null);
 
   const contValue = {
-    globalProjectState,
+    globalProjectState, //!
     globalThemeState,
-    globalSignupState,
+
     globalAdminPage,
+    globalHomePage,
+    globalLoginSignupPage,
 
-    alertState,
-    setAlertState,
+    // alertState,
+    // setAlertState,
 
-    dialog,
     dialogDelete,
-
-    filters,
-    handleChangeFilters,
-
-    inputState,
-    setInputState,
-    isEdit,
-    setIsEdit,
-
-    selectId,
+    // actualPage,
+    // setActualPage,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

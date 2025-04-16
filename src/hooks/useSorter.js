@@ -5,7 +5,10 @@ export default function useSorter() {
         return app.check;
       })
       .sort((a, b) => {
-        return a.timestamp - b.timestamp;
+        return (
+          new Date(`${a.date}T${a.time}`).getTime() -
+          new Date(`${b.date}T${b.time}`).getTime()
+        );
       });
 
     const appointmentUncompleted = list
@@ -13,7 +16,10 @@ export default function useSorter() {
         return !app.check;
       })
       .sort((a, b) => {
-        return a.timestamp - b.timestamp;
+        return (
+          new Date(`${a.date}T${a.time}`).getTime() -
+          new Date(`${b.date}T${b.time}`).getTime()
+        );
       });
 
     return {

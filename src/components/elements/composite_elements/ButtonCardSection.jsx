@@ -1,6 +1,8 @@
 import Button from "../Button.jsx";
 import useDialogDelete from "../../../hooks/useDialogDelete.js";
 import iconDelete from "../../../assets/icons/toggleIcons/icon-delete-27.png";
+import { Context } from "../../../ContextProvider.jsx";
+import { useContext } from "react";
 export default function ButtonCardSection({
   id,
   img = null,
@@ -9,6 +11,7 @@ export default function ButtonCardSection({
   onClickBtn,
   className = "",
 }) {
+  const { userState, actualPage } = useContext(Context).globalProjectState;
   const { handleOpenDialogDelete } = useDialogDelete();
   return (
     <div
@@ -28,8 +31,14 @@ export default function ButtonCardSection({
       <Button
         img={iconDelete}
         alt="delete icon"
-        className="deleteBtn rounded-xl p-3 flex-1/3"
-        onClick={() => handleOpenDialogDelete(id)}
+        className={`deleteBtn rounded-xl p-3 flex-1/3 ${
+          userState.id == id && actualPage === "admin" ? "opacity-50" : ""
+        }`}
+        onClick={() =>
+          userState.id == id && actualPage === "admin"
+            ? null
+            : handleOpenDialogDelete(id)
+        }
       >
         DELETE
       </Button>

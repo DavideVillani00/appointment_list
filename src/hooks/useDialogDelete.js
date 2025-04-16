@@ -1,12 +1,20 @@
-import { useContext, useRef, useState } from "react";
-
+import { useContext } from "react";
 import { Context } from "../ContextProvider.jsx";
+
 export default function useDialogDelete() {
   const { dialogDelete } = useContext(Context);
-  const { selectId } = useContext(Context);
+  const { actualPage } = useContext(Context).globalProjectState;
+  const { appointmentIdSelected } = useContext(Context).globalHomePage;
+  const { userIdSelected } = useContext(Context).globalAdminPage;
 
   function handleOpenDialogDelete(id) {
-    selectId.current = id;
+    if (actualPage === "home") {
+      userIdSelected.current = null;
+      appointmentIdSelected.current = id;
+    } else if (actualPage === "admin") {
+      userIdSelected.current = id;
+      appointmentIdSelected.current = null;
+    }
     document.documentElement.classList.add("overflow-hidden");
     dialogDelete.current.showModal();
   }
@@ -14,7 +22,8 @@ export default function useDialogDelete() {
   function handleCloseDialogDelete() {
     document.documentElement.classList.remove("overflow-hidden");
     dialogDelete.current.close();
-    selectId.current = null;
+    appointmentIdSelected.current = null;
+    appointmentIdSelected.current = null;
   }
 
   return {

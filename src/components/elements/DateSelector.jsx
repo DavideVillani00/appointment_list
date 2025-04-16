@@ -1,5 +1,4 @@
 import { useContext, useRef } from "react";
-import useDialogNew from "../../hooks/useDialogNew.js";
 import useFocusElement from "../../hooks/useFocusElement.js";
 import { Context } from "../../ContextProvider.jsx";
 
@@ -10,13 +9,14 @@ export default function DateSelector({
   value,
   type,
   err = null,
-  onHandleChange,
+  onHandleChange = null,
   ...props
 }) {
-  const { FORMATTED_INPUT } = useDialogNew();
-  const inputDate = useRef();
+  const { FORMATTED_INPUT } = useContext(Context).globalHomePage;
   const { firefox } = useContext(Context).globalProjectState;
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
+
+  const inputDate = useRef();
 
   function handleOpenCalendar() {
     if (!(type === "time" && firefox)) {
@@ -64,7 +64,9 @@ export default function DateSelector({
             className="opacity-0 absolute top-0 left-0 w-full h-full hover:cursor-pointer  "
             onChange={(e) => {
               onChangeInput(e);
-              onHandleChange(type, e.target.value);
+              if (onHandleChange) {
+                onHandleChange(type, e.target.value);
+              }
             }}
             {...props}
             ref={inputDate}

@@ -1,13 +1,10 @@
 import iconCloseLight from "../../assets/icons/toggleIcons/icon-close-light-48.png";
 import iconCloseDark from "../../assets/icons/toggleIcons/icon-close-dark-48.png";
 import addIcon from "../../assets/icons/beautyIcons/icon-add-27.png";
-import userIconLight from "../../assets/icons/beautyIcons/icon-user-light-27.png";
-import userIconDark from "../../assets/icons/beautyIcons/icon-user-dark-27.png";
+import editIcon from "../../assets/icons/beautyIcons/icon-edit-27.png";
 import { Context } from "../../ContextProvider.jsx";
 import { useContext } from "react";
 
-import Select from "../elements/Select.jsx";
-import Input from "../elements/Input.jsx";
 import Button from "../elements/Button.jsx";
 import useDialogUser from "../../hooks/useDialogUser.js";
 import ErrorList from "../lists/ErrorList.jsx";
@@ -17,6 +14,7 @@ export default function DialogUser() {
   const { theme } = useContext(Context).globalThemeState;
   const { dialogUser, isEdit, inputAdminState } =
     useContext(Context).globalAdminPage;
+
   const {
     handleCloseModalUser,
     handleChangeInput,
@@ -24,6 +22,7 @@ export default function DialogUser() {
     handleSendRequest,
     ERROR_MESSAGES_ADMIN,
   } = useDialogUser();
+
   return (
     <dialog
       ref={dialogUser}
@@ -137,7 +136,7 @@ export default function DialogUser() {
         <Button
           className="addBtn w-full p-4 rounded-lg"
           onClick={handleSendRequest}
-          img={addIcon}
+          img={isEdit ? editIcon : addIcon}
           alt="add icon"
         >
           {isEdit ? "EDIT" : "ADD"}

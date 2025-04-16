@@ -2,8 +2,9 @@ import titleLight from "../assets/title.png";
 import titleDark from "../assets/titleDark.png";
 
 import { useContext } from "react";
-import HeaderBurger from "./HeaderBurger.jsx";
 import { Context } from "../ContextProvider.jsx";
+import HeaderBurger from "./HeaderBurger.jsx";
+
 export default function Header() {
   const { theme } = useContext(Context).globalThemeState;
   return (
