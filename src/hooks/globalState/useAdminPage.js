@@ -1,5 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { Context } from "../../ContextProvider";
+import { useEffect, useRef, useState } from "react";
 
 export default function useAdminPage() {
   const inputStateDefault = {
@@ -13,8 +12,6 @@ export default function useAdminPage() {
     company: { value: "", err: false },
     gender: { value: null, err: false },
   };
-
-  // const { uploadUsers } = useContext(Context).globalProjectState; //! da sistemare la posizione
 
   const [isEdit, setIsEdit] = useState(false);
   const dialogUser = useRef(null);
@@ -49,7 +46,7 @@ export default function useAdminPage() {
     });
   }
 
-  async function uploadUsersFiltered() {
+  async function downloadUsersFiltered() {
     try {
       setIsLoadingList(true);
       const response = await fetch("http://localhost:3000/api/users/search", {
@@ -73,11 +70,7 @@ export default function useAdminPage() {
   }
 
   useEffect(() => {
-    uploadUsersFiltered();
-  }, []);
-  useEffect(() => {
-    uploadUsersFiltered();
-    // uploadUsers(); //! da sistemare la posizione
+    downloadUsersFiltered();
   }, [adminFilter]);
 
   return {

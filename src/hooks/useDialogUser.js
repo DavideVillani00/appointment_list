@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
+import useAuth from "./useAuth";
 
 let ERROR_MESSAGES_ADMIN = [];
 export default function useDialogUser() {
@@ -12,6 +13,7 @@ export default function useDialogUser() {
     userIdSelected,
     isEdit,
   } = useContext(Context).globalAdminPage;
+  const { downloadUsersList } = useAuth();
 
   function handleOpenModalUser(id = null) {
     if (id) {
@@ -23,6 +25,7 @@ export default function useDialogUser() {
     document.documentElement.classList.add("overflow-hidden");
   }
   function handleCloseModalUser() {
+    downloadUsersList();
     resetInputAdminState();
     dialogUser.current.close();
     document.documentElement.classList.remove("overflow-hidden");
@@ -191,6 +194,7 @@ export default function useDialogUser() {
         handleChangeErr(data.err);
         return console.error("Error in fetching add/edit user:", data.msg);
       }
+
       handleCloseModalUser();
     } catch (err) {
       return console.error("Error in fetch:", err);

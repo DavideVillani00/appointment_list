@@ -43,7 +43,9 @@ export default function TopAdminPage() {
       </div>
       <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-text2 dark:text-text2Dark">
-          <p>Total subscribers: {usersList.length}</p>
+          <p>Total: {usersList.length}</p>
+          <p>Admins: {usersList.filter((u) => u.role === "Admin").length}</p>
+          <p>Users: {usersList.filter((u) => u.role === "User").length}</p>
         </div>
 
         <Select

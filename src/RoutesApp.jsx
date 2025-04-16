@@ -5,13 +5,6 @@ import LoginPage from "./components/pages/LoginPage.jsx";
 import SignupPage from "./components/pages/SignupPage.jsx";
 import Auth from "./components/pages/Auth.jsx";
 
-// const router = createBrowserRouter([
-//   { path: "/", element: <HomePage /> },
-//   { path: "/login", element: <LoginPage /> },
-//   { path: "/signup", element: <SignupPage /> },
-//   { path: "/admin", element: <AdminPage /> },
-// ]);
-
 export default function RoutesApp() {
   return (
     <Routes>
@@ -36,4 +29,3 @@ export default function RoutesApp() {
     </Routes>
   );
 }
-// export default router;

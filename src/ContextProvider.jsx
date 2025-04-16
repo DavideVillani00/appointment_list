@@ -7,22 +7,18 @@ import useHomePage from "./hooks/globalState/useHomePage.js";
 import useLoginSignupPage from "./hooks/globalState/useLoginSignupPage.js";
 
 export const Context = createContext({
-  globalProjectState: () => {}, //! da cancellare
+  globalProjectState: () => {},
   globalThemeState: () => {},
 
   globalAdminPage: () => {},
   globalHomePage: () => {},
-
-  // alertState: false,
-  // setAlertState: () => {},
 
   dialogDelete: () => {},
   actualPage: null,
 });
 
 export default function ContextProvider({ children }) {
-  // const [alertState, setAlertState] = useState(false);
-  const globalProjectState = useProjectState(); //!
+  const globalProjectState = useProjectState();
   const globalThemeState = useThemeState();
 
   const globalAdminPage = useAdminPage();
@@ -30,22 +26,16 @@ export default function ContextProvider({ children }) {
   const globalLoginSignupPage = useLoginSignupPage();
 
   const dialogDelete = useRef();
-  // const [actualPage, setActualPage] = useState(null);
 
   const contValue = {
-    globalProjectState, //!
+    globalProjectState,
     globalThemeState,
 
     globalAdminPage,
     globalHomePage,
     globalLoginSignupPage,
 
-    // alertState,
-    // setAlertState,
-
     dialogDelete,
-    // actualPage,
-    // setActualPage,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

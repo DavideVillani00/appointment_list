@@ -23,6 +23,7 @@ export default function useHandleToggleButton() {
         return console.error("Error fetching appointments:", data.msg);
       }
       handleChangeFilterHome();
+      getAllAppointment();
     } catch (err) {
       console.error("Error in fetch:", err);
     }

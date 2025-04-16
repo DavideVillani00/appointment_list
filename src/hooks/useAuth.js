@@ -23,11 +23,6 @@ export default function useAuth() {
     }
   }, [location]);
 
-  useEffect(() => {
-    console.log("prova");
-    if (path !== "/login" && path !== "/signup") handleCheckIsLogged();
-  }, []);
-
   function handleCheckIsLogged() {
     const token = localStorage.getItem("token");
     if (token) {

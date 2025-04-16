@@ -83,9 +83,6 @@ export default function useHomePage() {
 
   useEffect(() => {
     uploadAppointmentFiltered();
-  }, []);
-  useEffect(() => {
-    uploadAppointmentFiltered();
   }, [homeFilter]);
   return {
     isEdit,
