@@ -3,6 +3,7 @@ import useDialogDelete from "../../../hooks/useDialogDelete.js";
 import iconDelete from "../../../assets/icons/toggleIcons/icon-delete-27.png";
 import { Context } from "../../../ContextProvider.jsx";
 import { useContext } from "react";
+import { useTranslation } from "react-i18next";
 export default function ButtonCardSection({
   id,
   img = null,
@@ -13,6 +14,7 @@ export default function ButtonCardSection({
 }) {
   const { userState, actualPage } = useContext(Context).globalProjectState;
   const { handleOpenDialogDelete } = useDialogDelete();
+  const { t } = useTranslation();
   return (
     <div
       className={`flex  md:flex-col md:justify-center md:self-center gap-2 border-t-[2px] pt-4 md:pt-0 md:border-0 md:border-r-[2px] md:pr-4 border-divider dark:border-dividerDark ${className}`}
@@ -40,7 +42,7 @@ export default function ButtonCardSection({
             : handleOpenDialogDelete(id)
         }
       >
-        DELETE
+        {t("Delete").toUpperCase()}
       </Button>
     </div>
   );

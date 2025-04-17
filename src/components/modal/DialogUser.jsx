@@ -9,8 +9,10 @@ import Button from "../elements/Button.jsx";
 import useDialogUser from "../../hooks/useDialogUser.js";
 import ErrorList from "../lists/ErrorList.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
+import { useTranslation } from "react-i18next";
 
 export default function DialogUser() {
+  const { t } = useTranslation();
   const { theme } = useContext(Context).globalThemeState;
   const { dialogUser, isEdit, inputAdminState } =
     useContext(Context).globalAdminPage;
@@ -30,7 +32,7 @@ export default function DialogUser() {
     >
       <div className="flex justify-between items-center ">
         <h1 className="text-3xl font-bold text-text1 dark:text-text1Dark">
-          {isEdit ? "Edit user" : "New user"}
+          {isEdit ? t("Edit user") : t("New user")}
         </h1>
         <img
           src={theme === "dark" ? iconCloseDark : iconCloseLight}
@@ -44,9 +46,9 @@ export default function DialogUser() {
         <span className="bg-divider dark:bg-dividerDark w-full h-0.5 my-2"></span>
         <div className="flex flex-col w-full md:flex-row  gap-3 md:gap-5">
           <Label
-            placeholder="Enter a role"
-            label="Role"
-            def={inputAdminState.role.value || "Enter a role"}
+            placeholder={t("Enter a role")}
+            label={t("Role")}
+            def={inputAdminState.role.value || t("Enter a role")}
             name="role"
             value={inputAdminState.role.value}
             err={inputAdminState.role.err}
@@ -58,11 +60,11 @@ export default function DialogUser() {
           <Label
             type="text"
             name="userName"
-            placeholder="Enter an user-name"
+            placeholder={t("Enter an username")}
             value={inputAdminState.userName.value}
             onChange={handleChangeInput}
             err={inputAdminState.userName.err}
-            label="UserName"
+            label={t("Username")}
           />
         </div>
 
@@ -70,65 +72,65 @@ export default function DialogUser() {
           <Label
             type="text"
             name="email"
-            placeholder="Enter an email"
+            placeholder={t("Enter an email")}
             value={inputAdminState.email.value}
             onChange={handleChangeInput}
             err={inputAdminState.email.err}
-            label="Email"
+            label={t("Email")}
           />
           <Label
             type="password"
             name="password"
-            placeholder="Enter a password"
+            placeholder={t("Enter a password")}
             value={inputAdminState.password.value}
             onChange={handleChangeInput}
             err={inputAdminState.password.err}
-            label="Password"
+            label={t("Password")}
           />
         </div>
         <div className="flex flex-col w-full md:flex-row  gap-3 md:gap-5">
           <Label
             type="text"
             name="name"
-            placeholder="Enter a name"
+            placeholder={t("Enter a first name")}
             value={inputAdminState.name.value}
             onChange={handleChangeInput}
             err={inputAdminState.name.err}
-            label="Name"
+            label={t("First name")}
           />
           <Label
             type="text"
             name="surname"
-            placeholder="Enter an surname"
+            placeholder={t("Enter a last name")}
             value={inputAdminState.surname.value}
             onChange={handleChangeInput}
             err={inputAdminState.surname.err}
-            label="Surname"
+            label={t("Last name")}
           />
         </div>
         <div className="flex flex-col w-full md:flex-row  gap-3 md:gap-5">
           <Label
             className="rounded-lg text-lg py-[17px]"
             name="gender"
-            def={inputAdminState.gender.value || "Enter a gender"}
-            placeholder="Enter a gender"
+            def={t(inputAdminState.gender.value) || t("Enter a gender")}
+            placeholder={t("Enter a gender")}
             value={inputAdminState.gender.value}
             err={inputAdminState.gender.err}
             onHandleChange={(name, value) => handleChangeSelect(name, value)}
-            label="Gender"
+            label={t("Gender")}
           >
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
+            <option>{t("Male")}</option>
+            <option>{t("Female")}</option>
+            <option>{t("Other")}</option>
           </Label>
           <Label
             type="text"
             name="company"
-            placeholder="Enter a company"
+            placeholder={t("Enter a company")}
             value={inputAdminState.company.value}
             onChange={handleChangeInput}
             err={inputAdminState.company.err}
-            label="Company"
+            label={t("Company")}
           />
         </div>
 
@@ -139,7 +141,7 @@ export default function DialogUser() {
           img={isEdit ? editIcon : addIcon}
           alt="add icon"
         >
-          {isEdit ? "EDIT" : "ADD"}
+          {isEdit ? t("Edit").toUpperCase() : t("Add").toUpperCase()}
         </Button>
       </form>
     </dialog>

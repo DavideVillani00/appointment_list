@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import ContextProvider from "./ContextProvider.jsx";
 import { BrowserRouter } from "react-router-dom";
+import "./translations/i18n.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

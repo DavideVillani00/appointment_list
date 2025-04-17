@@ -9,20 +9,34 @@ import iconLogoutDark from "../../assets/icons/toggleIcons/icon-logout-dark-48.p
 import iconHomeLight from "../../assets/icons/toggleIcons/icon-home-light-27.png";
 import iconHomeDark from "../../assets/icons/toggleIcons/icon-home-dark-27.png";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Context } from "../../ContextProvider";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import i18next from "i18next";
 
 export default function DialogMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   const { userState, actualPage } = useContext(Context).globalProjectState;
+  const [handleLanguage, setHandleLanguage] = useState(null);
+  const languageRef = useRef(i18next.language);
 
   const { handleLogout } = useAuth();
 
+  function handleChangeLanguage() {
+    setHandleLanguage((prev) => (prev === "en" ? "it" : "en"));
+    if (languageRef.current === "en") {
+      languageRef.current = "it";
+    } else if (languageRef.current === "it") {
+      languageRef.current = "en";
+    }
+
+    i18next.changeLanguage(languageRef.current);
+  }
+
   return (
     <div
-      className={`cardModalStyle flex flex-col justify-center items-center p-5 rounded-md gap-4 w-60 absolute top-11 right-[-88px] md:right-[32px] md:rounded-tr-none z-10 origin-top md:origin-top-right ${
+      className={`cardModalStyle flex flex-col justify-center items-center p-5 rounded-md gap-4 w-60 absolute top-11 right-[-88px] md:right-[32px] md:rounded-tr-none z-20 origin-top md:origin-top-right ${
         isOpen ? "scale-100" : "scale-0"
       } transition-transform duration-150`}
     >
@@ -58,7 +72,10 @@ export default function DialogMenuBurger({ isOpen }) {
       <img
         src={theme === "dark" ? iconLanguageDark : iconLanguageLight}
         alt="change language icon"
-        className="w-12 cursor-pointer"
+        className={`w-12 cursor-pointer ${
+          handleLanguage === "en" ? "rotate-360 " : "rotate-0 "
+        } transition-transform duration-200`}
+        onClick={handleChangeLanguage}
       />
       {userState && (
         <>

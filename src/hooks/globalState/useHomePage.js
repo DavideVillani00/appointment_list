@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const FORMATTED_INPUT = {
   date: "yyyy-mm-dd",
@@ -12,8 +13,8 @@ const INPUT_STATE_DEFAULT = {
   time: { value: FORMATTED_INPUT.time, err: false },
   oldDateTimeStamp: null,
 };
-
 export default function useHomePage() {
+  const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState(false);
   const dialogAppointment = useRef(null);
   const appointmentIdSelected = useRef(null);
@@ -36,9 +37,9 @@ export default function useHomePage() {
   }
 
   function handleChangeFilterHome(name, value) {
-    value = value === "All" ? null : value;
-    value = value === "Completed" ? true : value;
-    value = value === "Uncompleted" ? false : value;
+    value = value === t("All") ? null : value;
+    value = value === t("Completed") ? true : value;
+    value = value === t("Uncompleted") ? false : value;
     value = name === "date" && value === "" ? FORMATTED_INPUT.date : value;
     setHomeFilter((preState) => {
       return {

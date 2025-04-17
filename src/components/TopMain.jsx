@@ -17,6 +17,7 @@ import Button from "./elements/Button.jsx";
 import useSorter from "../hooks/useSorter.js";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
 import useModalAppointment from "../hooks/modal/useModalAppointment.js";
+import { useTranslation } from "react-i18next";
 
 // !! da sisteare
 //!!
@@ -24,7 +25,7 @@ import useModalAppointment from "../hooks/modal/useModalAppointment.js";
 export default function TopMain() {
   const { usersList, userState, appointmentsList } =
     useContext(Context).globalProjectState;
-
+  const { t } = useTranslation();
   const { theme } = useContext(Context).globalThemeState;
   const { handleChangeFilterHome, homeFilter } =
     useContext(Context).globalHomePage;
@@ -52,7 +53,7 @@ export default function TopMain() {
           onClick={() => handleOpenModalAppointment()}
           alt="add icon"
         >
-          ADD
+          {t("Add").toUpperCase()}
         </Button>
         <div className="md:flex-2/5 w-full flex gap-2 justify-center items-center ">
           <Input
@@ -62,7 +63,7 @@ export default function TopMain() {
             classImg="top-4 left-3"
             classInput="px-5 "
             type="text"
-            placeholder="Search"
+            placeholder={t("Search")}
             value={homeFilter.title}
             onHandleChange={handleChangeFilterHome}
             name="title"
@@ -84,7 +85,7 @@ export default function TopMain() {
         {userState.role === "Admin" && (
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
-            def="All"
+            def={t("All")}
             className="rounded-lg text-lg py-[18px] w-full"
             onHandleChange={handleChangeFilterHome}
             name="userName"
@@ -96,24 +97,30 @@ export default function TopMain() {
       </div>
       <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-text2 dark:text-text2Dark">
-          <p>Total: {appointmentSortered.length}</p>
+          <p>
+            {t("Total")}: {appointmentSortered.length}
+          </p>
           <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
-          <p>Completed: {appointmentCompleted.length}</p>
+          <p>
+            {t("Completed")}: {appointmentCompleted.length}
+          </p>
           <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
-          <p>Uncompleted: {appointmentUncompleted.length}</p>
+          <p>
+            {t("Uncompleted")}: {appointmentUncompleted.length}
+          </p>
         </div>
 
         <Select
           img={theme === "dark" ? iconFilterDark : iconFilterLight}
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
-          def="All"
+          def={t("All")}
           name="check"
           onHandleChange={handleChangeFilterHome}
         >
-          <option>All</option>
-          <option>Completed</option>
-          <option>Uncompleted</option>
+          <option>{t("All")}</option>
+          <option>{t("Completed")}</option>
+          <option>{t("Uncompleted")}</option>
         </Select>
 
         <hr />

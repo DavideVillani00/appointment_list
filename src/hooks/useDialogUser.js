@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import useAuth from "./useAuth";
+import { useTranslation } from "react-i18next";
 
 let ERROR_MESSAGES_ADMIN = [];
 export default function useDialogUser() {
@@ -14,6 +15,7 @@ export default function useDialogUser() {
     isEdit,
   } = useContext(Context).globalAdminPage;
   const { downloadUsersList } = useAuth();
+  const { t } = useTranslation();
 
   function handleOpenModalUser(id = null) {
     if (id) {
@@ -111,18 +113,20 @@ export default function useDialogUser() {
       handleChangeErr("gender");
       err = true;
     }
-    if (err) ERROR_MESSAGES_ADMIN.push("Enter all fields");
+    if (err) ERROR_MESSAGES_ADMIN.push(t("Enter all fields"));
 
     if (!emailValidation) {
       handleChangeErr("email");
       err = true;
-      ERROR_MESSAGES_ADMIN.push("Incorrect email format");
+      ERROR_MESSAGES_ADMIN.push(t("Incorrect email format"));
     }
     if (!passwordValidation) {
       handleChangeErr("password");
       err = true;
       ERROR_MESSAGES_ADMIN.push(
-        "Password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
+        t(
+          "Password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
+        )
       );
     }
 
@@ -192,6 +196,11 @@ export default function useDialogUser() {
       const data = await response.json();
       if (!response.ok) {
         handleChangeErr(data.err);
+        if (data.err === "userName") {
+          ERROR_MESSAGES_ADMIN.push(t("Username is already taken"));
+        } else if (data.err === "email") {
+          ERROR_MESSAGES_ADMIN.push(t("Email is already taken"));
+        }
         return console.error("Error in fetching add/edit user:", data.msg);
       }
 

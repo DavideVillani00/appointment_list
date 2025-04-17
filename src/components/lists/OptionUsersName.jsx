@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { Context } from "../../ContextProvider";
+import { useTranslation } from "react-i18next";
 
 export default function OptionUsersName({ users, allOption = false }) {
   const { userState } = useContext(Context).globalProjectState;
+  const { t } = useTranslation();
 
   if (!userState || !users) return null;
 
-  const all = { userName: "All", id: "All" };
+  const all = { userName: t("All"), id: "All" };
 
   const userLogged = users.find((u) => {
     return u.userName === userState.userName;

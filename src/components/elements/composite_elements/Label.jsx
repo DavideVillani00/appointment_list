@@ -18,7 +18,7 @@ export default function Label({ children, label, def, ...props }) {
         <Select
           def={def}
           placeholder={def}
-          className="p-4 rounded-lg "
+          className="p-4 rounded-lg text-lg "
           {...props}
         >
           {children}

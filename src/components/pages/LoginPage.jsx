@@ -7,8 +7,10 @@ import { Context } from "../../ContextProvider.jsx";
 import ErrorList from "../lists/ErrorList.jsx";
 import DialogAlert from "../modal/DialogAlert.jsx";
 import useLogin from "../../hooks/useLogin.js";
+import { useTranslation } from "react-i18next";
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const { alertState } = useContext(Context).globalProjectState;
   const { resetInputLoginSignupPage, inputLoginSignupPage, handleChangeInput } =
     useContext(Context).globalLoginSignupPage;
@@ -19,21 +21,21 @@ export default function LoginPage() {
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
-        LOGGED IN
+        {t("Logged in").toUpperCase()}
       </DialogAlert>
       <Header />
       <main className="flex flex-col justify-center items-center gap-7">
-        <h1 className="text-3xl font-extrabold ">LOGIN</h1>
+        <h1 className="text-3xl font-extrabold ">{t("Login").toUpperCase()}</h1>
         <Label
-          placeholder="Enter your user-name"
-          label="UserName"
+          placeholder={t("Enter your username")}
+          label={t("Username")}
           onChange={handleChangeInput}
           name="userName"
           err={inputLoginSignupPage.userName.err}
         />
         <Label
-          placeholder="Enter your password"
-          label="Password"
+          placeholder={t("Enter your password")}
+          label={t("Password")}
           onChange={handleChangeInput}
           name="password"
           type="password"
@@ -44,7 +46,7 @@ export default function LoginPage() {
           className="addBtn w-full p-4 rounded-lg "
           onClick={handleSendLoginRequest}
         >
-          LOGIN
+          {t("Login").toUpperCase()}
         </Button>
         <Link
           to="/signup"
@@ -54,8 +56,8 @@ export default function LoginPage() {
             resetInputLoginSignupPage();
           }}
         >
-          Not registered?{" "}
-          <span className="text-icon dark:text-iconDark ">Sign up</span>
+          {t("Not registered yet?")}{" "}
+          <span className="text-icon dark:text-iconDark ">{t("Sign up")}</span>
         </Link>
       </main>
     </>

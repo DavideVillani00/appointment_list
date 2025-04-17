@@ -1,9 +1,11 @@
 import { useContext, useEffect } from "react";
 import { Context } from "../../ContextProvider";
 import useAuth from "../useAuth";
+import { useTranslation } from "react-i18next";
 
 let ERROR_MESSAGES_HOME = [];
 export default function useModalAppointment() {
+  const { t } = useTranslation();
   const { userState, setAppointmentsList } =
     useContext(Context).globalProjectState;
   const {
@@ -103,13 +105,13 @@ export default function useModalAppointment() {
       handleChangeErr("time");
       err = true;
     }
-    if (err) ERROR_MESSAGES_HOME.push("Enter all fields");
+    if (err) ERROR_MESSAGES_HOME.push(t("Enter all fields"));
 
     if (!dateValidation) {
       handleChangeErr("date");
       handleChangeErr("time");
       err = true;
-      ERROR_MESSAGES_HOME.push("You cannot select earlier dates");
+      ERROR_MESSAGES_HOME.push(t("You cannot select earlier dates"));
     }
     if (err) return;
 
@@ -147,8 +149,8 @@ export default function useModalAppointment() {
     try {
       const obj = {
         id: inputHomeState.id.value,
-        userName: inputHomeState.userName.value || userState.userName,
-        title: inputHomeState.title.value,
+        userName: inputHomeState.userName.value.trim() || userState.userName,
+        title: inputHomeState.title.value.trim(),
         date: inputHomeState.date.value,
         time: inputHomeState.time.value,
       };

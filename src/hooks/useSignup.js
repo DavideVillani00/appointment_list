@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 let ERROR_MESSAGES_SIGNUP = [];
 export default function useSignup() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { inputLoginSignupPage, resetInputLoginSignupPage, handleChangeErr } =
     useContext(Context).globalLoginSignupPage;
@@ -52,7 +54,7 @@ export default function useSignup() {
       handleChangeErr("company");
       err = true;
     }
-    if (err) ERROR_MESSAGES_SIGNUP.push("Enter all fields");
+    if (err) ERROR_MESSAGES_SIGNUP.push(t("Enter all fields"));
 
     if (!emailValidation) {
       handleChangeErr("email");
@@ -63,7 +65,9 @@ export default function useSignup() {
       handleChangeErr("password");
       err = true;
       ERROR_MESSAGES_SIGNUP.push(
-        "password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
+        t(
+          "password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
+        )
       );
     }
     if (err) {

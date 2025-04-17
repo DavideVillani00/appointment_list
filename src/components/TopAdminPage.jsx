@@ -10,8 +10,10 @@ import Select from "./elements/Select.jsx";
 import Button from "./elements/Button.jsx";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
 import useDialogUser from "../hooks/useDialogUser.js";
+import { useTranslation } from "react-i18next";
 
 export default function TopAdminPage() {
+  const { t } = useTranslation();
   const { theme } = useContext(Context).globalThemeState;
   const { usersList } = useContext(Context).globalProjectState;
   const { handleChangeFilterAdmin } = useContext(Context).globalAdminPage;
@@ -26,12 +28,12 @@ export default function TopAdminPage() {
           onClick={() => handleOpenModalUser()}
           alt="add icon"
         >
-          ADD
+          {t("Add").toUpperCase()}
         </Button>
         <div className="md:flex-2/5 w-full flex gap-2 justify-center items-center ">
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
-            def="All"
+            def={t("All")}
             className="rounded-lg text-lg py-[18px] w-full"
             onHandleChange={handleChangeFilterAdmin}
             name="userName"
@@ -43,22 +45,28 @@ export default function TopAdminPage() {
       </div>
       <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-text2 dark:text-text2Dark">
-          <p>Total: {usersList.length}</p>
-          <p>Admins: {usersList.filter((u) => u.role === "Admin").length}</p>
-          <p>Users: {usersList.filter((u) => u.role === "User").length}</p>
+          <p>
+            {t("Total")}: {usersList.length}
+          </p>
+          <p>
+            {t("Admins")}: {usersList.filter((u) => u.role === "Admin").length}
+          </p>
+          <p>
+            {t("Users")}: {usersList.filter((u) => u.role === "User").length}
+          </p>
         </div>
 
         <Select
           img={theme === "dark" ? iconFilterDark : iconFilterLight}
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
-          def="All"
+          def={t("All")}
           name="role"
           onHandleChange={handleChangeFilterAdmin}
         >
-          <option>All</option>
-          <option>Admin</option>
-          <option>User</option>
+          <option>{t("All")}</option>
+          <option>{t("Admin")}</option>
+          <option>{t("User")}</option>
         </Select>
         <hr />
       </div>

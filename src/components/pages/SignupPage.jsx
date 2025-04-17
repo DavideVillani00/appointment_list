@@ -8,8 +8,10 @@ import ErrorList from "../lists/ErrorList.jsx";
 import useSignup from "../../hooks/useSignup.js";
 import { Context } from "../../ContextProvider.jsx";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function SignupPage() {
+  const { t } = useTranslation();
   const { alertState } = useContext(Context).globalProjectState;
   const {
     inputLoginSignupPage,
@@ -26,29 +28,31 @@ export default function SignupPage() {
   return (
     <>
       <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
-        REGISTRATION SUCCESSFUL
+        {t("Registration successful").toUpperCase()}
       </DialogAlert>
       <Header />
 
-      <h1 className="text-3xl font-extrabold text-center">SIGNUP</h1>
+      <h1 className="text-3xl font-extrabold text-center">
+        {t("Sign up").toUpperCase()}
+      </h1>
       <main className="flex flex-col justify-center items-center gap-7 md:gap-5">
         <Label
-          placeholder="Enter your user-name"
-          label="UserName"
+          placeholder={t("Enter your username")}
+          label={t("Username")}
           onChange={handleChangeInput}
           name="userName"
           err={inputLoginSignupPage.userName.err}
         />
         <Label
-          placeholder="Enter your email"
-          label="Email"
+          placeholder={t("Enter your email")}
+          label={t("Email")}
           onChange={handleChangeInput}
           name="email"
           err={inputLoginSignupPage.email.err}
         />
         <Label
-          placeholder="Enter your password"
-          label="Password"
+          placeholder={t("Enter your password")}
+          label={t("Password")}
           onChange={handleChangeInput}
           name="password"
           type="password"
@@ -56,15 +60,15 @@ export default function SignupPage() {
         />
         <div className="flex flex-col w-full md:flex-row  gap-5">
           <Label
-            placeholder="Enter your name"
-            label="Name"
+            placeholder={t("Enter your name")}
+            label={t("Name")}
             onChange={handleChangeInput}
             name="name"
             err={inputLoginSignupPage.name.err}
           />
           <Label
-            placeholder="Enter your surname"
-            label="Surname"
+            placeholder={t("Enter your surname")}
+            label={t("Surname")}
             onChange={handleChangeInput}
             name="surname"
             err={inputLoginSignupPage.surname.err}
@@ -72,9 +76,9 @@ export default function SignupPage() {
         </div>
         <div className="flex flex-col w-full md:flex-row  gap-5">
           <Label
-            placeholder="Enter your gender"
-            label="Gender"
-            def="Enter your gender"
+            placeholder={t("Enter your gender")}
+            label={t("Gender")}
+            def={t("Enter your gender")}
             onHandleChange={(name, value) => {
               handleChangeSelect(name, value);
             }}
@@ -86,8 +90,8 @@ export default function SignupPage() {
             <option>Other</option>
           </Label>
           <Label
-            placeholder="Enter your company"
-            label="Company"
+            placeholder={t("Enter your company")}
+            label={t("Company")}
             onChange={handleChangeInput}
             name="company"
             err={inputLoginSignupPage.company.err}
@@ -99,7 +103,7 @@ export default function SignupPage() {
           className="addBtn w-full p-4 rounded-lg"
           onClick={handleSendSignupRequest}
         >
-          SIGNUP
+          {t("Sign up").toUpperCase()}
         </Button>
         <Link
           to="/login"
@@ -109,8 +113,8 @@ export default function SignupPage() {
             resetInputLoginSignupPage();
           }}
         >
-          Already registered?{" "}
-          <span className="text-icon dark:text-iconDark">Log in</span>
+          {t("Already have an account?")}{" "}
+          <span className="text-icon dark:text-iconDark">{t("Login")}</span>
         </Link>
       </main>
     </>

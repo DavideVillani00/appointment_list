@@ -10,6 +10,7 @@ import { Context } from "../../ContextProvider.jsx";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
 import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
 import useModalAppointment from "../../hooks/modal/useModalAppointment.js";
+import { useTranslation } from "react-i18next";
 
 export default function AppointmentCard({
   id,
@@ -23,6 +24,7 @@ export default function AppointmentCard({
   const { handleOpenModalAppointment } = useModalAppointment();
   const { theme } = useContext(Context).globalThemeState;
   const { userState } = useContext(Context).globalProjectState;
+  const { t } = useTranslation();
 
   return (
     <li
@@ -61,7 +63,11 @@ export default function AppointmentCard({
               : iconUncompleted
           }
           alt="checkbox icon"
-          value={check ? "COMPLETED" : "UNCOMPLETED"}
+          value={
+            check
+              ? t("Completed").toUpperCase()
+              : t("Uncompleted").toUpperCase()
+          }
           onClickBtn={() => {
             handleToggleCheckButton(id);
           }}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 const INPUT_STATE_DEFAULT = {
   userName: { value: "", err: false },
   email: { value: "", err: false },
@@ -10,6 +11,7 @@ const INPUT_STATE_DEFAULT = {
 };
 
 export default function useLoginSignupPage() {
+  const { t } = useTranslation();
   const [inputLoginSignupPage, setInputLoginSignupPage] =
     useState(INPUT_STATE_DEFAULT);
 
@@ -22,7 +24,7 @@ export default function useLoginSignupPage() {
     setInputLoginSignupPage((preState) => {
       return {
         ...preState,
-        [name]: { value: value.trim(), err: false },
+        [name]: { value: value, err: false },
       };
     });
   }

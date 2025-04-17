@@ -5,8 +5,9 @@ import DialogDelete from "../modal/DialogDelete.jsx";
 import useSorter from "../../hooks/useSorter.js";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
-
+import { useTranslation } from "react-i18next";
 export default function AppointmentList() {
+  const { t } = useTranslation();
   const { userState } = useContext(Context).globalProjectState;
   const { filteredAppointmentList, isLoadingList } =
     useContext(Context).globalHomePage;
@@ -32,7 +33,7 @@ export default function AppointmentList() {
             className="animate-spin w-[50px]"
           />
         ) : filteredAppointmentList.length === 0 ? (
-          <p>There isn't appointment</p>
+          <p>{t("There isn't appointment")}</p>
         ) : (
           appointments.map((app) => {
             return <AppointmentCard key={app.id} {...app} />;

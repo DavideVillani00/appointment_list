@@ -20,8 +20,10 @@ import Button from "../elements/Button.jsx";
 import OptionUsersName from "../lists/OptionUsersName.jsx";
 import useModalAppointment from "../../hooks/modal/useModalAppointment.js";
 import ErrorList from "../lists/ErrorList.jsx";
+import { useTranslation } from "react-i18next";
 
 export default function DialogNew() {
+  const { t } = useTranslation();
   const { dialogAppointment, isEdit, inputHomeState } =
     useContext(Context).globalHomePage;
   const { usersList, userState } = useContext(Context).globalProjectState;
@@ -44,7 +46,7 @@ export default function DialogNew() {
     >
       <div className="flex justify-between items-center ">
         <h1 className="text-3xl font-bold text-text1 dark:text-text1Dark">
-          {isEdit ? "Edit appointment" : "New appointment"}
+          {isEdit ? t("Edit appointment") : t("New appointment")}
         </h1>
         <img
           src={theme === "dark" ? iconCloseDark : iconCloseLight}
@@ -75,7 +77,7 @@ export default function DialogNew() {
           alt="hand with pencil icon"
           type="text"
           name="title"
-          placeholder="Write an appointment"
+          placeholder={t("Write an appointment")}
           value={inputHomeState.title.value}
           onChange={handleChangeInput}
           err={inputHomeState.title.err}
@@ -117,7 +119,7 @@ export default function DialogNew() {
           img={isEdit ? editIcon : addIcon}
           alt="add icon"
         >
-          {isEdit ? "EDIT" : "ADD"}
+          {isEdit ? t("Edit").toUpperCase() : t("Add").toUpperCase()}
         </Button>
       </form>
     </dialog>

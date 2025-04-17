@@ -6,11 +6,13 @@ import { Context } from "../../ContextProvider.jsx";
 import useDialogDelete from "../../hooks/useDialogDelete.js";
 import Button from "../elements/Button.jsx";
 import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
+import { useTranslation } from "react-i18next";
 
 export default function DialogDelete() {
   const { actualPage } = useContext(Context).globalProjectState;
   const { handleDelete } = useHandleToggleButton();
   const { dialogDelete, handleCloseDialogDelete } = useDialogDelete();
+  const { t } = useTranslation();
 
   const modalRoot = document.getElementById("modal");
   if (!modalRoot) return null;
@@ -22,15 +24,17 @@ export default function DialogDelete() {
     >
       <div className="flex flex-col gap-10 place-self-center">
         <h1 className="text-2xl text-center font-bold leading-12 text-text1 dark:text-text1Dark">
-          Are you sure you want to delete the{" "}
-          {actualPage === "home" ? "appointment" : "user"}?
+          {actualPage === "home"
+            ? t("Are you sure you want to delete this appointment?")
+            : t("Are you sure you want to delete this user?")}
+          ?
         </h1>
         <div className="flex flex-col gap-3 md:flex-row justify-center ">
           <Button
             className=" flex-2/3 primaryBtn w-full p-4 rounded-md"
             onClick={handleCloseDialogDelete}
           >
-            NO
+            {t("No").toUpperCase()}
           </Button>
           <Button
             img={iconDelete}
@@ -41,7 +45,7 @@ export default function DialogDelete() {
               handleCloseDialogDelete();
             }}
           >
-            DELETE
+            {t("Delete").toUpperCase()}
           </Button>
         </div>
       </div>

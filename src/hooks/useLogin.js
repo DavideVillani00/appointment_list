@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 let ERROR_MESSAGES_LOGIN = [];
 export default function useLogin() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { inputLoginSignupPage, resetInputLoginSignupPage, handleChangeErr } =
     useContext(Context).globalLoginSignupPage;
@@ -29,7 +31,7 @@ export default function useLogin() {
     }
 
     if (err) {
-      ERROR_MESSAGES_LOGIN.push("Enter all fields");
+      ERROR_MESSAGES_LOGIN.push(t("Enter all fields"));
       return;
     }
     const user = { userName, password };

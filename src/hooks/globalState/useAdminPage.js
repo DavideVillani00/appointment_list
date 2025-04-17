@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function useAdminPage() {
   const inputStateDefault = {
@@ -25,6 +26,7 @@ export default function useAdminPage() {
 
   const [filteredUsersList, setFilteredUsersList] = useState(null);
   const [isLoadingList, setIsLoadingList] = useState(true);
+  const { t } = useTranslation();
 
   function resetInputAdminState() {
     setInputAdminState(inputStateDefault);
@@ -37,7 +39,7 @@ export default function useAdminPage() {
   }
 
   function handleChangeFilterAdmin(name, value) {
-    value = value === "All" ? null : value;
+    value = value === t("All") ? null : value;
     setAdminFilter((preState) => {
       return {
         ...preState,
