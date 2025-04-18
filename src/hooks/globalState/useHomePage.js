@@ -13,6 +13,12 @@ const INPUT_STATE_DEFAULT = {
   time: { value: FORMATTED_INPUT.time, err: false },
   oldDateTimeStamp: null,
 };
+const INPUT_HOME_FILTER_DEFAULT = {
+  title: "",
+  date: FORMATTED_INPUT.date,
+  userName: null,
+  check: null,
+};
 export default function useHomePage() {
   const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState(false);
@@ -20,12 +26,7 @@ export default function useHomePage() {
   const appointmentIdSelected = useRef(null);
 
   const [inputHomeState, setInputHomeState] = useState(INPUT_STATE_DEFAULT);
-  const [homeFilter, setHomeFilter] = useState({
-    title: "",
-    date: FORMATTED_INPUT.date,
-    userName: null,
-    check: null,
-  });
+  const [homeFilter, setHomeFilter] = useState(INPUT_HOME_FILTER_DEFAULT);
 
   const [filteredAppointmentList, setFilteredAppointmentList] = useState(null);
   const [isLoadingList, setIsLoadingList] = useState(true);
@@ -34,6 +35,10 @@ export default function useHomePage() {
     setInputHomeState(INPUT_STATE_DEFAULT);
     appointmentIdSelected.current = null;
     setIsEdit(false);
+  }
+
+  function resetHomeFilter() {
+    setHomeFilter(INPUT_HOME_FILTER_DEFAULT);
   }
 
   function handleChangeFilterHome(name, value) {
@@ -99,5 +104,6 @@ export default function useHomePage() {
     filteredAppointmentList,
     FORMATTED_INPUT,
     homeFilter,
+    resetHomeFilter,
   };
 }

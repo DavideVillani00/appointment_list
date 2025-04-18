@@ -32,8 +32,8 @@ export default function AppointmentList() {
             alt="loading ring"
             className="animate-spin w-[50px]"
           />
-        ) : filteredAppointmentList.length === 0 ? (
-          <p>{t("There isn't appointment")}</p>
+        ) : appointments.length === 0 ? (
+          <p>{t("There isn't any appointments")}</p>
         ) : (
           appointments.map((app) => {
             return <AppointmentCard key={app.id} {...app} />;

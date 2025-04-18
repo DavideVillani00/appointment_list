@@ -27,6 +27,7 @@ export default function useDialogUser() {
     document.documentElement.classList.add("overflow-hidden");
   }
   function handleCloseModalUser() {
+    console.log("Close modal user");
     downloadUsersList();
     resetInputAdminState();
     dialogUser.current.close();

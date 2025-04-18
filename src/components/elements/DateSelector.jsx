@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import useFocusElement from "../../hooks/useFocusElement.js";
 import { Context } from "../../ContextProvider.jsx";
+import { useTranslation } from "react-i18next";
 
 export default function DateSelector({
   children,
@@ -15,6 +16,7 @@ export default function DateSelector({
   const { FORMATTED_INPUT } = useContext(Context).globalHomePage;
   const { firefox } = useContext(Context).globalProjectState;
   const { isFocus, handleBlur, handleFocus } = useFocusElement();
+  const { t } = useTranslation();
 
   const inputDate = useRef();
 
@@ -41,7 +43,11 @@ export default function DateSelector({
       {type === "time" && firefox ? (
         <input
           type={type}
-          className="focus:outline-none"
+          className={` focus:outline-none ${
+            value == FORMATTED_INPUT[type]
+              ? "text-placeholder dark:text-placeholderDark"
+              : "text-text1 dark:text-text1Dark"
+          }`}
           onChange={onChangeInput}
           {...props}
           ref={inputDate}
@@ -57,7 +63,7 @@ export default function DateSelector({
                 : "text-text1 dark:text-text1Dark"
             }`}
           >
-            {value}
+            {value === FORMATTED_INPUT[type] ? t(FORMATTED_INPUT[type]) : value}
           </span>
           <input
             type={type}

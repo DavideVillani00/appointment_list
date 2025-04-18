@@ -16,7 +16,8 @@ export default function TopAdminPage() {
   const { t } = useTranslation();
   const { theme } = useContext(Context).globalThemeState;
   const { usersList } = useContext(Context).globalProjectState;
-  const { handleChangeFilterAdmin } = useContext(Context).globalAdminPage;
+  const { handleChangeFilterAdmin, adminFilter } =
+    useContext(Context).globalAdminPage;
   const { handleOpenModalUser } = useDialogUser();
 
   return (
@@ -33,7 +34,7 @@ export default function TopAdminPage() {
         <div className="md:flex-2/5 w-full flex gap-2 justify-center items-center ">
           <Select
             img={theme === "dark" ? userIconDark : userIconLight}
-            def={t("All")}
+            def={t(adminFilter.userName) || t("All")}
             className="rounded-lg text-lg py-[18px] w-full"
             onHandleChange={handleChangeFilterAdmin}
             name="userName"
@@ -60,7 +61,7 @@ export default function TopAdminPage() {
           img={theme === "dark" ? iconFilterDark : iconFilterLight}
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
-          def={t("All")}
+          def={t(adminFilter.role) || t("All")}
           name="role"
           onHandleChange={handleChangeFilterAdmin}
         >

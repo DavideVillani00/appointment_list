@@ -74,7 +74,7 @@ export default function useSignup() {
       return;
     }
     const id = Math.random() * 1000;
-    const role = "user";
+    const role = "User";
     const newUser = {
       id,
       role,

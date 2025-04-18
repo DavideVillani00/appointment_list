@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Context } from "../ContextProvider.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 export default function useAuth() {
+  const { resetHomeFilter } = useContext(Context).globalHomePage;
   const {
     setUserState,
     setUsersList,
@@ -15,11 +16,12 @@ export default function useAuth() {
 
   const path = location.pathname;
   useEffect(() => {
+    console.log("Path", path);
     if (path === "/") setActualPage("home");
     if (path === "/admin") setActualPage("admin");
     if (path !== "/login" && path !== "/signup") {
-      console.log(path);
       handleCheckIsLogged();
+      // resetHomeFilter();
     }
   }, [location]);
 

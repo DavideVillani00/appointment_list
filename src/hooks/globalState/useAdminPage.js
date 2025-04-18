@@ -32,6 +32,14 @@ export default function useAdminPage() {
     setInputAdminState(inputStateDefault);
     userIdSelected.current = null;
     setIsEdit(false);
+    resetAdminFilter();
+    // setAdminFilter({
+    //   userName: null,
+    //   role: null,
+    // });
+  }
+
+  function resetAdminFilter() {
     setAdminFilter({
       userName: null,
       role: null,
@@ -49,6 +57,7 @@ export default function useAdminPage() {
   }
 
   async function downloadUsersFiltered() {
+    console.log("Admin filter", adminFilter);
     try {
       setIsLoadingList(true);
       const response = await fetch("http://localhost:3000/api/users/search", {
@@ -72,6 +81,7 @@ export default function useAdminPage() {
   }
 
   useEffect(() => {
+    console.log("sss");
     downloadUsersFiltered();
   }, [adminFilter]);
 
@@ -87,5 +97,7 @@ export default function useAdminPage() {
     handleChangeFilterAdmin,
     isLoadingList,
     filteredUsersList,
+    resetAdminFilter,
+    adminFilter,
   };
 }

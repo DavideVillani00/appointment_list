@@ -83,7 +83,7 @@ export default function useModalAppointment() {
     const dateSelectedTimeStamp = new Date(`${date}T${time}`).getTime();
     const dateValidation =
       (dateSelectedTimeStamp > actualDateTimeStamp ||
-        dateSelectedTimeStamp > oldDateTimeStamp) &&
+        dateSelectedTimeStamp >= oldDateTimeStamp) &&
       dateSelectedTimeStamp < maxDateTimeStamp;
 
     let err = false;

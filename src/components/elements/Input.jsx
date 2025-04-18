@@ -42,7 +42,7 @@ export default function Input({
         onChange={handleChange}
         type={type === "password" && !isFocus ? "password" : "text"}
         {...props}
-        className={`w-full rounded-lg p-4  text-lg outline-0 text-placeholder dark:text-placeholderDark ${
+        className={`w-full rounded-lg p-4  text-lg outline-0   ${
           img ? "pl-15" : ""
         } ${classInput}`}
       />
