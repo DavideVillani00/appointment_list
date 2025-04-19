@@ -47,13 +47,19 @@ export default function TopAdminPage() {
       <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-text2 dark:text-text2Dark">
           <p>
-            {t("Total")}: {usersList.length}
+            {t("Total")} : <span className="font-bold">{usersList.length}</span>
           </p>
           <p>
-            {t("Admins")}: {usersList.filter((u) => u.role === "Admin").length}
+            {t("Admins")} :{" "}
+            <span className="font-bold">
+              {usersList.filter((u) => u.role === "Admin").length}
+            </span>
           </p>
           <p>
-            {t("Users")}: {usersList.filter((u) => u.role === "User").length}
+            {t("Users")} :{" "}
+            <span className="font-bold">
+              {usersList.filter((u) => u.role === "User").length}
+            </span>
           </p>
         </div>
 
@@ -61,13 +67,13 @@ export default function TopAdminPage() {
           img={theme === "dark" ? iconFilterDark : iconFilterLight}
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
-          def={t(adminFilter.role) || t("All")}
+          def={(adminFilter.role && t(`${adminFilter.role}s`)) || t("All")}
           name="role"
           onHandleChange={handleChangeFilterAdmin}
         >
           <option>{t("All")}</option>
-          <option>{t("Admin")}</option>
-          <option>{t("User")}</option>
+          <option>{t("Admins")}</option>
+          <option>{t("Users")}</option>
         </Select>
         <hr />
       </div>

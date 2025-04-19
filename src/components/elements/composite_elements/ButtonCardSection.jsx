@@ -17,12 +17,12 @@ export default function ButtonCardSection({
   const { t } = useTranslation();
   return (
     <div
-      className={`flex  md:flex-col md:justify-center md:self-center gap-2 border-t-[2px] pt-4 md:pt-0 md:border-0 md:border-r-[2px] md:pr-4 border-divider dark:border-dividerDark ${className}`}
+      className={`flex  md:flex-col md:justify-center md:self-center gap-1 border-t-[2px] pt-3 md:pt-0 md:border-0 md:border-r-[2px] md:pr-4 border-divider dark:border-dividerDark ${className}`}
     >
       <Button
         img={img}
         alt={alt}
-        className="primaryBtn rounded-xl p-3 flex-2/3 "
+        className="primaryBtn rounded-xl px-2 py-3  "
         onClick={() => onClickBtn(id)}
       >
         {value}
@@ -33,7 +33,7 @@ export default function ButtonCardSection({
       <Button
         img={iconDelete}
         alt="delete icon"
-        className={`deleteBtn rounded-xl p-3 flex-1/3 ${
+        className={`deleteBtn rounded-xl px-4 py-3 flex-3/5 ${
           userState.id == id && actualPage === "admin" ? "opacity-50" : ""
         }`}
         onClick={() =>

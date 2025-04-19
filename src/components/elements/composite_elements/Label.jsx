@@ -13,7 +13,7 @@ export default function Label({ children, label, def, ...props }) {
 
   return (
     <div className="w-full relative">
-      <label className="text-lg">{label}</label>
+      <label className="text-lg text-text1 dark:text-text1Dark">{label}</label>
       {children ? (
         <Select
           def={def}

@@ -98,15 +98,18 @@ export default function TopMain() {
       <div className="mt-1 p-3 flex flex-col gap-5 md:flex-row md:justify-center items-center">
         <div className="flex justify-center gap-4 text-text2 dark:text-text2Dark">
           <p>
-            {t("Total")}: {appointmentSortered.length}
+            {t("Total")} :{" "}
+            <span className="font-bold">{appointmentSortered.length}</span>
           </p>
           <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
           <p>
-            {t("Completed")}: {appointmentCompleted.length}
+            {t("Completed :")}{" "}
+            <span className="font-bold">{appointmentCompleted.length}</span>
           </p>
           <span className=" w-[2px] h-auto  bg-divider dark:bg-dividerDark "></span>
           <p>
-            {t("Uncompleted")}: {appointmentUncompleted.length}
+            {t("Uncompleted :")}{" "}
+            <span className="font-bold">{appointmentUncompleted.length}</span>
           </p>
         </div>
 

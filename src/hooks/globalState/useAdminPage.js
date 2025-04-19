@@ -33,10 +33,6 @@ export default function useAdminPage() {
     userIdSelected.current = null;
     setIsEdit(false);
     resetAdminFilter();
-    // setAdminFilter({
-    //   userName: null,
-    //   role: null,
-    // });
   }
 
   function resetAdminFilter() {
@@ -47,7 +43,10 @@ export default function useAdminPage() {
   }
 
   function handleChangeFilterAdmin(name, value) {
+    console.log(name, value);
     value = value === t("All") ? null : value;
+    value = value === t("Admins") ? "Admin" : value;
+    value = value === t("Users") ? "User" : value;
     setAdminFilter((preState) => {
       return {
         ...preState,

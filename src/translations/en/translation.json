@@ -34,6 +34,8 @@
   "All": "All",
   "Completed": "Completed",
   "Uncompleted": "Uncompleted",
+  "Completed:": "Completed",
+  "Uncompleted:": "Uncompleted",
   "Total": "Total",
   "Delete": "Delete",
   "Edit": "Edit",

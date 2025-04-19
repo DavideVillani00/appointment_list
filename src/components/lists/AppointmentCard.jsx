@@ -28,15 +28,13 @@ export default function AppointmentCard({
 
   return (
     <li
-      className={`w-full my-5 rounded-md flex flex-col relative cardModalStyle ${
-        check ? "opacity-70" : "opacity-100"
-      }`}
+      className={`w-full my-5 rounded-md flex flex-col relative cardModalStyle `}
     >
       <img
         src={theme === "dark" ? writeIconDark : writeIconLight}
         onClick={() => handleOpenModalAppointment(id)}
         alt="edit icon"
-        className={`absolute p-3 md:px-5 top-0 right-0 bg-uncomplete/10 ${
+        className={`absolute p-3 md:px-5 top-0 right-0 bg-uncomplete/10 cursor-pointer  ${
           userState.role === "Admin" ? "" : "rounded-bl-md"
         } rounded-tr-md`}
       />
@@ -45,8 +43,10 @@ export default function AppointmentCard({
           <span>@{userName}</span>
         </div>
       )}
-      <div className="p-3 md:p-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end ">
-        <div className=" p-3  flex-3/4 ">
+      <div className="px-1 py-2 md:p-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end ">
+        <div
+          className={`p-3  flex-3/4 ${check ? "opacity-40" : "opacity-100"}`}
+        >
           <p className="text-lg font-bold mb-3 text-placeholder dark:text-placeholderDark">
             {date} {time}
           </p>

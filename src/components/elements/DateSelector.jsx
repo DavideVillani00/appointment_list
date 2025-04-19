@@ -31,7 +31,7 @@ export default function DateSelector({
 
   return (
     <div
-      className={`input w-full text-lg  relative p-[18px] rounded-lg  flex gap-4 items-centers ${
+      className={`input w-full text-lg  relative py-[18px] px-4 rounded-lg  flex gap-3 items-center ${
         err
           ? "dark:border-deleteDark border-delete"
           : "border-border dark:border-borderDark"
