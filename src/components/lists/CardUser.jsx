@@ -2,9 +2,13 @@ import useModalUser from "../../hooks/modal/useModalUser.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
 import CardInfo from "../elements/composite_elements/CardInfo.jsx";
 import editIcon from "../../assets/icons/beautyIcons/icon-edit-27.png";
+import arrowIconDark from "../../assets/icons/beautyIcons/icon-arrow-down-dark-27.png";
+import arrowIconLight from "../../assets/icons/beautyIcons/icon-arrow-down-light-27.png";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "../../ContextProvider.jsx";
 export default function CardUser({ user }) {
+  const { theme } = useContext(Context).globalThemeState;
   const { handleOpenModalUser } = useModalUser();
   const { t } = useTranslation();
   const {
@@ -18,27 +22,45 @@ export default function CardUser({ user }) {
     gender,
     company,
   } = user;
-  const { selectedCard, setSelectedCard } = useState(false);
+  const [selectedCard, setSelectedCard] = useState(false);
+
+  function handleOpenInfoUser() {
+    setSelectedCard(true);
+  }
+  function handleCloseInfoUser() {
+    setSelectedCard(false);
+  }
 
   return (
-    <li className="flex flex-col md:flex-row-reverse gap-3 cardModalStyle p-4 rounded-md md:max-w-10/14 min-w-11/12  ">
-      <div className="flex  gap-2 flex-col justify-center">
-        <div className="flex gap-2 w-full">
+    <li className="flex flex-col md:flex-row-reverse gap-3 cardModalStyle p-4 rounded-md w-full  ">
+      <div
+        tabIndex={0}
+        className="flex  gap-2 flex-col justify-center flex-auto items-center cursor-pointer"
+        onClick={handleOpenInfoUser}
+        onBlur={handleCloseInfoUser}
+      >
+        <div className="flex gap-2 w-full flex-auto flex-wrap">
           <CardInfo label={t("Id")} info={id} />
           <CardInfo label={t("Username")} info={userName} />
-          <CardInfo
-            label={t("Role")}
-            info={t(role) === "Amministratore" ? "Ammin." : t(role)}
-          />
+          <CardInfo label={t("Role")} info={t(role)} />
         </div>
-        <div className={`flex gap-3 flex-wrap `}>
-          <CardInfo label={t("Email")} info={email} />
-          <CardInfo label={t("Password")} info={password} />
-          <CardInfo label={t("First name")} info={name} />
-          <CardInfo label={t("Last name")} info={surname} />
-          <CardInfo label={t("Gender")} info={t(`${gender}`)} />
-          <CardInfo label={t("Company")} info={company} />
-        </div>
+        {!selectedCard ? (
+          <div className=" w-full flex justify-center rounded-lg mt-1 p-2 bg-bg dark:bg-bgDark">
+            <img
+              src={theme === "dark" ? arrowIconDark : arrowIconLight}
+              alt="expand arrow icon"
+            />
+          </div>
+        ) : (
+          <div className={`flex gap-3 flex-wrap w-full`}>
+            <CardInfo label={t("Email")} info={email} />
+            <CardInfo label={t("Password")} info={password} />
+            <CardInfo label={t("First name")} info={name} />
+            <CardInfo label={t("Last name")} info={surname} />
+            <CardInfo label={t("Gender")} info={t(`${gender}`)} />
+            <CardInfo label={t("Company")} info={company} />
+          </div>
+        )}
       </div>
       <ButtonCardSection
         img={editIcon}

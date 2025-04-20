@@ -47,10 +47,10 @@ export default function AppointmentCard({
         <div
           className={`p-3  flex-3/4 ${check ? "opacity-40" : "opacity-100"}`}
         >
-          <p className="text-lg font-bold mb-3 text-placeholder dark:text-placeholderDark">
+          <p className="text-xl font-bold mb-3 text-placeholder dark:text-placeholderDark">
             {date} {time}
           </p>
-          <p>{title}</p>
+          <p className="text-lg">{title}</p>
         </div>
         <ButtonCardSection
           id={id}

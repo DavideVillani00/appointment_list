@@ -8,7 +8,7 @@ import addIcon from "../assets/icons/beautyIcons/icon-add-27.png";
 import calendarIconLight from "../assets/icons/beautyIcons/icon-calendar-light-27.png";
 import calendarIconDark from "../assets/icons/beautyIcons/icon-calendar-dark-27.png";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../ContextProvider.jsx";
 import Input from "./elements/Input.jsx";
 import Select from "./elements/Select.jsx";
@@ -18,9 +18,6 @@ import useSorter from "../hooks/useSorter.js";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
 import useModalAppointment from "../hooks/modal/useModalAppointment.js";
 import { useTranslation } from "react-i18next";
-
-// !! da sisteare
-//!!
 
 export default function TopMain() {
   const { usersList, userState, appointmentsList } =
