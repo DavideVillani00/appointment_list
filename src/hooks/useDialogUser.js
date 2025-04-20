@@ -45,6 +45,11 @@ export default function useDialogUser() {
   }
 
   function handleChangeSelect(name, value) {
+    value = value === t("Other") ? "Other" : value;
+    value = value === t("Male") ? "Male" : value;
+    value = value === t("Female") ? "Female" : value;
+    value = value === t("Admin") ? "Admin" : value;
+    value = value === t("User") ? "User" : value;
     setInputAdminState((preState) => {
       return { ...preState, [name]: { value, err: false } };
     });

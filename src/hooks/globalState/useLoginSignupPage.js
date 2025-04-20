@@ -29,6 +29,9 @@ export default function useLoginSignupPage() {
     });
   }
   function handleChangeSelect(name, value) {
+    value = value === t("Male") ? "Male" : value;
+    value = value === t("Female") ? "Female" : value;
+    value = value === t("Other") ? "Other" : value;
     setInputLoginSignupPage((preState) => {
       return { ...preState, [name]: { value, err: false } };
     });

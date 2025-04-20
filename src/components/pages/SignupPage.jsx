@@ -60,15 +60,15 @@ export default function SignupPage() {
         />
         <div className="flex flex-col w-full md:flex-row  gap-5">
           <Label
-            placeholder={t("Enter your name")}
-            label={t("Name")}
+            placeholder={t("Enter your first name")}
+            label={t("First name")}
             onChange={handleChangeInput}
             name="name"
             err={inputLoginSignupPage.name.err}
           />
           <Label
-            placeholder={t("Enter your surname")}
-            label={t("Surname")}
+            placeholder={t("Enter your last name")}
+            label={t("Last name")}
             onChange={handleChangeInput}
             name="surname"
             err={inputLoginSignupPage.surname.err}
@@ -85,9 +85,9 @@ export default function SignupPage() {
             name="gender"
             err={inputLoginSignupPage.gender.err}
           >
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
+            <option>{t("Male")}</option>
+            <option>{t("Female")}</option>
+            <option>{t("Other")}</option>
           </Label>
           <Label
             placeholder={t("Enter your company")}

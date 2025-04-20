@@ -43,7 +43,6 @@ export default function useAdminPage() {
   }
 
   function handleChangeFilterAdmin(name, value) {
-    console.log(name, value);
     value = value === t("All") ? null : value;
     value = value === t("Admins") ? "Admin" : value;
     value = value === t("Users") ? "User" : value;
@@ -56,7 +55,6 @@ export default function useAdminPage() {
   }
 
   async function downloadUsersFiltered() {
-    console.log("Admin filter", adminFilter);
     try {
       setIsLoadingList(true);
       const response = await fetch("http://localhost:3000/api/users/search", {
@@ -80,7 +78,6 @@ export default function useAdminPage() {
   }
 
   useEffect(() => {
-    console.log("sss");
     downloadUsersFiltered();
   }, [adminFilter]);
 

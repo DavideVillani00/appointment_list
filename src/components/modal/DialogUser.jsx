@@ -13,8 +13,9 @@ import { useTranslation } from "react-i18next";
 
 export default function DialogUser() {
   const { t } = useTranslation();
+  const { userState } = useContext(Context).globalProjectState;
   const { theme } = useContext(Context).globalThemeState;
-  const { dialogUser, isEdit, inputAdminState } =
+  const { dialogUser, isEdit, inputAdminState, userIdSelected } =
     useContext(Context).globalAdminPage;
 
   const {
@@ -24,6 +25,7 @@ export default function DialogUser() {
     handleSendRequest,
     ERROR_MESSAGES_ADMIN,
   } = useDialogUser();
+  console.log(userIdSelected, userState);
 
   return (
     <dialog
@@ -48,14 +50,16 @@ export default function DialogUser() {
           <Label
             placeholder={t("Enter a role")}
             label={t("Role")}
-            def={inputAdminState.role.value || t("Enter a role")}
+            def={t(inputAdminState.role.value) || t("Enter a role")}
             name="role"
             value={inputAdminState.role.value}
             err={inputAdminState.role.err}
             onHandleChange={(name, value) => handleChangeSelect(name, value)}
           >
-            <option>Admin</option>
-            <option>User</option>
+            <option>{t("Admin")}</option>
+            {userState.id !== userIdSelected.current && (
+              <option>{t("User")}</option>
+            )}
           </Label>
           <Label
             type="text"
