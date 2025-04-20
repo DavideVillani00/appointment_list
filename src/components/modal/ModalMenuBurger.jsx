@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import i18next from "i18next";
 
-export default function DialogMenuBurger({ isOpen }) {
+export default function ModalMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   const { userState, actualPage } = useContext(Context).globalProjectState;
   const [handleLanguage, setHandleLanguage] = useState(null);
@@ -36,13 +36,16 @@ export default function DialogMenuBurger({ isOpen }) {
 
   return (
     <div
-      className={`cardModalStyle flex flex-col justify-center items-center p-5 rounded-md gap-4 w-60 absolute top-11 right-[-88px] md:right-[32px] md:rounded-tr-none z-20 origin-top md:origin-top-right ${
+      className={`cardModalStyle flex flex-col justify-center items-center p-2 rounded-md gap-2 w-60 absolute top-11 right-[-88px] md:right-[32px] md:rounded-tr-none z-20 origin-top md:origin-top-right ${
         isOpen ? "scale-100" : "scale-0"
       } transition-transform duration-150`}
     >
       {userState && userState.role === "Admin" && (
         <>
-          <Link to={actualPage === "home" ? "/admin" : "/"}>
+          <Link
+            to={actualPage === "home" ? "/admin" : "/"}
+            className="bg-bg dark:bg-bgDark hover:bg-bg2 dark:hover:bg-bg2Dark w-full p-4 rounded-lg flex justify-center  "
+          >
             <img
               src={
                 theme === "dark"
@@ -54,38 +57,50 @@ export default function DialogMenuBurger({ isOpen }) {
                   : iconHomeLight
               }
               alt="users icon"
-              className="w-12"
+              className="w-12 "
             />
           </Link>
           <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
         </>
       )}
-      <img
+      <div
         onClick={handleTheme}
-        src={theme === "dark" ? iconMoon : iconSun}
-        alt="switch color icon"
-        className={`${
-          theme === "dark" ? "rotate-0 w-12" : "rotate-180 w-[50px]"
-        } transition-transform duration-200 cursor-pointer`}
-      />
+        className="bg-bg dark:bg-bgDark hover:bg-bg2 dark:hover:bg-bg2Dark w-full p-4 rounded-lg flex justify-center cursor-pointer"
+      >
+        <img
+          src={theme === "dark" ? iconMoon : iconSun}
+          alt="switch color icon"
+          className={`${
+            theme === "dark" ? "rotate-0 w-12" : "rotate-180 w-[50px]"
+          } transition-transform duration-200  `}
+        />
+      </div>
       <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
-      <img
-        src={theme === "dark" ? iconLanguageDark : iconLanguageLight}
-        alt="change language icon"
-        className={`w-12 cursor-pointer ${
-          handleLanguage === "en" ? "rotate-360 " : "rotate-0 "
-        } transition-transform duration-200`}
+      <div
         onClick={handleChangeLanguage}
-      />
+        className="bg-bg dark:bg-bgDark hover:bg-bg2 dark:hover:bg-bg2Dark w-full p-4 rounded-lg  flex justify-center cursor-pointer"
+      >
+        <img
+          src={theme === "dark" ? iconLanguageDark : iconLanguageLight}
+          alt="change language icon"
+          className={`w-12  ${
+            handleLanguage === "en" ? "rotate-360 " : "rotate-0 "
+          } transition-transform duration-200`}
+        />
+      </div>
       {userState && (
         <>
           <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
-          <img
+          <div
             onClick={handleLogout}
-            src={theme === "dark" ? iconLogoutDark : iconLogoutLight}
-            alt="logout icon"
-            className="w-12 cursor-pointer"
-          />
+            className="bg-bg dark:bg-bgDark hover:bg-bg2 dark:hover:bg-bg2Dark w-full p-4 rounded-lg flex justify-center cursor-pointer"
+          >
+            <img
+              src={theme === "dark" ? iconLogoutDark : iconLogoutLight}
+              alt="logout icon"
+              className="w-12 "
+            />
+          </div>
         </>
       )}
     </div>

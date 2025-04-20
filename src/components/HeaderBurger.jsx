@@ -3,7 +3,7 @@ import iconBurgerMenuDark from "../assets/icons/toggleIcons/icon-menu-dark-64.pn
 
 import { useContext, useState } from "react";
 import { Context } from "../ContextProvider.jsx";
-import DialogMenuBurger from "./modal/DialogMenuBurger.jsx";
+import ModalMenuBurger from "./modal/ModalMenuBurger.jsx";
 
 export default function HeaderBurger() {
   const { theme } = useContext(Context).globalThemeState;
@@ -34,7 +34,7 @@ export default function HeaderBurger() {
             isOpen ? "rotate-90" : "rotate-0"
           } transition-transform duration-150 cursor-pointer`}
         />
-        <DialogMenuBurger isOpen={isOpen} onCloseModal={handleCloseModal} />
+        <ModalMenuBurger isOpen={isOpen} onCloseModal={handleCloseModal} />
       </div>
     </>
   );

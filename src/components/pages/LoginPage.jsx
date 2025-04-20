@@ -5,7 +5,7 @@ import Label from "../elements/composite_elements/Label.jsx";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
 import ErrorList from "../lists/ErrorList.jsx";
-import DialogAlert from "../modal/DialogAlert.jsx";
+import ModalAlert from "../modal/ModalAlert.jsx";
 import useLogin from "../../hooks/useLogin.js";
 import { useTranslation } from "react-i18next";
 
@@ -20,9 +20,9 @@ export default function LoginPage() {
 
   return (
     <>
-      <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
+      <ModalAlert className={`${alertState ? "visible" : "invisible"}`}>
         {t("Logged in").toUpperCase()}
-      </DialogAlert>
+      </ModalAlert>
       <Header />
       <main className="flex flex-col justify-center items-center gap-7">
         <h1 className="text-3xl font-extrabold ">{t("Login").toUpperCase()}</h1>

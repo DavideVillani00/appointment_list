@@ -6,16 +6,16 @@ import { Context } from "../../ContextProvider.jsx";
 import { useContext } from "react";
 
 import Button from "../elements/Button.jsx";
-import useDialogUser from "../../hooks/useDialogUser.js";
+import useModalUser from "../../hooks/modal/useModalUser.js";
 import ErrorList from "../lists/ErrorList.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
 import { useTranslation } from "react-i18next";
 
-export default function DialogUser() {
+export default function ModalUser() {
   const { t } = useTranslation();
   const { userState } = useContext(Context).globalProjectState;
   const { theme } = useContext(Context).globalThemeState;
-  const { dialogUser, isEdit, inputAdminState, userIdSelected } =
+  const { modalUser, isEdit, inputAdminState, userIdSelected } =
     useContext(Context).globalAdminPage;
 
   const {
@@ -24,12 +24,11 @@ export default function DialogUser() {
     handleChangeSelect,
     handleSendRequest,
     ERROR_MESSAGES_ADMIN,
-  } = useDialogUser();
-  console.log(userIdSelected, userState);
+  } = useModalUser();
 
   return (
     <dialog
-      ref={dialogUser}
+      ref={modalUser}
       className="  backdrop:backdrop-blur-xs  w-8/9 p-5 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg border-4 cardModalStyle text-text1"
     >
       <div className="flex justify-between items-center ">

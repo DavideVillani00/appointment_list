@@ -3,23 +3,23 @@ import iconDelete from "../../assets/icons/toggleIcons/icon-delete-27.png";
 import { useContext } from "react";
 import { createPortal } from "react-dom";
 import { Context } from "../../ContextProvider.jsx";
-import useDialogDelete from "../../hooks/useDialogDelete.js";
+import useModalDelete from "../../hooks/modal/useModalDelete.js";
 import Button from "../elements/Button.jsx";
 import useHandleToggleButton from "../../hooks/useHandleToggleButton.js";
 import { useTranslation } from "react-i18next";
 
-export default function DialogDelete() {
+export default function ModalDelete() {
   const { actualPage } = useContext(Context).globalProjectState;
   const { handleDelete } = useHandleToggleButton();
-  const { dialogDelete, handleCloseDialogDelete } = useDialogDelete();
+  const { modalDelete, handleCloseModalDelete } = useModalDelete();
   const { t } = useTranslation();
 
   const modalRoot = document.getElementById("modal");
   if (!modalRoot) return null;
   return createPortal(
     <dialog
-      ref={dialogDelete}
-      onClose={handleCloseDialogDelete}
+      ref={modalDelete}
+      onClose={handleCloseModalDelete}
       className=" p-5 md:p-10 rounded-2xl place-self-center w-10/12 md:w-3xl md:items-center backdrop:backdrop-blur-xs border-4 cardModalStyle"
     >
       <div className="flex flex-col gap-10 place-self-center">
@@ -32,7 +32,7 @@ export default function DialogDelete() {
         <div className="flex flex-col gap-3 md:flex-row justify-center ">
           <Button
             className=" flex-2/3 primaryBtn w-full p-4 rounded-md"
-            onClick={handleCloseDialogDelete}
+            onClick={handleCloseModalDelete}
           >
             {t("No").toUpperCase()}
           </Button>
@@ -42,7 +42,7 @@ export default function DialogDelete() {
             className="flex-1/3 deleteBtn w-full p-4 rounded-md"
             onClick={() => {
               handleDelete();
-              handleCloseDialogDelete();
+              handleCloseModalDelete();
             }}
           >
             {t("Delete").toUpperCase()}

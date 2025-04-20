@@ -9,7 +9,7 @@ export default function useModalAppointment() {
   const { userState, setAppointmentsList } =
     useContext(Context).globalProjectState;
   const {
-    dialogAppointment,
+    modalAppointment,
     setIsEdit,
     resetInputHomeState,
     setInputHomeState,
@@ -27,14 +27,14 @@ export default function useModalAppointment() {
       handleUploadAppointmentInfo();
       setIsEdit(true);
     }
-    dialogAppointment.current.showModal();
+    modalAppointment.current.showModal();
     document.documentElement.classList.add("overflow-hidden");
   }
 
   function handleCloseModalAppointment() {
     ERROR_MESSAGES_HOME = [];
     resetInputHomeState();
-    dialogAppointment.current.close();
+    modalAppointment.current.close();
     document.documentElement.classList.remove("overflow-hidden");
   }
 

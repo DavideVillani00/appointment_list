@@ -3,7 +3,7 @@ import { useContext } from "react";
 import Header from "../Header.jsx";
 import Button from "../elements/Button.jsx";
 import Label from "../elements/composite_elements/Label.jsx";
-import DialogAlert from "../modal/DialogAlert.jsx";
+import ModalAlert from "../modal/ModalAlert.jsx";
 import ErrorList from "../lists/ErrorList.jsx";
 import useSignup from "../../hooks/useSignup.js";
 import { Context } from "../../ContextProvider.jsx";
@@ -27,9 +27,9 @@ export default function SignupPage() {
 
   return (
     <>
-      <DialogAlert className={`${alertState ? "visible" : "invisible"}`}>
+      <ModalAlert className={`${alertState ? "visible" : "invisible"}`}>
         {t("Registration successful").toUpperCase()}
-      </DialogAlert>
+      </ModalAlert>
       <Header />
 
       <h1 className="text-3xl font-extrabold text-center">

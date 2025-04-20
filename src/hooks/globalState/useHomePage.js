@@ -22,7 +22,7 @@ const INPUT_HOME_FILTER_DEFAULT = {
 export default function useHomePage() {
   const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState(false);
-  const dialogAppointment = useRef(null);
+  const modalAppointment = useRef(null);
   const appointmentIdSelected = useRef(null);
 
   const [inputHomeState, setInputHomeState] = useState(INPUT_STATE_DEFAULT);
@@ -93,7 +93,7 @@ export default function useHomePage() {
   return {
     isEdit,
     setIsEdit,
-    dialogAppointment,
+    modalAppointment,
     appointmentIdSelected,
     inputHomeState,
     setInputHomeState,

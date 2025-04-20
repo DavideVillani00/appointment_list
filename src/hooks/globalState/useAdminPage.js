@@ -15,7 +15,7 @@ export default function useAdminPage() {
   };
 
   const [isEdit, setIsEdit] = useState(false);
-  const dialogUser = useRef(null);
+  const modalUser = useRef(null);
   const userIdSelected = useRef(null);
 
   const [inputAdminState, setInputAdminState] = useState(inputStateDefault);
@@ -84,7 +84,7 @@ export default function useAdminPage() {
   return {
     isEdit,
     setIsEdit,
-    dialogUser,
+    modalUser,
     userIdSelected,
     inputAdminState,
     setInputAdminState,

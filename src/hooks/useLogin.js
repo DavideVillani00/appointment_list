@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Context } from "../ContextProvider";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useAuth from "./useAuth.js";
 
 let ERROR_MESSAGES_LOGIN = [];
 export default function useLogin() {
   const { t } = useTranslation();
+  const { navigateRedirector } = useAuth();
   const navigate = useNavigate();
   const { inputLoginSignupPage, resetInputLoginSignupPage, handleChangeErr } =
     useContext(Context).globalLoginSignupPage;
@@ -55,14 +57,7 @@ export default function useLogin() {
 
       localStorage.setItem("token", data.token);
       resetInputLoginSignupPage();
-      // setAlertState(true); //!!
-      document.documentElement.classList.add("overflow-hidden");
-
-      setTimeout(() => {
-        // setAlertState(false); //!!
-        document.documentElement.classList.remove("overflow-hidden");
-        navigate("/");
-      }, 1000);
+      navigateRedirector("/");
     } catch (err) {
       return console.error("Error in fetch:", err);
     }

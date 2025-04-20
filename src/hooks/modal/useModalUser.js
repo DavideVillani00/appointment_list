@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { Context } from "../ContextProvider";
-import useAuth from "./useAuth";
+import { Context } from "../../ContextProvider";
+import useAuth from "../useAuth";
 import { useTranslation } from "react-i18next";
 
 let ERROR_MESSAGES_ADMIN = [];
-export default function useDialogUser() {
+export default function useModalUser() {
   const {
-    dialogUser,
+    modalUser,
     setIsEdit,
     resetInputAdminState,
     setInputAdminState,
@@ -23,14 +23,14 @@ export default function useDialogUser() {
       handleUploadUserInfo();
       setIsEdit(true);
     }
-    dialogUser.current.showModal();
+    modalUser.current.showModal();
     document.documentElement.classList.add("overflow-hidden");
   }
   function handleCloseModalUser() {
     ERROR_MESSAGES_ADMIN = [];
     downloadUsersList();
     resetInputAdminState();
-    dialogUser.current.close();
+    modalUser.current.close();
     document.documentElement.classList.remove("overflow-hidden");
   }
 

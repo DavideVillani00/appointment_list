@@ -13,7 +13,7 @@ export const Context = createContext({
   globalAdminPage: () => {},
   globalHomePage: () => {},
 
-  dialogDelete: () => {},
+  modalDelete: () => {},
   actualPage: null,
 });
 
@@ -25,7 +25,7 @@ export default function ContextProvider({ children }) {
   const globalHomePage = useHomePage();
   const globalLoginSignupPage = useLoginSignupPage();
 
-  const dialogDelete = useRef();
+  const modalDelete = useRef();
 
   const contValue = {
     globalProjectState,
@@ -35,7 +35,7 @@ export default function ContextProvider({ children }) {
     globalHomePage,
     globalLoginSignupPage,
 
-    dialogDelete,
+    modalDelete,
   };
   return <Context.Provider value={contValue}>{children}</Context.Provider>;
 }

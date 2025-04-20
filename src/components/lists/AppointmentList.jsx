@@ -1,7 +1,7 @@
 import iconLoading from "../../assets/icons/beautyIcons/icon-loading-48.png";
 
 import AppointmentCard from "./AppointmentCard.jsx";
-import DialogDelete from "../modal/DialogDelete.jsx";
+import ModalDelete from "../modal/ModalDelete.jsx";
 import useSorter from "../../hooks/useSorter.js";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
@@ -24,7 +24,7 @@ export default function AppointmentList() {
 
   return (
     <>
-      <DialogDelete />
+      <ModalDelete />
       <ul className="  m-2 p-5 rounded-md   flex flex-col items-center bg-bg2 dark:bg-bg2Dark border-none ">
         {isLoadingList ? (
           <img

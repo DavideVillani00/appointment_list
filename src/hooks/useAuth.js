@@ -16,14 +16,12 @@ export default function useAuth() {
 
   const path = location.pathname;
   useEffect(() => {
-    console.log("Path", path);
     if (path === "/") setActualPage("home");
     if (path === "/admin") setActualPage("admin");
     if (path !== "/login" && path !== "/signup") {
       handleCheckIsLogged();
-      // resetHomeFilter();
     }
-  }, [location]);
+  }, [location.pathname]);
 
   function handleCheckIsLogged() {
     const token = localStorage.getItem("token");

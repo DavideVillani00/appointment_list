@@ -22,9 +22,9 @@ import useModalAppointment from "../../hooks/modal/useModalAppointment.js";
 import ErrorList from "../lists/ErrorList.jsx";
 import { useTranslation } from "react-i18next";
 
-export default function DialogNew() {
+export default function ModalAppointment() {
   const { t } = useTranslation();
-  const { dialogAppointment, isEdit, inputHomeState } =
+  const { modalAppointment, isEdit, inputHomeState } =
     useContext(Context).globalHomePage;
   const { usersList, userState } = useContext(Context).globalProjectState;
   const { theme } = useContext(Context).globalThemeState;
@@ -41,7 +41,7 @@ export default function DialogNew() {
   return (
     <dialog
       onClose={handleCloseModalAppointment}
-      ref={dialogAppointment}
+      ref={modalAppointment}
       className="  backdrop:backdrop-blur-xs  w-8/9 p-6 md:p-8 rounded-2xl fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg border-4 cardModalStyle text-text1"
     >
       <div className="flex justify-between items-center ">

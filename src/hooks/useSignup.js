@@ -1,12 +1,14 @@
 import { useContext } from "react";
-import { Context } from "../ContextProvider";
+import { Context } from "../ContextProvider.jsx";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useAuth from "./useAuth.js";
 
 let ERROR_MESSAGES_SIGNUP = [];
 export default function useSignup() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { navigateRedirector } = useAuth();
   const { inputLoginSignupPage, resetInputLoginSignupPage, handleChangeErr } =
     useContext(Context).globalLoginSignupPage;
 
@@ -105,14 +107,7 @@ export default function useSignup() {
       }
 
       resetInputLoginSignupPage();
-      //   setAlertState(true); //!!
-      document.documentElement.classList.add("overflow-hidden");
-
-      setTimeout(() => {
-        // setAlertState(false); // !!
-        document.documentElement.classList.remove("overflow-hidden");
-        navigate("/login");
-      }, 1000);
+      navigateRedirector("/login");
     } catch (err) {
       return console.error("Error in fetch:", err);
     }

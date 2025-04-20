@@ -9,7 +9,7 @@ import { Context } from "../ContextProvider.jsx";
 import Select from "./elements/Select.jsx";
 import Button from "./elements/Button.jsx";
 import OptionUsersName from "./lists/OptionUsersName.jsx";
-import useDialogUser from "../hooks/useDialogUser.js";
+import useModalUser from "../hooks/modal/useModalUser.js";
 import { useTranslation } from "react-i18next";
 
 export default function TopAdminPage() {
@@ -18,7 +18,7 @@ export default function TopAdminPage() {
   const { usersList } = useContext(Context).globalProjectState;
   const { handleChangeFilterAdmin, adminFilter } =
     useContext(Context).globalAdminPage;
-  const { handleOpenModalUser } = useDialogUser();
+  const { handleOpenModalUser } = useModalUser();
 
   return (
     <>

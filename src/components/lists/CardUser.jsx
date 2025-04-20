@@ -1,11 +1,11 @@
-import useDialogUser from "../../hooks/useDialogUser.js";
+import useModalUser from "../../hooks/modal/useModalUser.js";
 import ButtonCardSection from "../elements/composite_elements/ButtonCardSection.jsx";
 import CardInfo from "../elements/composite_elements/CardInfo.jsx";
 import editIcon from "../../assets/icons/beautyIcons/icon-edit-27.png";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 export default function CardUser({ user }) {
-  const { handleOpenModalUser } = useDialogUser();
+  const { handleOpenModalUser } = useModalUser();
   const { t } = useTranslation();
   const {
     id,

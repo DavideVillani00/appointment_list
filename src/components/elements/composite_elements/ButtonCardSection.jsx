@@ -1,5 +1,5 @@
 import Button from "../Button.jsx";
-import useDialogDelete from "../../../hooks/useDialogDelete.js";
+import useModalDelete from "../../../hooks/modal/useModalDelete.js";
 import iconDelete from "../../../assets/icons/toggleIcons/icon-delete-27.png";
 import { Context } from "../../../ContextProvider.jsx";
 import { useContext } from "react";
@@ -13,7 +13,7 @@ export default function ButtonCardSection({
   className = "",
 }) {
   const { userState, actualPage } = useContext(Context).globalProjectState;
-  const { handleOpenDialogDelete } = useDialogDelete();
+  const { handleOpenModalDelete } = useModalDelete();
   const { t } = useTranslation();
   return (
     <div
@@ -39,7 +39,7 @@ export default function ButtonCardSection({
         onClick={() =>
           userState.id == id && actualPage === "admin"
             ? null
-            : handleOpenDialogDelete(id)
+            : handleOpenModalDelete(id)
         }
       >
         {t("Delete").toUpperCase()}

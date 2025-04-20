@@ -1,4 +1,4 @@
-import DialogDelete from "../modal/DialogDelete.jsx";
+import ModalDelete from "../modal/ModalDelete.jsx";
 import CardUser from "../lists/CardUser.jsx";
 import { useContext } from "react";
 import { Context } from "../../ContextProvider.jsx";
@@ -10,7 +10,7 @@ export default function UsersList() {
 
   return (
     <>
-      <DialogDelete />
+      <ModalDelete />
       <ul className="m-2 p-5 rounded-md gap-5  flex flex-col items-center bg-bg2 dark:bg-bg2Dark border-none">
         {!isLoadingList &&
           (filteredUsersList.length === 0 ? (
