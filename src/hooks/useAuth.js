@@ -9,6 +9,8 @@ export default function useAuth() {
     setPageLoading,
     setAlertState,
     setActualPage,
+    usersList,
+    userState,
   } = useContext(Context).globalProjectState;
 
   const location = useLocation();
@@ -25,11 +27,11 @@ export default function useAuth() {
 
   function handleCheckIsLogged() {
     const token = localStorage.getItem("token");
-    if (token) {
-      handleAuthenticateToken(token);
-    } else {
-      navigateRedirector("/login");
-    }
+    if (!token) return navigateRedirector("/login");
+
+    if (userState) return;
+
+    handleAuthenticateToken(token);
   }
 
   function navigateRedirector(to) {
@@ -57,7 +59,8 @@ export default function useAuth() {
       }
 
       setUserState(data);
-      downloadUsersList();
+      if (!usersList) downloadUsersList();
+
       setPageLoading(false);
     } catch (err) {
       console.error("Error fetch:", err);

@@ -18,13 +18,13 @@ import i18next from "i18next";
 export default function ModalMenuBurger({ isOpen }) {
   const { theme, handleTheme } = useContext(Context).globalThemeState;
   const { userState, actualPage } = useContext(Context).globalProjectState;
-  const [handleLanguage, setHandleLanguage] = useState(null);
+  // const [handleLanguage, setHandleLanguage] = useState(null);
   const languageRef = useRef(i18next.language);
 
   const { handleLogout } = useAuth();
 
   function handleChangeLanguage() {
-    setHandleLanguage((prev) => (prev === "en" ? "it" : "en"));
+    // setHandleLanguage((prev) => (prev === "en" ? "it" : "en"));
     if (languageRef.current === "en") {
       languageRef.current = "it";
     } else if (languageRef.current === "it") {
@@ -78,13 +78,14 @@ export default function ModalMenuBurger({ isOpen }) {
       <span className="w-full h-0.5 bg-divider dark:bg-dividerDark"></span>
       <div
         onClick={handleChangeLanguage}
-        className="bg-bg dark:bg-bgDark hover:bg-bg2 dark:hover:bg-bg2Dark w-full p-4 rounded-lg  flex justify-center cursor-pointer"
+        className="bg-bg dark:bg-bgDark hover:bg-bg2 dark:hover:bg-bg2Dark w-full p-4 rounded-lg  flex justify-center items-center gap-2 cursor-pointer"
       >
+        <span className="text-lg">{languageRef.current.toUpperCase()}</span>
         <img
           src={theme === "dark" ? iconLanguageDark : iconLanguageLight}
           alt="change language icon"
           className={`w-12  ${
-            handleLanguage === "en" ? "rotate-360 " : "rotate-0 "
+            languageRef.current === "en" ? "rotate-360 " : "rotate-0 "
           } transition-transform duration-200`}
         />
       </div>
