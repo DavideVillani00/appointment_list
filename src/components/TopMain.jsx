@@ -28,7 +28,6 @@ export default function TopMain() {
     useContext(Context).globalHomePage;
   const { handleOpenModalAppointment, getAllAppointment } =
     useModalAppointment();
-
   const appointments =
     userState.role === "Admin"
       ? appointmentsList
@@ -36,7 +35,6 @@ export default function TopMain() {
 
   const { appointmentCompleted, appointmentSortered, appointmentUncompleted } =
     useSorter().sort(appointments);
-
   useEffect(() => {
     getAllAppointment();
   }, []);
@@ -115,7 +113,7 @@ export default function TopMain() {
           alt="filter icon"
           className="w-60 py-3 rounded-2xl "
           def={t("All")}
-          name="check"
+          name="done"
           onHandleChange={handleChangeFilterHome}
         >
           <option>{t("All")}</option>

@@ -8,7 +8,7 @@ export default function OptionUsersName({ users, allOption = false }) {
 
   if (!userState || !users) return null;
 
-  const all = { userName: t("All"), id: "All" };
+  const all = { userName: t("All"), userId: "All" };
 
   const userLogged = users.find((u) => {
     return u.userName === userState.userName;
@@ -25,6 +25,6 @@ export default function OptionUsersName({ users, allOption = false }) {
   }
 
   return userList.map((u) => {
-    return <option key={u.id}>{u.userName}</option>;
+    return <option key={u.userId}>{u.userName}</option>;
   });
 }

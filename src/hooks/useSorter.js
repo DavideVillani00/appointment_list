@@ -2,7 +2,7 @@ export default function useSorter() {
   function sort(list = []) {
     const appointmentCompleted = list
       .filter((app) => {
-        return app.check;
+        return app.done;
       })
       .sort((a, b) => {
         return (
@@ -13,7 +13,7 @@ export default function useSorter() {
 
     const appointmentUncompleted = list
       .filter((app) => {
-        return !app.check;
+        return !app.done;
       })
       .sort((a, b) => {
         return (

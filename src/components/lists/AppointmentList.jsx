@@ -36,7 +36,7 @@ export default function AppointmentList() {
           <p>{t("There isn't any appointments")}</p>
         ) : (
           appointments.map((app) => {
-            return <AppointmentCard key={app.id} {...app} />;
+            return <AppointmentCard key={app.appointmentId} {...app} />;
           })
         )}
       </ul>

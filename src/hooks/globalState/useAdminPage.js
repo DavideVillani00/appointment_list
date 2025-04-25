@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 
 export default function useAdminPage() {
   const inputStateDefault = {
-    id: { value: null, err: false },
+    userId: { value: null, err: false },
     role: { value: null, err: false },
     userName: { value: "", err: false },
     email: { value: "", err: false },
     password: { value: "", err: false },
-    name: { value: "", err: false },
-    surname: { value: "", err: false },
+    firstName: { value: "", err: false },
+    lastName: { value: "", err: false },
     company: { value: "", err: false },
     gender: { value: null, err: false },
   };

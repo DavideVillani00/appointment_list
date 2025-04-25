@@ -6,7 +6,7 @@ const FORMATTED_INPUT = {
   time: "--:--",
 };
 const INPUT_STATE_DEFAULT = {
-  id: { value: null, err: false },
+  appointmentId: { value: null, err: false },
   title: { value: "", err: false },
   userName: { value: "", err: false },
   date: { value: FORMATTED_INPUT.date, err: false },
@@ -17,7 +17,7 @@ const INPUT_HOME_FILTER_DEFAULT = {
   title: "",
   date: FORMATTED_INPUT.date,
   userName: null,
-  check: null,
+  done: null,
 };
 export default function useHomePage() {
   const { t } = useTranslation();
@@ -42,6 +42,7 @@ export default function useHomePage() {
   }
 
   function handleChangeFilterHome(name, value) {
+    console.log("name", name, "value", value);
     value = value === t("All") ? null : value;
     value = value === t("Completed") ? true : value;
     value = value === t("Uncompleted") ? false : value;
@@ -60,7 +61,7 @@ export default function useHomePage() {
         title: homeFilter.title === "" ? null : homeFilter.title,
         date: homeFilter.date === FORMATTED_INPUT.date ? null : homeFilter.date,
         userName: homeFilter.userName,
-        check: homeFilter.check,
+        done: homeFilter.done,
       };
       setIsLoadingList(true);
       const response = await fetch(

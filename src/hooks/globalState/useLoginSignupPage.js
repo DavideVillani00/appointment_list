@@ -4,8 +4,8 @@ const INPUT_STATE_DEFAULT = {
   userName: { value: "", err: false },
   email: { value: "", err: false },
   password: { value: "", err: false },
-  name: { value: "", err: false },
-  surname: { value: "", err: false },
+  firstName: { value: "", err: false },
+  lastName: { value: "", err: false },
   gender: { value: null, err: false },
   company: { value: "", err: false },
 };

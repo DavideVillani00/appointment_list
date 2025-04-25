@@ -20,8 +20,8 @@ export default function useSignup() {
     const userName = inputLoginSignupPage.userName.value;
     const email = inputLoginSignupPage.email.value;
     const password = inputLoginSignupPage.password.value;
-    const name = inputLoginSignupPage.name.value;
-    const surname = inputLoginSignupPage.surname.value;
+    const firstName = inputLoginSignupPage.firstName.value;
+    const lastName = inputLoginSignupPage.lastName.value;
     const gender = inputLoginSignupPage.gender.value;
     const company = inputLoginSignupPage.company.value;
 
@@ -40,12 +40,12 @@ export default function useSignup() {
       handleChangeErr("userName");
       err = true;
     }
-    if (!name) {
-      handleChangeErr("name");
+    if (!firstName) {
+      handleChangeErr("firstName");
       err = true;
     }
-    if (!surname) {
-      handleChangeErr("surname");
+    if (!lastName) {
+      handleChangeErr("lastName");
       err = true;
     }
     if (!gender) {
@@ -68,23 +68,23 @@ export default function useSignup() {
       err = true;
       ERROR_MESSAGES_SIGNUP.push(
         t(
-          "password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
+          "Password must contain uppercase, lowercase, numbers, special characters and must be at least 12 characters long"
         )
       );
     }
     if (err) {
       return;
     }
-    const id = Math.random() * 1000;
-    const role = "User";
+    // const id = Math.random() * 1000;
+    // const role = "User";
     const newUser = {
-      id,
-      role,
+      // id,
+      // role,
       userName,
       email,
       password,
-      name,
-      surname,
+      firstName,
+      lastName,
       gender,
       company,
     };

@@ -82,7 +82,7 @@ export default function useAuth() {
       });
       const data = await response.json();
       if (!response.ok) {
-        return console.error("Error in fetching users:", data.msg);
+        return console.error("Error in fetching users:", data.msg, data.err);
       }
       setUsersList(data);
     } catch (err) {

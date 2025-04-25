@@ -21,9 +21,9 @@ export default function useModalAppointment() {
   } = useContext(Context).globalHomePage;
   const { downloadUsersList } = useAuth();
 
-  function handleOpenModalAppointment(id = null) {
-    if (id) {
-      appointmentIdSelected.current = id;
+  function handleOpenModalAppointment(appointmentId = null) {
+    if (appointmentId) {
+      appointmentIdSelected.current = appointmentId;
       handleUploadAppointmentInfo();
       setIsEdit(true);
     }
@@ -131,13 +131,13 @@ export default function useModalAppointment() {
       if (!response.ok) {
         return console.error("Error in fetching appointment:", data.msg);
       }
-      const { id, title, userName, date, time } = data;
+      const { appointmentId, title, userName, date, time } = data;
       setInputHomeState({
-        id: { value: id, err: false },
+        appointmentId: { value: appointmentId, err: false },
         title: { value: title, err: false },
         userName: { value: userName, err: false },
-        date: { value: date, err: false },
-        time: { value: time, err: false },
+        date: { value: date.split("T")[0], err: false },
+        time: { value: time.slice(0, 5), err: false },
         oldDateTimeStamp: new Date(`${date}T${time}`).getTime(),
       });
     } catch (err) {
@@ -148,7 +148,7 @@ export default function useModalAppointment() {
   async function handlePushAppointment() {
     try {
       const obj = {
-        id: inputHomeState.id.value,
+        appointmentId: inputHomeState.appointmentId.value,
         userName: inputHomeState.userName.value.trim() || userState.userName,
         title: inputHomeState.title.value.trim(),
         date: inputHomeState.date.value,
@@ -165,10 +165,11 @@ export default function useModalAppointment() {
       });
       const data = await response.json();
       if (!response.ok) {
-        handleChangeErr(data.err);
+        // handleChangeErr(data.err);
         return console.error(
           "Error in fetching add/edit appointment:",
-          data.msg
+          data.msg,
+          data.err
         );
       }
       handleCloseModalAppointment();
@@ -187,6 +188,7 @@ export default function useModalAppointment() {
         headers: { "Content-Type": "application/json" },
       });
       const data = await response.json();
+
       if (response.ok) setAppointmentsList(data);
     } catch (err) {
       console.error("Error in fetch:", err);

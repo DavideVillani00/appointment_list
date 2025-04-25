@@ -56,7 +56,7 @@ export default function ModalUser() {
             onHandleChange={(name, value) => handleChangeSelect(name, value)}
           >
             <option>{t("Admin")}</option>
-            {userState.id !== userIdSelected.current && (
+            {userState.userId !== userIdSelected.current && (
               <option>{t("User")}</option>
             )}
           </Label>
@@ -84,7 +84,9 @@ export default function ModalUser() {
           <Label
             type="password"
             name="password"
-            placeholder={t("Enter a password")}
+            placeholder={
+              isEdit ? t("Click here for new password") : t("Enter a password")
+            }
             value={inputAdminState.password.value}
             onChange={handleChangeInput}
             err={inputAdminState.password.err}
@@ -94,20 +96,20 @@ export default function ModalUser() {
         <div className="flex flex-col w-full md:flex-row  gap-3 md:gap-5">
           <Label
             type="text"
-            name="name"
+            name="firstName"
             placeholder={t("Enter a first name")}
-            value={inputAdminState.name.value}
+            value={inputAdminState.firstName.value}
             onChange={handleChangeInput}
-            err={inputAdminState.name.err}
+            err={inputAdminState.firstName.err}
             label={t("First name")}
           />
           <Label
             type="text"
-            name="surname"
+            name="lastName"
             placeholder={t("Enter a last name")}
-            value={inputAdminState.surname.value}
+            value={inputAdminState.lastName.value}
             onChange={handleChangeInput}
-            err={inputAdminState.surname.err}
+            err={inputAdminState.lastName.err}
             label={t("Last name")}
           />
         </div>

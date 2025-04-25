@@ -17,7 +17,7 @@ export default function UsersList() {
             <li>{t("Subscribers not found")}</li>
           ) : (
             filteredUsersList.map((u) => {
-              return <CardUser key={u.id} user={u} />;
+              return <CardUser key={u.userId} user={u} />;
             })
           ))}
       </ul>

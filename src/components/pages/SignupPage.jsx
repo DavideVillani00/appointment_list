@@ -63,14 +63,14 @@ export default function SignupPage() {
             placeholder={t("Enter your first name")}
             label={t("First name")}
             onChange={handleChangeInput}
-            name="name"
+            name="firstName"
             err={inputLoginSignupPage.name.err}
           />
           <Label
             placeholder={t("Enter your last name")}
             label={t("Last name")}
             onChange={handleChangeInput}
-            name="surname"
+            name="lastName"
             err={inputLoginSignupPage.surname.err}
           />
         </div>

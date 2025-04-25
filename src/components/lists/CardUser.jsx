@@ -12,13 +12,13 @@ export default function CardUser({ user }) {
   const { handleOpenModalUser } = useModalUser();
   const { t } = useTranslation();
   const {
-    id,
+    userId,
     userName,
     role,
     email,
     password,
-    name,
-    surname,
+    firstName,
+    lastName,
     gender,
     company,
   } = user;
@@ -40,7 +40,7 @@ export default function CardUser({ user }) {
         onBlur={handleCloseInfoUser}
       >
         <div className="flex gap-2 w-full flex-auto flex-wrap">
-          <CardInfo label={t("Id")} info={id} />
+          <CardInfo label={t("Id")} info={userId} />
           <CardInfo label={t("Username")} info={userName} />
           <CardInfo label={t("Role")} info={t(role)} />
         </div>
@@ -55,8 +55,8 @@ export default function CardUser({ user }) {
           <div className={`flex gap-3 flex-wrap w-full`}>
             <CardInfo label={t("Email")} info={email} />
             <CardInfo label={t("Password")} info={password} />
-            <CardInfo label={t("First name")} info={name} />
-            <CardInfo label={t("Last name")} info={surname} />
+            <CardInfo label={t("First name")} info={firstName} />
+            <CardInfo label={t("Last name")} info={lastName} />
             <CardInfo label={t("Gender")} info={t(`${gender}`)} />
             <CardInfo label={t("Company")} info={company} />
           </div>
@@ -64,7 +64,7 @@ export default function CardUser({ user }) {
       </div>
       <ButtonCardSection
         img={editIcon}
-        id={id}
+        id={userId}
         value={t("Edit").toUpperCase()}
         onClickBtn={handleOpenModalUser}
         className="min-w-32"

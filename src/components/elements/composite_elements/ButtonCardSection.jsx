@@ -34,10 +34,10 @@ export default function ButtonCardSection({
         img={iconDelete}
         alt="delete icon"
         className={`deleteBtn rounded-xl px-4 py-3 flex-3/5 ${
-          userState.id == id && actualPage === "admin" ? "opacity-50" : ""
+          userState.userId == id && actualPage === "admin" ? "opacity-50" : ""
         }`}
         onClick={() =>
-          userState.id == id && actualPage === "admin"
+          userState.userId == id && actualPage === "admin"
             ? null
             : handleOpenModalDelete(id)
         }

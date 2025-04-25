@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { use, useContext } from "react";
 import { Context } from "../../ContextProvider";
 import useAuth from "../useAuth";
 import { useTranslation } from "react-i18next";
@@ -17,9 +17,9 @@ export default function useModalUser() {
   const { downloadUsersList } = useAuth();
   const { t } = useTranslation();
 
-  function handleOpenModalUser(id = null) {
-    if (id) {
-      userIdSelected.current = id;
+  function handleOpenModalUser(userId = null) {
+    if (userId) {
+      userIdSelected.current = userId;
       handleUploadUserInfo();
       setIsEdit(true);
     }
@@ -70,8 +70,8 @@ export default function useModalUser() {
     const userName = inputAdminState.userName.value.trim();
     const email = inputAdminState.email.value.trim();
     const password = inputAdminState.password.value.trim();
-    const name = inputAdminState.name.value.trim();
-    const surname = inputAdminState.surname.value.trim();
+    const firstName = inputAdminState.firstName.value.trim();
+    const lastName = inputAdminState.lastName.value.trim();
     const company = inputAdminState.company.value.trim();
     const gender = inputAdminState.gender.value;
 
@@ -95,20 +95,21 @@ export default function useModalUser() {
       handleChangeErr("userName");
       err = true;
     }
+
     if (!email) {
       handleChangeErr("email");
       err = true;
     }
-    if (!password) {
+    if (!password && !isEdit) {
       handleChangeErr("password");
       err = true;
     }
-    if (!name) {
-      handleChangeErr("name");
+    if (!firstName) {
+      handleChangeErr("firstName");
       err = true;
     }
-    if (!surname) {
-      handleChangeErr("surname");
+    if (!lastName) {
+      handleChangeErr("lastName");
       err = true;
     }
     if (!company) {
@@ -150,25 +151,26 @@ export default function useModalUser() {
       if (!response.ok) {
         return console.error("Error in fetching user:", data.msg);
       }
+      console.log("data", data);
       const {
-        id,
+        userId,
         role,
         userName,
         email,
         password,
-        name,
-        surname,
+        firstName,
+        lastName,
         gender,
         company,
       } = data;
       setInputAdminState({
-        id: { value: id, err: false },
+        userId: { value: userId, err: false },
         role: { value: role, err: false },
         userName: { value: userName, err: false },
         email: { value: email, err: false },
         password: { value: password, err: false },
-        name: { value: name, err: false },
-        surname: { value: surname, err: false },
+        firstName: { value: firstName, err: false },
+        lastName: { value: lastName, err: false },
         company: { value: company, err: false },
         gender: { value: gender, err: false },
       });
@@ -180,13 +182,13 @@ export default function useModalUser() {
   async function handlePushUser() {
     try {
       const obj = {
-        id: inputAdminState.id.value,
+        userId: inputAdminState.userId.value,
         role: inputAdminState.role.value,
         userName: inputAdminState.userName.value,
         email: inputAdminState.email.value,
         password: inputAdminState.password.value,
-        name: inputAdminState.name.value,
-        surname: inputAdminState.surname.value,
+        firstName: inputAdminState.firstName.value,
+        lastName: inputAdminState.lastName.value,
         company: inputAdminState.company.value,
         gender: inputAdminState.gender.value,
       };

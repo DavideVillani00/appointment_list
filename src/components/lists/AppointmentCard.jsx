@@ -13,11 +13,11 @@ import useModalAppointment from "../../hooks/modal/useModalAppointment.js";
 import { useTranslation } from "react-i18next";
 
 export default function AppointmentCard({
-  id,
+  appointmentId,
   title,
   date,
   time,
-  check,
+  done,
   userName,
 }) {
   const { handleToggleCheckButton } = useHandleToggleButton();
@@ -32,7 +32,7 @@ export default function AppointmentCard({
     >
       <img
         src={theme === "dark" ? writeIconDark : writeIconLight}
-        onClick={() => handleOpenModalAppointment(id)}
+        onClick={() => handleOpenModalAppointment(appointmentId)}
         alt="edit icon"
         className={`absolute p-3 md:px-5 top-0 right-0 bg-uncomplete/10 cursor-pointer  ${
           userState.role === "Admin" ? "" : "rounded-bl-md"
@@ -44,19 +44,17 @@ export default function AppointmentCard({
         </div>
       )}
       <div className="px-1 py-2 md:p-5 flex flex-col gap-4 md:flex-row-reverse md:justify-end ">
-        <div
-          className={`p-3  flex-3/4 ${check ? "opacity-40" : "opacity-100"}`}
-        >
+        <div className={`p-3  flex-3/4 ${done ? "opacity-40" : "opacity-100"}`}>
           <p className="text-xl font-bold mb-3 text-placeholder dark:text-placeholderDark">
-            {date} {time}
+            {date} {time.slice(0, 5)}
           </p>
           <p className="text-lg">{title}</p>
         </div>
         <ButtonCardSection
-          id={id}
+          id={appointmentId}
           page="home"
           img={
-            check
+            done
               ? theme === "dark"
                 ? iconCompleteDark
                 : iconCompleteLight
@@ -64,12 +62,10 @@ export default function AppointmentCard({
           }
           alt="checkbox icon"
           value={
-            check
-              ? t("Completed").toUpperCase()
-              : t("Uncompleted").toUpperCase()
+            done ? t("Completed").toUpperCase() : t("Uncompleted").toUpperCase()
           }
           onClickBtn={() => {
-            handleToggleCheckButton(id);
+            handleToggleCheckButton(appointmentId);
           }}
           className="min-w-48"
         />
