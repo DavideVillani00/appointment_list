@@ -36,6 +36,15 @@ export default function useModalUser() {
 
   function handleChangeInput(e) {
     const { name, value } = e.target;
+    if (isEdit && name === "password") {
+      setInputAdminState((preState) => {
+        return {
+          ...preState,
+          [name]: { value, err: false, reset: true },
+        };
+      });
+      return;
+    }
     setInputAdminState((preState) => {
       return {
         ...preState,
@@ -127,7 +136,7 @@ export default function useModalUser() {
       err = true;
       ERROR_MESSAGES_ADMIN.push(t("Incorrect email format"));
     }
-    if (!passwordValidation) {
+    if (!passwordValidation && inputAdminState.password.reset) {
       handleChangeErr("password");
       err = true;
       ERROR_MESSAGES_ADMIN.push(

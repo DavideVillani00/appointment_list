@@ -57,7 +57,6 @@ export default function useAuth() {
         navigateRedirector("/login");
         return console.error("Error in fetching token:", data.msg);
       }
-
       setUserState(data);
       if (!usersList) downloadUsersList();
 

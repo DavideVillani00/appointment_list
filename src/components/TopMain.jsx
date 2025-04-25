@@ -31,10 +31,11 @@ export default function TopMain() {
   const appointments =
     userState.role === "Admin"
       ? appointmentsList
-      : appointmentsList.filter((app) => app.userName === userState.userName);
+      : appointmentsList.filter((app) => app.userId === userState.userId);
 
   const { appointmentCompleted, appointmentSortered, appointmentUncompleted } =
     useSorter().sort(appointments);
+
   useEffect(() => {
     getAllAppointment();
   }, []);

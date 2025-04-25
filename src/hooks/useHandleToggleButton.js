@@ -13,7 +13,6 @@ export default function useHandleToggleButton() {
   const { downloadUsersList } = useAuth();
 
   async function handleToggleCheckButton(id) {
-    console.log(id);
     try {
       const response = await fetch(
         `http://localhost:3000/api/appointments/edit/${id}`,

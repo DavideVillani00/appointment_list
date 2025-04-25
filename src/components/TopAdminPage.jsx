@@ -19,7 +19,6 @@ export default function TopAdminPage() {
   const { handleChangeFilterAdmin, adminFilter } =
     useContext(Context).globalAdminPage;
   const { handleOpenModalUser } = useModalUser();
-
   return (
     <>
       <div className="mt-3 p-3 flex flex-col gap-4 md:flex-row items-center justify-center">

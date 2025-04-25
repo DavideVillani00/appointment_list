@@ -42,7 +42,6 @@ export default function useHomePage() {
   }
 
   function handleChangeFilterHome(name, value) {
-    console.log("name", name, "value", value);
     value = value === t("All") ? null : value;
     value = value === t("Completed") ? true : value;
     value = value === t("Uncompleted") ? false : value;

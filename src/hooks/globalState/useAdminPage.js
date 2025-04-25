@@ -7,7 +7,7 @@ export default function useAdminPage() {
     role: { value: null, err: false },
     userName: { value: "", err: false },
     email: { value: "", err: false },
-    password: { value: "", err: false },
+    password: { value: "", err: false, reset: false },
     firstName: { value: "", err: false },
     lastName: { value: "", err: false },
     company: { value: "", err: false },
